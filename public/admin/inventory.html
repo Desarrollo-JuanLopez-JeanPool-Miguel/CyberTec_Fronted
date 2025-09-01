@@ -1,0 +1,284 @@
+<!-- public/admin/inventory.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Inventario - CyberTec Admin</title>
+
+  <!-- Base styles del sitio + estilos específicos de Inventory -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/inventory.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1><span style="font-size:1.2em;">⚡</span>CyberTec</h1>
+        <span class="admin-label">ADMIN PANEL</span>
+      </div>
+
+      <h2 class="page-title">📦 GESTIÓN DE INVENTARIO</h2>
+      <div class="user-info">👤 Admin:  Juan Pablo</div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <a href="dashboard.html" class="menu-item">📊 Dashboard</a>
+      <a href="inventory.html" class="menu-item active">📦 Inventario</a>
+      <a href="catalog.html" class="menu-item">🛒 Catálogo</a>
+      <a href="#" class="menu-item">💰 Ventas</a>
+      <a href="#" class="menu-item">👥 Clientes</a>
+      <a href="#" class="menu-item">📈 Reportes</a>
+      <a href="#" class="menu-item">⚙️ Configuración</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Filtros -->
+      <section class="filters-section">
+        <h3 class="filters-title">🔍 FILTROS Y BÚSQUEDA</h3>
+
+        <div class="filters-grid">
+          <input type="text" class="filter-input" placeholder="🔍 Buscar productos...">
+          <select class="filter-input">
+            <option>📁 Todas las categorías</option>
+            <option>Tarjetas Gráficas</option>
+            <option>Procesadores</option>
+            <option>Memoria RAM</option>
+            <option>Monitores</option>
+            <option>Fuentes</option>
+          </select>
+          <select class="filter-input">
+            <option>📊 Stock: Todos</option>
+            <option>Crítico</option>
+            <option>Bajo</option>
+            <option>Bueno</option>
+            <option>Agotado</option>
+          </select>
+          <select class="filter-input">
+            <option>🏭 Proveedor</option>
+            <option>ASUS</option>
+            <option>AMD</option>
+            <option>NVIDIA</option>
+            <option>Samsung</option>
+            <option>Corsair</option>
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <button class="filter-btn btn-export" onclick="showMessage('📊 Exportar (demo)')">📊 Exportar</button>
+          <button class="filter-btn btn-actions" onclick="showMessage('⚡ Acciones masivas (demo)')">⚡ Acciones</button>
+        </div>
+      </section>
+
+      <!-- Alertas de stock -->
+      <section class="stock-alert">
+        <div class="alert-title">⚠️ ALERTAS DE STOCK</div>
+        <div class="alert-text">12 productos con stock crítico • 5 productos agotados • 8 próximos a vencer</div>
+        <button class="alert-btn" onclick="showMessage('👁️ Ver alertas (demo)')">VER ALERTAS</button>
+      </section>
+
+      <!-- Tabla de inventario -->
+      <section class="inventory-section">
+        <table class="inventory-table">
+          <thead>
+            <tr class="table-header">
+              <th>Producto</th>
+              <th>SKU</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Precio</th>
+              <th>Estado</th>
+              <th>Proveedor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Fila 1 - Crítico -->
+            <tr class="product-row row-critical">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-critical">🎮</div>
+                  <div class="product-details">
+                    <h4>RTX 4080 SUPER Gaming OC</h4>
+                    <div class="product-specs">16GB GDDR6X • ASUS ROG</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">RTX4080S-001</div></td>
+              <td><div class="product-category">Tarjetas Gráficas</div></td>
+              <td><div class="stock-display stock-critical">2 ⚠️</div></td>
+              <td><div class="price-display">$1.890.000</div></td>
+              <td><span class="status-badge status-critical">CRÍTICO</span></td>
+              <td><div class="supplier-name">ASUS</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-stock" onclick="showMessage('📦 Stock (demo)')">STOCK</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Fila 2 - Bueno -->
+            <tr class="product-row row-good">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-good">⚡</div>
+                  <div class="product-details">
+                    <h4>AMD Ryzen 7 7800X3D</h4>
+                    <div class="product-specs">8C/16T • Socket AM5</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">R7-7800X3D-01</div></td>
+              <td><div class="product-category">Procesadores</div></td>
+              <td><div class="stock-display stock-good">28 ✓</div></td>
+              <td><div class="price-display">$620.000</div></td>
+              <td><span class="status-badge status-good">BUENO</span></td>
+              <td><div class="supplier-name">AMD</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-stock" onclick="showMessage('📦 Stock (demo)')">STOCK</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Fila 3 - Agotado -->
+            <tr class="product-row row-out">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-out">💾</div>
+                  <div class="product-details">
+                    <h4>SSD Samsung 980 PRO 2TB</h4>
+                    <div class="product-specs">NVMe Gen4 • M.2</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">SSD-980PRO-2TB</div></td>
+              <td><div class="product-category">Almacenamiento</div></td>
+              <td><div class="stock-display stock-out">0 ❌</div></td>
+              <td><div class="price-display">$285.000</div></td>
+              <td><span class="status-badge status-out">AGOTADO</span></td>
+              <td><div class="supplier-name">Samsung</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-urgent" onclick="showMessage('📦 Pedir (demo)')">PEDIR</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Fila 4 - Bajo -->
+            <tr class="product-row row-low">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-low">💾</div>
+                  <div class="product-details">
+                    <h4>Corsair Vengeance RGB DDR5 32GB</h4>
+                    <div class="product-specs">2×16GB • 5600MHz</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">RAM-COR-32G-DDR5</div></td>
+              <td><div class="product-category">Memoria RAM</div></td>
+              <td><div class="stock-display stock-low">6 ⚠️</div></td>
+              <td><div class="price-display">$420.000</div></td>
+              <td><span class="status-badge status-low">BAJO</span></td>
+              <td><div class="supplier-name">Corsair</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-stock" onclick="showMessage('📦 Stock (demo)')">STOCK</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Fila 5 - Bueno -->
+            <tr class="product-row row-good">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-good">🖥️</div>
+                  <div class="product-details">
+                    <h4>Monitor ASUS ROG 27" 240Hz</h4>
+                    <div class="product-specs">QHD • IPS • G-SYNC</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">MON-ASUS-27-240</div></td>
+              <td><div class="product-category">Monitores</div></td>
+              <td><div class="stock-display stock-good">15 ✓</div></td>
+              <td><div class="price-display">$1.250.000</div></td>
+              <td><span class="status-badge status-good">BUENO</span></td>
+              <td><div class="supplier-name">ASUS</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-stock" onclick="showMessage('📦 Stock (demo)')">STOCK</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Fila 6 - Bueno -->
+            <tr class="product-row row-good">
+              <td>
+                <div class="product-info">
+                  <div class="product-icon icon-good">⚡</div>
+                  <div class="product-details">
+                    <h4>Fuente Corsair RM850x 80+ Gold</h4>
+                    <div class="product-specs">850W • Modular</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="product-sku">PSU-COR-850X-G</div></td>
+              <td><div class="product-category">Fuentes</div></td>
+              <td><div class="stock-display stock-good">22 ✓</div></td>
+              <td><div class="price-display">$285.000</div></td>
+              <td><span class="status-badge status-good">BUENO</span></td>
+              <td><div class="supplier-name">Corsair</div></td>
+              <td>
+                <div class="product-actions">
+                  <button class="action-btn-small btn-edit" onclick="showMessage('✏️ Editar (demo)')">EDITAR</button>
+                  <button class="action-btn-small btn-stock" onclick="showMessage('📦 Stock (demo)')">STOCK</button>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Acciones masivas -->
+      <section class="bulk-actions">
+        <div class="bulk-info">☑️ 3 productos seleccionados</div>
+        <div class="bulk-buttons">
+          <button class="bulk-btn bulk-stock" onclick="showMessage('📦 Actualizar stock (demo)')">📦 Actualizar Stock</button>
+          <button class="bulk-btn bulk-price" onclick="showMessage('🏷️ Cambiar precio (demo)')">🏷️ Cambiar Precio</button>
+          <button class="bulk-btn bulk-category" onclick="showMessage('📁 Categorizar (demo)')">📁 Categorizar</button>
+          <button class="bulk-btn bulk-delete" onclick="showMessage('🗑️ Eliminar (demo)')">🗑️ Eliminar</button>
+        </div>
+      </section>
+
+      <!-- Paginación -->
+      <section class="pagination">
+        <div class="pagination-info">Mostrando 1–6 de 1,247 productos</div>
+        <div class="pagination-controls">
+          <button class="page-btn">←</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">→</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JS específico de Inventory -->
+  <script src="../../assets/js/inventory.js" defer></script>
+</body>
+</html>

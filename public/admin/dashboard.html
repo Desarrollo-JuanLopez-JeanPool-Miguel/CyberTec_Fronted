@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard • CyberTec</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../assets/css/admin.css" />
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="admin-topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <div class="brand-text">
+          <strong>CyberTec</strong>
+          <small>Admin Panel</small>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search">
+          <input type="text" placeholder="Buscar pedidos, clientes, SKUs…" />
+          <span class="icon">🔎</span>
+        </div>
+
+        <button class="icon-btn" data-tip="Notificaciones">🔔<span class="dot"></span></button>
+        <button class="icon-btn" data-tip="Modo oscuro" id="toggleTheme">🌓</button>
+
+        <div class="avatar">
+          <img src="https://i.pravatar.cc/48?img=12" alt="admin"/>
+          <span class="name">Juan Pablo</span>
+        </div>
+        <a class="logout" href="../index.html">Salir</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav">
+        <a class="nav-item active" href="#">📊 Dashboard</a>
+        <a class="nav-item" href="inventory.html">📦 Inventario</a>
+        <a class="nav-item" href="catalog.html">🛒 Catálogo</a>
+        <a class="nav-item" href="#">💰 Ventas</a>
+        <a class="nav-item" href="#">👥 Clientes</a>
+        <a class="nav-item" href="#">📈 Reportes</a>
+        <a class="nav-item" href="#">⚙️ Configuración</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-card">
+          <div class="mini-title">Uso API</div>
+          <div class="mini-value">62%</div>
+          <div class="mini-bar"><span style="width:62%"></span></div>
+        </div>
+        <div class="version">v2.2.0</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- KPIs -->
+      <section class="kpis">
+        <article class="kpi kpi-success">
+          <div class="kpi-top">
+            <span class="kpi-title">Ventas hoy</span>
+            <span class="kpi-icon">💳</span>
+          </div>
+          <div class="kpi-value" data-count="$4.250.000">$0</div>
+          <div class="kpi-sub"><span class="chip chip-up">+15%</span> vs ayer</div>
+        </article>
+
+        <article class="kpi kpi-primary">
+          <div class="kpi-top">
+            <span class="kpi-title">Productos</span>
+            <span class="kpi-icon">📦</span>
+          </div>
+          <div class="kpi-value" data-count="1,247">0</div>
+          <div class="kpi-sub"><span class="chip">+32</span> esta semana</div>
+        </article>
+
+        <article class="kpi kpi-warning">
+          <div class="kpi-top">
+            <span class="kpi-title">Stock bajo</span>
+            <span class="kpi-icon">⚠️</span>
+          </div>
+          <div class="kpi-value" data-count="12">0</div>
+          <div class="kpi-sub">Requieren reposición</div>
+        </article>
+
+        <article class="kpi kpi-info">
+          <div class="kpi-top">
+            <span class="kpi-title">Clientes</span>
+            <span class="kpi-icon">👥</span>
+          </div>
+          <div class="kpi-value" data-count="3,456">0</div>
+          <div class="kpi-sub"><span class="chip">+89</span> este mes</div>
+        </article>
+      </section>
+
+      <!-- Grid -->
+      <section class="grid">
+        <!-- Orders -->
+        <div class="card">
+          <div class="card-head">
+            <h3>🛒 Órdenes recientes</h3>
+            <div class="card-actions">
+              <button class="btn ghost" id="refreshOrders">↻ Actualizar</button>
+              <button class="btn primary" id="newOrder">➕ Nueva</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Productos</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="ordersBody">
+                <tr>
+                  <td><span class="badge id">#2024-001</span></td>
+                  <td><strong>Juan Pérez</strong></td>
+                  <td>RTX 4070 + Ryzen 5</td>
+                  <td><span class="money">$1.250.000</span></td>
+                  <td><span class="status paid">Pagado</span></td>
+                  <td><button class="link" data-action="view">Ver</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge id">#2024-002</span></td>
+                  <td><strong>María García</strong></td>
+                  <td>Gaming Setup</td>
+                  <td><span class="money">$2.890.000</span></td>
+                  <td><span class="status ship">Enviando</span></td>
+                  <td><button class="link" data-action="view">Ver</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge id">#2024-003</span></td>
+                  <td><strong>Carlos López</strong></td>
+                  <td>PC Builder Custom</td>
+                  <td><span class="money">$3.450.000</span></td>
+                  <td><span class="status pend">Pendiente</span></td>
+                  <td><button class="link" data-action="process">Procesar</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge id">#2024-004</span></td>
+                  <td><strong>Ana Rodríguez</strong></td>
+                  <td>Monitor + Teclado</td>
+                  <td><span class="money">$650.000</span></td>
+                  <td><span class="status ok">Entregado</span></td>
+                  <td><span class="muted">—</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Quick actions / activity -->
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>⚡ Acciones rápidas</h3></div>
+            <div class="actions-col">
+              <a class="btn block primary" href="add-product.html">➕ Nuevo producto</a>
+              <a class="btn block success" href="inventory.html">📦 Gestionar stock</a>
+              <button class="btn block warning" data-toast="🏷️ Crear oferta (demo)">🏷️ Crear oferta</button>
+              <button class="btn block danger" data-toast="📊 Ver reportes (demo)">📊 Ver reportes</button>
+              <button class="btn block info" data-toast="👥 Gestionar usuarios (demo)">👥 Gestionar usuarios</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>📈 Actividad reciente</h3></div>
+            <ul class="activity">
+              <li>
+                <span class="dot ok">✓</span>
+                <div>
+                  <p>Stock actualizado: RTX 4080 Super (+15)</p>
+                  <small>Hace 5 min</small>
+                </div>
+              </li>
+              <li>
+                <span class="dot info">💰</span>
+                <div>
+                  <p>Nueva venta: Gaming Setup Pro — $3.450.000</p>
+                  <small>Hace 12 min</small>
+                </div>
+              </li>
+              <li>
+                <span class="dot warn">⚠️</span>
+                <div>
+                  <p>Alerta: Ryzen 7 7800X3D (2 restantes)</p>
+                  <small>Hace 25 min</small>
+                </div>
+              </li>
+              <li>
+                <span class="dot ok">✓</span>
+                <div>
+                  <p>Producto agregado: Monitor ASUS ROG 240Hz</p>
+                  <small>Hace 1 hora

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agregar Producto • CyberTec</title>
+
+  <!-- (Opcional) estilos base del sitio -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- Estilos específicos de la página -->
+  <link rel="stylesheet" href="../../assets/css/admin-add-product.css">
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="admin-topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <div class="brand-text">
+          <strong>CyberTec</strong>
+          <small>Admin Panel</small>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search">
+          <input type="text" placeholder="Buscar productos, SKUs…" />
+          <span class="icon">🔎</span>
+        </div>
+
+        <button class="icon-btn" data-tip="Notificaciones">🔔</button>
+        <button class="icon-btn" data-tip="Modo oscuro" id="toggleTheme">🌓</button>
+
+        <div class="avatar">
+          <img src="https://i.pravatar.cc/48?img=12" alt="admin"/>
+          <span class="name">Juan Pablo</span>
+        </div>
+        <a class="logout" href="dashboard.html">Salir</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav">
+        <a class="nav-item" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-item" href="inventory.html">📦 Inventario</a>
+        <a class="nav-item" href="catalog.html">🛒 Catálogo</a>
+        <a class="nav-item active" href="add-product.html">➕ Nuevo Producto</a>
+        <a class="nav-item" href="#">💰 Ventas</a>
+        <a class="nav-item" href="#">👥 Clientes</a>
+        <a class="nav-item" href="#">📈 Reportes</a>
+        <a class="nav-item" href="#">⚙️ Configuración</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-card">
+          <div class="mini-title">Productos este mes</div>
+          <div class="mini-value">47 nuevos</div>
+        </div>
+        <div class="version">v2.2.0</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="form-card">
+        <div class="form-header">
+          <h2>➕ Agregar Nuevo Producto</h2>
+          <p>Complete la información del producto para agregarlo al catálogo</p>
+        </div>
+
+        <form id="productForm" class="form-grid" onsubmit="return false;">
+          <!-- Columna izquierda -->
+          <div class="form-section">
+            <h3 class="section-title">📝 Información Básica</h3>
+
+            <div class="form-group">
+              <label class="form-label">Nombre del Producto *</label>
+              <input type="text" class="form-input" id="productName" placeholder="Ej: NVIDIA RTX 4070 Ti Gaming OC" required>
+              <div class="form-help">Nombre comercial completo del producto</div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">SKU *</label>
+                <input type="text" class="form-input" id="productSku" placeholder="GPU-RTX4070TI-001" required>
+                <div class="form-help">Código único del producto</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Categoría *</label>
+                <select class="form-select" id="productCategory" required>
+                  <option value="">Seleccionar categoría</option>
+                  <option value="gpu">🖥️ Tarjetas Gráficas</option>
+                  <option value="cpu">⚡ Procesadores</option>
+                  <option value="ram">🧠 Memorias RAM</option>
+                  <option value="storage">💾 Almacenamiento</option>
+                  <option value="motherboard">🔌 Placas Madre</option>
+                  <option value="psu">⚡ Fuentes de Poder</option>
+                  <option value="cooling">❄️ Refrigeración</option>
+                  <option value="case">📦 Gabinetes</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Descripción Corta</label>
+              <textarea class="form-textarea" id="productDescription" placeholder="Descripción breve del producto para mostrar en las tarjetas..." rows="3"></textarea>
+              <div class="form-help">Máximo 160 caracteres</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Especificaciones Técnicas</label>
+              <textarea class="form-textarea" id="productSpecs" placeholder="• 12GB GDDR6X
+• Ray Tracing de 3ra generación
+• DLSS 3.0
+• Boost Clock: 2610 MHz
+• Memory Speed: 21 Gbps" rows="6"></textarea>
+              <div class="form-help">Una especificación por línea, usando viñetas</div>
+            </div>
+
+            <h3 class="section-title">💰 Precios e Inventario</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Precio de Venta *</label>
+                <input type="number" class="form-input" id="productPrice" placeholder="980000" required>
+                <div class="form-help">Precio en pesos colombianos (sin puntos)</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Precio Original</label>
+                <input type="number" class="form-input" id="productOriginalPrice" placeholder="1200000">
+                <div class="form-help">Para mostrar descuentos (opcional)</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Stock Inicial *</label>
+                <input type="number" class="form-input" id="productStock" placeholder="15" required min="0">
+                <div class="form-help">Cantidad disponible en inventario</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stock Mínimo</label>
+                <input type="number" class="form-input" id="productMinStock" placeholder="5" min="0">
+                <div class="form-help">Para alertas de stock bajo</div>
+              </div>
+            </div>
+
+            <h3 class="section-title">📷 Imagen del Producto</h3>
+
+            <label class="image-upload" for="imageInput">
+              <div class="upload-icon">📷</div>
+              <div class="upload-text">
+                <strong>Haz clic para subir imagen</strong><br>
+                o arrastra y suelta aquí<br>
+                <small>JPG, PNG hasta 5MB</small>
+              </div>
+              <input type="file" id="imageInput" class="upload-input" accept="image/*">
+            </label>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Estado del Producto</label>
+                <select class="form-select" id="productStatus">
+                  <option value="draft">📝 Borrador</option>
+                  <option value="active">✅ Activo</option>
+                  <option value="inactive">❌ Inactivo</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Marca</label>
+                <input type="text" class="form-input" id="productBrand" placeholder="NVIDIA, AMD, Intel, etc.">
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha (preview) -->
+          <div class="form-section">
+            <h3 class="section-title">👁️ Vista Previa</h3>
+
+            <div class="preview-card">
+              <div class="preview-image" id="previewImage">🖥️</div>
+              <div class="preview-title" id="previewTitle">Nombre del Producto</div>
+              <div class="preview-price" id="previewPrice">$0</div>
+              <div class="preview-category" id="previewCategory">Categoría</div>
+
+              <div class="status-indicator">
+                <div class="indicator-dot dot-draft" id="statusDot"></div>
+                <span class="indicator-text" id="statusText">Borrador</span>
+              </div>
+            </div>
+
+            <div class="tips">
+              <h4>💡 Consejos</h4>
+              <ul>
+                <li>Usa nombres descriptivos y completos</li>
+                <li>Incluye especificaciones técnicas clave</li>
+                <li>Agrega imágenes de alta calidad</li>
+                <li>Verifica precios antes de publicar</li>
+                <li>Guarda como borrador para revisar después</li>
+              </ul>
+            </div>
+
+            <div class="valid-box">
+              <div class="valid-title">✅ FORMULARIO VÁLIDO</div>
+              <div class="valid-text" id="validationStatus">Complete los campos requeridos</div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <a href="catalog.html" class="btn ghost">❌ Cancelar</a>
+          <button type="button" class="btn ghost" id="saveDraft">📝 Guardar Borrador</button>
+          <button type="button" class="btn success" id="publishProduct">✅ Publicar Producto</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS específico de la página -->
+  <script src="../../assets/js/admin-add-product.js" defer></script>
+</body>
+</html>

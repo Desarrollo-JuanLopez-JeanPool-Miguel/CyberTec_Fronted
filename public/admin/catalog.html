@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Catálogo • CyberTec</title>
+
+  <!-- (Opcional) estilos base globales -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- Estilos específicos de Catálogo -->
+  <link rel="stylesheet" href="../../assets/css/admin-catalog.css">
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="admin-topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <div class="brand-text">
+          <strong>CyberTec</strong>
+          <small>Admin Panel</small>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search">
+          <input type="text" placeholder="Buscar productos, SKUs, categorías…" />
+          <span class="icon">🔎</span>
+        </div>
+
+        <button class="icon-btn" data-tip="Notificaciones">🔔<span class="dot"></span></button>
+        <button class="icon-btn" data-tip="Modo oscuro" id="toggleTheme">🌓</button>
+
+        <div class="avatar">
+          <img src="https://i.pravatar.cc/48?img=12" alt="admin"/>
+          <span class="name">Juan Pablo</span>
+        </div>
+        <a class="logout" href="dashboard.html">Salir</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav">
+        <a class="nav-item" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-item" href="inventory.html">📦 Inventario</a>
+        <a class="nav-item active" href="catalog.html">🛒 Catálogo</a>
+        <a class="nav-item" href="add-product.html">➕ Nuevo Producto</a>
+        <a class="nav-item" href="#">💰 Ventas</a>
+        <a class="nav-item" href="#">👥 Clientes</a>
+        <a class="nav-item" href="#">📈 Reportes</a>
+        <a class="nav-item" href="#">⚙️ Configuración</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-card">
+          <div class="mini-title">Productos Activos</div>
+          <div class="mini-value">847/1,200</div>
+          <div class="mini-bar"><span style="width:70%"></span></div>
+        </div>
+        <div class="version">v2.2.0</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- Stats -->
+      <section class="catalog-stats">
+        <article class="stat-card stat-primary">
+          <div class="stat-number" data-count="847">0</div>
+          <div class="stat-label">Total Productos</div>
+        </article>
+
+        <article class="stat-card stat-success">
+          <div class="stat-number" data-count="738">0</div>
+          <div class="stat-label">Productos Activos</div>
+        </article>
+
+        <article class="stat-card stat-warning">
+          <div class="stat-number" data-count="89">0</div>
+          <div class="stat-label">Borradores</div>
+        </article>
+
+        <article class="stat-card stat-info">
+          <div class="stat-number" data-count="20">0</div>
+          <div class="stat-label">Sin Stock</div>
+        </article>
+      </section>
+
+      <!-- Filters and Actions -->
+      <section class="card">
+        <div class="card-head">
+          <h3>🛒 Gestión de Catálogo</h3>
+          <div class="card-actions">
+            <button class="btn ghost" id="bulkActions">Acciones en lote</button>
+            <a class="btn primary" href="add-product.html">➕ Nuevo Producto</a>
+          </div>
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="gpu">🖥️ GPUs</button>
+          <button class="filter-btn" data-filter="cpu">⚡ CPUs</button>
+          <button class="filter-btn" data-filter="ram">🧠 RAM</button>
+          <button class="filter-btn" data-filter="storage">💾 Storage</button>
+          <button class="filter-btn" data-filter="active">✅ Activos</button>
+          <button class="filter-btn" data-filter="draft">📝 Borradores</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+          <!-- RTX 4070 Ti -->
+          <div class="product-card" data-category="gpu" data-status="active">
+            <div class="product-image">🖥️</div>
+            <div class="product-info">
+              <div class="product-category">Tarjetas Gráficas</div>
+              <h4>NVIDIA RTX 4070 Ti Gaming OC</h4>
+              <div class="product-price">$980.000</div>
+              <div class="product-stock">Stock: 15 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar RTX 4070 Ti">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles RTX 4070 Ti">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar RTX 4070 Ti">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ryzen 7 7700X -->
+          <div class="product-card" data-category="cpu" data-status="active">
+            <div class="product-image">⚡</div>
+            <div class="product-info">
+              <div class="product-category">Procesadores</div>
+              <h4>AMD Ryzen 7 7700X</h4>
+              <div class="product-price">$420.000</div>
+              <div class="product-stock">Stock: 8 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar Ryzen 7">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles Ryzen 7">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar Ryzen 7">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Corsair RAM -->
+          <div class="product-card" data-category="ram" data-status="active">
+            <div class="product-image">🧠</div>
+            <div class="product-info">
+              <div class="product-category">Memorias RAM</div>
+              <h4>Corsair Vengeance DDR5 32GB</h4>
+              <div class="product-price">$320.000</div>
+              <div class="product-stock">Stock: 25 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar Corsair RAM">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles RAM">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar RAM">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Samsung SSD -->
+          <div class="product-card" data-category="storage" data-status="active">
+            <div class="product-image">💾</div>
+            <div class="product-info">
+              <div class="product-category">Almacenamiento</div>
+              <h4>Samsung 990 PRO 1TB NVMe</h4>
+              <div class="product-price">$250.000</div>
+              <div class="product-stock">Stock: 32 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar Samsung SSD">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles SSD">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar SSD">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RTX 4080 -->
+          <div class="product-card" data-category="gpu" data-status="draft">
+            <div class="product-image">🖥️</div>
+            <div class="product-info">
+              <div class="product-category">Tarjetas Gráficas</div>
+              <h4>NVIDIA RTX 4080 Super</h4>
+              <div class="product-price">$1.450.000</div>
+              <div class="product-stock">Borrador</div>
+              <span class="product-status status-draft">Borrador</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar RTX 4080">✏️ Editar</button>
+                <button class="action-btn" data-toast="✅ Publicar RTX 4080">✅ Publicar</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar RTX 4080">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Intel i9 -->
+          <div class="product-card" data-category="cpu" data-status="inactive">
+            <div class="product-image">⚡</div>
+            <div class="product-info">
+              <div class="product-category">Procesadores</div>
+              <h4>Intel Core i9-13900K</h4>
+              <div class="product-price">$850.000</div>
+              <div class="product-stock">Sin stock</div>
+              <span class="product-status status-inactive">Inactivo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar Intel i9">✏️ Editar</button>
+                <button class="action-btn" data-toast="📦 Reabastecer i9">📦 Stock</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar i9">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- G.Skill RAM -->
+          <div class="product-card" data-category="ram" data-status="active">
+            <div class="product-image">🧠</div>
+            <div class="product-info">
+              <div class="product-category">Memorias RAM</div>
+              <h4>G.Skill Trident Z5 64GB</h4>
+              <div class="product-price">$680.000</div>
+              <div class="product-stock">Stock: 12 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar G.Skill RAM">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles G.Skill">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar G.Skill">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WD SSD -->
+          <div class="product-card" data-category="storage" data-status="active">
+            <div class="product-image">💾</div>
+            <div class="product-info">
+              <div class="product-category">Almacenamiento</div>
+              <h4>WD Black SN850X 2TB</h4>
+              <div class="product-price">$420.000</div>
+              <div class="product-stock">Stock: 18 unidades</div>
+              <span class="product-status status-active">Activo</span>
+              <div class="product-actions">
+                <button class="action-btn edit-btn" data-toast="✏️ Editar WD SSD">✏️ Editar</button>
+                <button class="action-btn" data-toast="👁️ Ver detalles WD">👁️ Ver</button>
+                <button class="action-btn delete-btn" data-toast="🗑️ Eliminar WD">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JS específico de Catálogo -->
+  <script src="../../assets/js/admin-catalog.js" defer></script>
+</body>
+</html>
