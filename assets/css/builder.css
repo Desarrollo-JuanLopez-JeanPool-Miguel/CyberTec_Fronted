@@ -1,0 +1,107 @@
+/* Estilos mínimos específicos del Builder (reusa tus variables de style.css) */
+
+.builder-title { color: var(--warning-color); font-weight: 700; }
+
+.main-container { padding: var(--spacing-xl) 0; }
+
+.build-header {
+  background: var(--bg-secondary);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.build-title { font-size: 2rem; font-weight: 800; margin-bottom: .25rem; }
+.build-subtitle { color: var(--text-muted); }
+
+.build-progress-container { background: var(--bg-tertiary); padding: 1rem; border-radius: .75rem; margin: 1rem 0; }
+.build-progress-text { color: var(--success-color); font-weight: 700; margin-bottom: .5rem; }
+.progress-bar-container { background: var(--text-disabled); height: 10px; border-radius: 6px; overflow: hidden; }
+.progress-bar { background: linear-gradient(90deg, #10b981, #34d399); height: 100%; width: 0%; }
+
+.progress-percentage { color: var(--success-color); font-size: .9rem; text-align: right; }
+
+.budget-display { background: var(--bg-tertiary); padding: 1rem; border-radius: .75rem; display: inline-block; }
+.budget-label { color: var(--text-muted); font-size: .9rem; }
+.budget-amount { color: var(--primary-color); font-weight: 800; font-size: 1.2rem; }
+.budget-remaining { color: var(--success-color); font-size: .9rem; }
+.budget-status { margin-top: .25rem; font-size: .9rem; }
+
+.builder-layout { display: grid; grid-template-columns: 1fr 380px; gap: var(--spacing-xl); }
+
+/* tarjetas de componente */
+.components-section { background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); box-shadow: var(--shadow-xl); }
+.components-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; }
+.component-item { background: var(--bg-tertiary); border-radius: .75rem; padding: 1rem; margin-bottom: 1rem; border: 1px solid transparent; }
+.component-item:hover { border-color: var(--primary-color); box-shadow: var(--shadow-lg); }
+.component-layout { display: grid; grid-template-columns: 50px 1fr auto; gap: 1rem; align-items: center; }
+.component-status { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; }
+.status-selected { background: var(--success-color); color: #fff; }
+.status-required { background: var(--danger-color); color: #fff; }
+.status-optional { background: var(--warning-color); color: #fff; }
+.status-empty { background: var(--text-disabled); color: #fff; }
+.component-title { font-weight: 800; }
+.component-description { color: var(--text-secondary); }
+.component-specs { color: var(--text-muted); font-size: .9rem; }
+.component-action { display: flex; flex-direction: column; gap: .5rem; }
+
+.action-btn { padding: .6rem 1rem; border-radius: 18px; font-weight: 700; cursor: pointer; border: none; }
+.btn-change { background: var(--success-color); color: #fff; }
+.btn-select { background: var(--primary-color); color: #fff; }
+.btn-urgent { background: var(--danger-color); color: #fff; animation: pulse 2s infinite; }
+
+.compatibility-panel { background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); box-shadow: var(--shadow-xl); height: fit-content; position: sticky; top: 110px; }
+
+.compatibility-section { background: #065f46; padding: 1rem; border-radius: .75rem; margin-bottom: 1rem; border-left: 4px solid var(--success-color); }
+.compatibility-title { color: var(--success-color); font-weight: 800; margin-bottom: .5rem; }
+.compatibility-item { color: #6ee7b7; font-size: .9rem; }
+.compatibility-bar-container { background: var(--bg-tertiary); height: 14px; border-radius: 7px; overflow: hidden; margin-top: .5rem; }
+.compatibility-bar { background: linear-gradient(90deg, #10b981, #34d399); height: 100%; width: 0%; }
+.compatibility-score { text-align: center; color: var(--success-color); font-weight: 800; margin-top: .35rem; }
+
+.price-section { background: var(--bg-tertiary); padding: 1rem; border-radius: .75rem; margin-bottom: 1rem; }
+.price-title { font-weight: 800; margin-bottom: .5rem; }
+.price-row { display: flex; justify-content: space-between; margin: .35rem 0; }
+.price-label { color: var(--text-muted); }
+.price-value { color: var(--text-primary); }
+.price-missing { color: var(--warning-color); }
+.total-divider { border: none; border-top: 1px solid var(--text-disabled); margin: .6rem 0; }
+.total-label { font-weight: 800; }
+.total-value { color: var(--primary-color); font-weight: 800; font-size: 1.15rem; }
+.installments { color: var(--text-muted); font-size: .9rem; text-align: center; margin-top: .4rem; }
+
+.main-actions { display: flex; flex-direction: column; gap: .8rem; margin-top: 1rem; }
+.secondary-actions { display: flex; gap: .6rem; }
+.btn-secondary { border: 2px solid currentColor; background: transparent; }
+.btn-save { color: var(--success-color); }
+.btn-share { color: var(--warning-color); }
+
+.quick-builds { background: var(--bg-tertiary); padding: .8rem; border-radius: .5rem; margin-top: 1rem; }
+.quick-builds-title { color: var(--text-muted); font-size: .9rem; margin-bottom: .4rem; }
+.build-templates { display: flex; flex-wrap: wrap; gap: .4rem; }
+.build-template { border: 1px solid var(--primary-color); color: var(--primary-color); background: transparent; border-radius: 14px; padding: .35rem .7rem; font-size: .85rem; cursor: pointer; }
+.build-template.featured { border-color: var(--danger-color); color: var(--danger-color); }
+
+/* Animación que usa el JS opcionalmente */
+.appear { animation: fadeIn .5s ease both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%,100%{opacity:1} 50%{opacity:.7}
+}
+@keyframes slideInRight {
+  from{transform:translateX(20px);opacity:0} to{transform:none;opacity:1}
+}
+@keyframes slideOutRight {
+  from{transform:none;opacity:1} to{transform:translateX(20px);opacity:0}
+}
+
+/* Responsive simple */
+@media (max-width: 1024px){
+  .builder-layout{ grid-template-columns: 1fr; }
+  .compatibility-panel{ position: static; }
+}

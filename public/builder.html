@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PC Builder Gaming - CyberTec</title>
+
+  <!-- Estilos globales + builder -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/builder.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <h1><span class="logo-icon">⚡</span>CyberTec</h1>
+        <span class="tagline">Gaming Store</span>
+      </div>
+      <h2 class="builder-title">🔧 PC BUILDER GAMING</h2>
+    </div>
+  </header>
+
+  <main class="main-container container">
+    <!-- Encabezado del build -->
+    <section class="build-header">
+      <h1 class="build-title">🎮 CONSTRUYE TU SETUP GAMING</h1>
+      <p class="build-subtitle">Selecciona componentes compatibles para tu PC gaming ideal</p>
+
+      <div class="build-progress-container">
+        <div id="build-progress-text" class="build-progress-text">0/7 componentes • 0% completado</div>
+        <div class="progress-bar-container">
+          <div id="progress-bar" class="progress-bar" style="width:0%"></div>
+        </div>
+        <div id="progress-percentage" class="progress-percentage">0/7 componentes seleccionados</div>
+      </div>
+
+      <div class="budget-display">
+        <div class="budget-label">Presupuesto target</div>
+        <div id="budget-amount" class="budget-amount">$0</div>
+        <div id="budget-remaining" class="budget-remaining">--</div>
+        <div id="budget-status" class="budget-status"></div>
+      </div>
+    </section>
+
+    <section class="builder-layout">
+      <!-- COMPONENTES -->
+      <div class="components-section">
+        <h2 class="components-title">COMPONENTES</h2>
+
+        <!-- CPU -->
+        <article class="component-item component-selected">
+          <div class="component-layout">
+            <div class="component-status status-selected">✓</div>
+            <div class="component-info">
+              <h3 class="component-title">PROCESADOR (CPU)</h3>
+              <p class="component-description">AMD Ryzen 7 7800X3D - $620.000</p>
+              <p class="component-specs">8 Cores • Gaming optimizado • Socket AM5</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-change" data-action="change" data-key="cpu">CAMBIAR</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- GPU -->
+        <article class="component-item component-selected">
+          <div class="component-layout">
+            <div class="component-status status-selected">✓</div>
+            <div class="component-info">
+              <h3 class="component-title">TARJETA GRÁFICA (GPU)</h3>
+              <p class="component-description">RTX 4080 SUPER Gaming OC - $1.890.000</p>
+              <p class="component-specs">16GB VRAM • Ray Tracing • DLSS 3</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-change" data-action="change" data-key="gpu">CAMBIAR</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- RAM -->
+        <article class="component-item component-selected">
+          <div class="component-layout">
+            <div class="component-status status-selected">✓</div>
+            <div class="component-info">
+              <h3 class="component-title">MEMORIA RAM</h3>
+              <p class="component-description">Corsair Vengeance DDR5 32GB - $350.000</p>
+              <p class="component-specs">5600MHz • RGB • 2×16GB</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-change" data-action="change" data-key="ram">CAMBIAR</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Motherboard (pendiente) -->
+        <article class="component-item component-required">
+          <div class="component-layout">
+            <div class="component-status status-required">!</div>
+            <div class="component-info">
+              <h3 class="component-title">MOTHERBOARD</h3>
+              <p class="component-description">Requerido para compatibilidad</p>
+              <p class="component-specs">Socket AM5 • DDR5 • PCIe 5.0</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-urgent" data-action="select" data-key="motherboard">ELEGIR</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Storage (opcional) -->
+        <article class="component-item component-optional">
+          <div class="component-layout">
+            <div class="component-status status-optional">?</div>
+            <div class="component-info">
+              <h3 class="component-title">ALMACENAMIENTO</h3>
+              <p class="component-description">Recomendamos SSD NVMe para gaming</p>
+              <p class="component-specs">1TB+ • Gen4 • Alta velocidad</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-select" data-action="select" data-key="storage">ELEGIR</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- PSU (crítico) -->
+        <article class="component-item component-required">
+          <div class="component-layout">
+            <div class="component-status status-required">!</div>
+            <div class="component-info">
+              <h3 class="component-title">FUENTE DE PODER (PSU)</h3>
+              <p class="component-description">Crítico — se requiere 850W+ para este build</p>
+              <p class="component-specs">80+ Gold • Modular • Alta eficiencia</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-urgent" data-action="select" data-key="psu">URGENTE</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Case (vacío) -->
+        <article class="component-item component-empty">
+          <div class="component-layout">
+            <div class="component-status status-empty">○</div>
+            <div class="component-info">
+              <h3 class="component-title">CASE / GABINETE</h3>
+              <p class="component-description">Mid-Tower • RGB • Buen airflow recomendado</p>
+            </div>
+            <div class="component-action">
+              <button class="action-btn btn-select" data-action="select" data-key="case">ELEGIR</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- PANEL DERECHO -->
+      <aside class="compatibility-panel">
+        <!-- Compatibilidad -->
+        <div class="compatibility-section">
+          <h3 class="compatibility-title">✅ COMPATIBILIDAD</h3>
+          <div class="compatibility-item">✓ CPU + GPU: Excelente pairing</div>
+          <div class="compatibility-item">✓ RAM: Compatible con Ryzen</div>
+          <div class="compatibility-item">✓ Sin cuellos de botella</div>
+
+          <div class="compatibility-bar-container">
+            <div id="compatibility-bar" class="compatibility-bar" style="width:0%"></div>
+          </div>
+          <div id="compatibility-score" class="compatibility-score">0% Compatible</div>
+        </div>
+
+        <!-- Resumen de precios -->
+        <div class="price-section">
+          <h3 class="price-title">💰 RESUMEN DE PRECIOS</h3>
+          <div class="price-row">
+            <span class="price-label">Componentes actuales:</span>
+            <span id="current-total" class="price-value">$0</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Componentes faltantes:</span>
+            <span id="missing-total" class="price-value price-missing">~$0</span>
+          </div>
+          <hr class="total-divider" />
+          <div class="total-row">
+            <span class="total-label">Total estimado:</span>
+            <span id="estimated-total" class="total-value">$0</span>
+          </div>
+          <div id="installments" class="installments">💳 Cuotas sin interés: $0/mes</div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="main-actions">
+          <button class="btn-primary" data-action="add-cart">🛒 AGREGAR AL CARRITO</button>
+          <div class="secondary-actions">
+            <button class="btn-secondary btn-save" data-action="save">💾 Guardar Build</button>
+            <button class="btn-secondary btn-share" data-action="share">📤 Compartir</button>
+          </div>
+        </div>
+
+        <!-- Templates rápidos -->
+        <div class="quick-builds">
+          <div class="quick-builds-title">Builds populares:</div>
+          <div class="build-templates">
+            <button class="build-template" data-template="1440p">Gaming 1440p</button>
+            <button class="build-template" data-template="4k">4K Ultra</button>
+            <button class="build-template" data-template="streaming">Streaming</button>
+            <button class="build-template" data-template="competitive">Competitivo</button>
+            <button class="build-template" data-template="creator">Creator</button>
+            <button class="build-template featured" data-template="beast">🔥 Beast Mode</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="../assets/js/builder.js" defer></script>
+</body>
+</html>
