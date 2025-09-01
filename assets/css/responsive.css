@@ -1,0 +1,13 @@
+@media (max-width: 1024px) {
+  .cart-layout { grid-template-columns: 1fr; gap: var(--spacing-xl); }
+  .order-summary { position: static; top: auto; }
+}
+
+@media (max-width: 768px) {
+  .main-container { padding: var(--spacing-md); }
+  .item-layout { grid-template-columns: 60px 1fr; gap: var(--spacing-md); }
+  .quantity-section, .item-price, .remove-item { grid-column: 1 / -1; justify-self: start; margin-top: .5rem; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .progress-steps { flex-direction: column; gap: var(--spacing-md); }
+  .step-line { display: none; }
+}

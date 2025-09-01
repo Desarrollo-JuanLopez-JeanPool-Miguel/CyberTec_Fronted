@@ -1,0 +1,272 @@
+<!-- public/cart.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tu Setup Gaming - CyberTec</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/cart.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content container">
+      <div class="logo">
+        <h1><span class="logo-icon">⚡</span>CyberTec</h1>
+        <span class="tagline">Gaming Store</span>
+      </div>
+      <div class="cart-info">🛒 Gaming Cart (3)</div>
+    </div>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-title">
+    <h1>🎮 TU SETUP GAMING</h1>
+    <p class="gaming-subtitle">Construye la máquina gaming definitiva</p>
+  </section>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <div class="continue-shopping">
+      <a href="index.html" class="continue-btn">← Seguir Gaming</a>
+    </div>
+
+    <div class="cart-layout">
+      <!-- Cart Items -->
+      <div class="cart-items">
+        <h2 class="section-title">COMPONENTES SELECCIONADOS</h2>
+
+        <!-- Build Progress -->
+        <div class="build-progress">
+          <div class="progress-text">🎮 Build Progress: 3/7 componentes</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width:43%"></div>
+          </div>
+          <div class="progress-label">43% completado</div>
+        </div>
+
+        <!-- Cart Item 1 - GPU -->
+        <div class="cart-item gpu-item" data-item-id="1">
+          <div class="item-layout">
+            <div class="item-image">🎮</div>
+            <div class="item-info">
+              <h3 class="item-title">ASUS ROG STRIX RTX 4080 SUPER</h3>
+              <div class="item-specs">16GB GDDR6X • 4K Gaming Ready</div>
+              <div class="item-badge badge-hot">HOT SELLER</div>
+            </div>
+            <div class="quantity-section">
+              <div class="qty-label">Qty:</div>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty(1,-1)">-</button>
+                <div class="qty-display" id="qty-1">1</div>
+                <button class="qty-btn" onclick="changeQty(1,1)">+</button>
+              </div>
+            </div>
+            <div class="item-price">$1.890.000</div>
+            <div class="remove-item" onclick="removeItem(1)">🗑️ Remover</div>
+          </div>
+        </div>
+
+        <!-- Cart Item 2 - CPU -->
+        <div class="cart-item cpu-item" data-item-id="2">
+          <div class="item-layout">
+            <div class="item-image">⚡</div>
+            <div class="item-info">
+              <h3 class="item-title">AMD Ryzen 7 7800X3D</h3>
+              <div class="item-specs">8 Cores • 16 Threads • Gaming Beast</div>
+              <div class="item-badge badge-best">BEST FOR GAMING</div>
+            </div>
+            <div class="quantity-section">
+              <div class="qty-label">Qty:</div>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty(2,-1)">-</button>
+                <div class="qty-display" id="qty-2">1</div>
+                <button class="qty-btn" onclick="changeQty(2,1)">+</button>
+              </div>
+            </div>
+            <div class="item-price">$620.000</div>
+            <div class="remove-item" onclick="removeItem(2)">🗑️ Remover</div>
+          </div>
+        </div>
+
+        <!-- Cart Item 3 - RAM -->
+        <div class="cart-item ram-item" data-item-id="3">
+          <div class="item-layout">
+            <div class="item-image">💾</div>
+            <div class="item-info">
+              <h3 class="item-title">Corsair Vengeance RGB DDR5</h3>
+              <div class="item-specs">32GB (2x16GB) • 5600MHz • RGB</div>
+              <div class="item-badge badge-rgb">RGB SYNC</div>
+            </div>
+            <div class="quantity-section">
+              <div class="qty-label">Qty:</div>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty(3,-1)">-</button>
+                <div class="qty-display" id="qty-3">1</div>
+                <button class="qty-btn" onclick="changeQty(3,1)">+</button>
+              </div>
+            </div>
+            <div class="item-price">$420.000</div>
+            <div class="remove-item" onclick="removeItem(3)">🗑️ Remover</div>
+          </div>
+        </div>
+
+        <!-- Missing Components Alert -->
+        <div style="background:#7f1d1d;padding:1rem;border-radius:8px;margin-top:1rem;">
+          <div style="color:#fecaca;font-size:0.9rem;">
+            ⚠️ <strong>Faltan:</strong> Motherboard, PSU, Storage, Case para completar tu build
+          </div>
+        </div>
+
+        <!-- Suggested Products -->
+        <div class="suggested-products">
+          <h3 class="suggested-title">Te puede interesar:</h3>
+          <div class="suggested-grid">
+            <div class="suggested-item" onclick="showMessage('🛒 Función de agregar sugerencias no implementada aún')">
+              <div class="suggested-icon" style="color:#10b981;">💾</div>
+              <div class="suggested-name">SSD 1TB</div>
+              <div class="suggested-price">$95.000</div>
+            </div>
+            <div class="suggested-item" onclick="showMessage('🛒 Función de agregar sugerencias no implementada aún')">
+              <div class="suggested-icon" style="color:#7c3aed;">🖥️</div>
+              <div class="suggested-name">Monitor 144Hz</div>
+              <div class="suggested-price">$380.000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2 class="summary-title">💰 RESUMEN GAMING</h2>
+
+        <!-- Performance Score -->
+        <div class="performance-score">
+          <div class="score-title">🎮 Gaming Performance Score</div>
+          <div class="score-value">95/100</div>
+          <div class="score-bar-container">
+            <div class="score-bar" style="width:95%"></div>
+          </div>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span class="price-label">Subtotal (3 items)</span>
+            <span class="price-value" id="subtotal-display">$2.930.000</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Descuento Gaming Bundle</span>
+            <span class="price-value discount-value">-$150.000</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Envío Express</span>
+            <span class="price-value free-value">GRATIS</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Setup Gaming (Opcional)</span>
+            <span class="price-value" style="color:#f59e0b;">+$80.000</span>
+          </div>
+          <hr class="total-divider">
+          <div class="total-row">
+            <span class="total-label">TOTAL GAMING BUILD</span>
+            <span class="total-value" id="total-display">$2.860.000</span>
+          </div>
+          <div class="installments-info">
+            💳 12 cuotas sin interés: $238.333/mes
+          </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+          <h3 class="payment-title">💳 MÉTODOS DE PAGO</h3>
+          <div class="payment-option">💳 Tarjetas (Visa, Master, Amex)</div>
+          <div class="payment-option">🏪 Contraentrega (+$15.000)</div>
+          <div class="payment-option">🏦 Transferencia (-2% descuento)</div>
+        </div>
+
+        <!-- Gaming Perks -->
+        <div class="gaming-perks">
+          <h3 class="perks-title">🎮 GAMING PERKS INCLUIDOS</h3>
+          <div class="perk-item">⚡ Overclocking gratuito</div>
+          <div class="perk-item">🎧 Discord VIP 3 meses</div>
+          <div class="perk-item">🔧 Soporte gamer 24/7</div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn-primary" onclick="showMessage('🚀 Función de checkout no implementada aún')">🚀 CHECKOUT GAMING</button>
+          <div class="secondary-actions">
+            <button class="btn-secondary btn-save" onclick="showMessage('💾 Función de guardar build no implementada aún')">💾 Guardar Build</button>
+            <button class="btn-secondary btn-share" onclick="showMessage('📤 Función de compartir setup no implementada aún')">📤 Compartir Setup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+      <div class="progress-steps">
+        <div class="step step-active">
+          <div class="step-circle">1</div>
+          <div class="step-label">Cart</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step step-inactive">
+          <div class="step-circle">2</div>
+          <div class="step-label">Gaming Setup</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step step-inactive">
+          <div class="step-circle">3</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step step-inactive">
+          <div class="step-circle">4</div>
+          <div class="step-label">Ready to Game!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Section -->
+    <div class="trust-section">
+      <div class="trust-grid">
+        <div class="trust-item trust-secure">
+          <div class="trust-icon">🔒</div>
+          <div class="trust-title">Protección Gamer Plus</div>
+          <div class="trust-desc">✓ Garantía extendida 3 años</div>
+        </div>
+        <div class="trust-item trust-delivery">
+          <div class="trust-icon">🚚</div>
+          <div class="trust-title">Entrega Premium</div>
+          <div class="trust-desc">✓ Setup completo incluido</div>
+        </div>
+      </div>
+      <div class="trust-contact">
+        📞 Línea gamer: +57 320 456 7890 | 💬 Discord: CyberTecGaming#2025
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2025 CyberTec Gaming Store</p>
+        <p>📞 +57 320 456 7890 | 📧 info@cybertec.co</p>
+      </div>
+      <div class="admin-access">
+        <a href="admin/dashboard.html" class="admin-link">🛠️ Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="../assets/js/cart.js" defer></script>
+</body>
+</html>
