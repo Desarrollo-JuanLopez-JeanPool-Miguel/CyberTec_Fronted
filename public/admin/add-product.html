@@ -1,226 +1,491 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agregar Producto • CyberTec</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto - Admin CyberTec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- (Opcional) estilos base del sitio -->
-  <link rel="stylesheet" href="../../assets/css/style.css">
-  <!-- Estilos específicos de la página -->
-  <link rel="stylesheet" href="../../assets/css/admin-add-product.css">
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0a0e1a;
+        color: #fff;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 260px;
+        background-color: #151824;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 2rem 0;
+        border-right: 1px solid #2a2d3e;
+    }
+
+    .logo-section {
+        padding: 0 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .logo-icon {
+        font-size: 3rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #7c3aed;
+    }
+
+    .nav-menu {
+        list-style: none;
+    }
+
+    .nav-item {
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #9ca3af;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        background-color: #1a1d2e;
+        color: #7c3aed;
+        border-left: 4px solid #7c3aed;
+    }
+
+    .main-content {
+        margin-left: 260px;
+        flex: 1;
+        padding: 2rem;
+        max-width: 1000px;
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        color: #9ca3af;
+    }
+
+    .form-card {
+        background-color: #151824;
+        border-radius: 12px;
+        padding: 2rem;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #7c3aed;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #9ca3af;
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.875rem;
+        background-color: #1a1d2e;
+        border: 2px solid #2a2d3e;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #7c3aed;
+        background-color: #252839;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .image-upload {
+        border: 2px dashed #2a2d3e;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .image-upload:hover {
+        border-color: #7c3aed;
+        background-color: #1a1d2e;
+    }
+
+    .upload-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .upload-text {
+        color: #9ca3af;
+    }
+
+    .featured-toggle {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .toggle-switch {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background-color: #2a2d3e;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .toggle-switch.active {
+        background-color: #7c3aed;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .toggle-switch.active .toggle-slider {
+        left: 33px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-secondary {
+        background-color: #1a1d2e;
+        color: #fff;
+        border: 2px solid #2a2d3e;
+    }
+
+    .btn-secondary:hover {
+        border-color: #7c3aed;
+    }
+
+    .preview-section {
+        background-color: #1a1d2e;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .preview-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #9ca3af;
+    }
+
+    .product-preview {
+        background-color: #151824;
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 2px solid #7c3aed;
+    }
+</style>
+```
+
 </head>
 <body>
-  <!-- Topbar -->
-  <header class="admin-topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="logo">⚡</span>
-        <div class="brand-text">
-          <strong>CyberTec</strong>
-          <small>Admin Panel</small>
-        </div>
-      </div>
-
-      <div class="topbar-actions">
-        <div class="search">
-          <input type="text" placeholder="Buscar productos, SKUs…" />
-          <span class="icon">🔎</span>
-        </div>
-
-        <button class="icon-btn" data-tip="Notificaciones">🔔</button>
-        <button class="icon-btn" data-tip="Modo oscuro" id="toggleTheme">🌓</button>
-
-        <div class="avatar">
-          <img src="https://i.pravatar.cc/48?img=12" alt="admin"/>
-          <span class="name">Juan Pablo</span>
-        </div>
-        <a class="logout" href="dashboard.html">Salir</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="admin-shell">
-    <!-- Sidebar -->
     <aside class="sidebar">
-      <nav class="nav">
-        <a class="nav-item" href="dashboard.html">📊 Dashboard</a>
-        <a class="nav-item" href="inventory.html">📦 Inventario</a>
-        <a class="nav-item" href="catalog.html">🛒 Catálogo</a>
-        <a class="nav-item active" href="add-product.html">➕ Nuevo Producto</a>
-        <a class="nav-item" href="#">💰 Ventas</a>
-        <a class="nav-item" href="#">👥 Clientes</a>
-        <a class="nav-item" href="#">📈 Reportes</a>
-        <a class="nav-item" href="#">⚙️ Configuración</a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="mini-card">
-          <div class="mini-title">Productos este mes</div>
-          <div class="mini-value">47 nuevos</div>
+        <div class="logo-section">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">CyberTec</div>
         </div>
-        <div class="version">v2.2.0</div>
-      </div>
+        <ul class="nav-menu">
+            <li class="nav-item" onclick="window.location.href='dashboard.html'">
+                <span>📊</span> Dashboard
+            </li>
+            <li class="nav-item" onclick="window.location.href='catalog.html'">
+                <span>📦</span> Catálogo
+            </li>
+            <li class="nav-item active">
+                <span>➕</span> Agregar Producto
+            </li>
+            <li class="nav-item" onclick="window.location.href='../index.html'">
+                <span>🏠</span> Volver al Sitio
+            </li>
+        </ul>
     </aside>
 
-    <!-- Main -->
-    <main class="main">
-      <div class="form-card">
-        <div class="form-header">
-          <h2>➕ Agregar Nuevo Producto</h2>
-          <p>Complete la información del producto para agregarlo al catálogo</p>
-        </div>
+```
+<main class="main-content">
+    <div class="page-header">
+        <h1>➕ Agregar Nuevo Producto</h1>
+        <p>Completa la información del producto para agregarlo al catálogo</p>
+    </div>
 
-        <form id="productForm" class="form-grid" onsubmit="return false;">
-          <!-- Columna izquierda -->
-          <div class="form-section">
+    <form class="form-card" id="productForm">
+        <!-- Información Básica -->
+        <div class="form-section">
             <h3 class="section-title">📝 Información Básica</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Nombre del Producto *</label>
+                    <input type="text" id="name" name="name" placeholder="RTX 4090 Gaming OC" required>
+                </div>
 
-            <div class="form-group">
-              <label class="form-label">Nombre del Producto *</label>
-              <input type="text" class="form-input" id="productName" placeholder="Ej: NVIDIA RTX 4070 Ti Gaming OC" required>
-              <div class="form-help">Nombre comercial completo del producto</div>
+                <div class="form-group">
+                    <label for="category">Categoría *</label>
+                    <select id="category" name="category" required>
+                        <option value="">Seleccionar categoría</option>
+                        <option value="GPU">GPU - Tarjetas Gráficas</option>
+                        <option value="CPU">CPU - Procesadores</option>
+                        <option value="RAM">RAM - Memoria</option>
+                        <option value="Storage">Storage - Almacenamiento</option>
+                        <option value="Motherboard">Motherboard - Placas Madre</option>
+                        <option value="PSU">PSU - Fuentes de Poder</option>
+                        <option value="Case">Case - Gabinetes</option>
+                        <option value="Cooling">Cooling - Refrigeración</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" placeholder="Describe las características principales del producto..."></textarea>
+                </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">SKU *</label>
-                <input type="text" class="form-input" id="productSku" placeholder="GPU-RTX4070TI-001" required>
-                <div class="form-help">Código único del producto</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Categoría *</label>
-                <select class="form-select" id="productCategory" required>
-                  <option value="">Seleccionar categoría</option>
-                  <option value="gpu">🖥️ Tarjetas Gráficas</option>
-                  <option value="cpu">⚡ Procesadores</option>
-                  <option value="ram">🧠 Memorias RAM</option>
-                  <option value="storage">💾 Almacenamiento</option>
-                  <option value="motherboard">🔌 Placas Madre</option>
-                  <option value="psu">⚡ Fuentes de Poder</option>
-                  <option value="cooling">❄️ Refrigeración</option>
-                  <option value="case">📦 Gabinetes</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Descripción Corta</label>
-              <textarea class="form-textarea" id="productDescription" placeholder="Descripción breve del producto para mostrar en las tarjetas..." rows="3"></textarea>
-              <div class="form-help">Máximo 160 caracteres</div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Especificaciones Técnicas</label>
-              <textarea class="form-textarea" id="productSpecs" placeholder="• 12GB GDDR6X
-• Ray Tracing de 3ra generación
-• DLSS 3.0
-• Boost Clock: 2610 MHz
-• Memory Speed: 21 Gbps" rows="6"></textarea>
-              <div class="form-help">Una especificación por línea, usando viñetas</div>
-            </div>
-
-            <h3 class="section-title">💰 Precios e Inventario</h3>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Precio de Venta *</label>
-                <input type="number" class="form-input" id="productPrice" placeholder="980000" required>
-                <div class="form-help">Precio en pesos colombianos (sin puntos)</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Precio Original</label>
-                <input type="number" class="form-input" id="productOriginalPrice" placeholder="1200000">
-                <div class="form-help">Para mostrar descuentos (opcional)</div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Stock Inicial *</label>
-                <input type="number" class="form-input" id="productStock" placeholder="15" required min="0">
-                <div class="form-help">Cantidad disponible en inventario</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Stock Mínimo</label>
-                <input type="number" class="form-input" id="productMinStock" placeholder="5" min="0">
-                <div class="form-help">Para alertas de stock bajo</div>
-              </div>
-            </div>
-
-            <h3 class="section-title">📷 Imagen del Producto</h3>
-
-            <label class="image-upload" for="imageInput">
-              <div class="upload-icon">📷</div>
-              <div class="upload-text">
-                <strong>Haz clic para subir imagen</strong><br>
-                o arrastra y suelta aquí<br>
-                <small>JPG, PNG hasta 5MB</small>
-              </div>
-              <input type="file" id="imageInput" class="upload-input" accept="image/*">
-            </label>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Estado del Producto</label>
-                <select class="form-select" id="productStatus">
-                  <option value="draft">📝 Borrador</option>
-                  <option value="active">✅ Activo</option>
-                  <option value="inactive">❌ Inactivo</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Marca</label>
-                <input type="text" class="form-input" id="productBrand" placeholder="NVIDIA, AMD, Intel, etc.">
-              </div>
-            </div>
-          </div>
-
-          <!-- Columna derecha (preview) -->
-          <div class="form-section">
-            <h3 class="section-title">👁️ Vista Previa</h3>
-
-            <div class="preview-card">
-              <div class="preview-image" id="previewImage">🖥️</div>
-              <div class="preview-title" id="previewTitle">Nombre del Producto</div>
-              <div class="preview-price" id="previewPrice">$0</div>
-              <div class="preview-category" id="previewCategory">Categoría</div>
-
-              <div class="status-indicator">
-                <div class="indicator-dot dot-draft" id="statusDot"></div>
-                <span class="indicator-text" id="statusText">Borrador</span>
-              </div>
-            </div>
-
-            <div class="tips">
-              <h4>💡 Consejos</h4>
-              <ul>
-                <li>Usa nombres descriptivos y completos</li>
-                <li>Incluye especificaciones técnicas clave</li>
-                <li>Agrega imágenes de alta calidad</li>
-                <li>Verifica precios antes de publicar</li>
-                <li>Guarda como borrador para revisar después</li>
-              </ul>
-            </div>
-
-            <div class="valid-box">
-              <div class="valid-title">✅ FORMULARIO VÁLIDO</div>
-              <div class="valid-text" id="validationStatus">Complete los campos requeridos</div>
-            </div>
-          </div>
-        </form>
-
-        <!-- Action Buttons -->
-        <div class="form-actions">
-          <a href="catalog.html" class="btn ghost">❌ Cancelar</a>
-          <button type="button" class="btn ghost" id="saveDraft">📝 Guardar Borrador</button>
-          <button type="button" class="btn success" id="publishProduct">✅ Publicar Producto</button>
         </div>
-      </div>
-    </main>
-  </div>
 
-  <!-- JS específico de la página -->
-  <script src="../../assets/js/admin-add-product.js" defer></script>
+        <!-- Precio e Inventario -->
+        <div class="form-section">
+            <h3 class="section-title">💰 Precio e Inventario</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="price">Precio *</label>
+                    <input type="number" id="price" name="price" placeholder="2850000" min="0" step="1000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="stock">Stock Disponible *</label>
+                    <input type="number" id="stock" name="stock" placeholder="10" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="sku">SKU (Código)</label>
+                    <input type="text" id="sku" name="sku" placeholder="GPU-RTX4090-001">
+                </div>
+
+                <div class="form-group">
+                    <label>Producto Destacado</label>
+                    <div class="featured-toggle">
+                        <div class="toggle-switch" id="featuredToggle" onclick="toggleFeatured()">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span id="featuredText">No</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Imagen del Producto -->
+        <div class="form-section">
+            <h3 class="section-title">🖼️ Imagen del Producto</h3>
+            <div class="form-group">
+                <label for="imageUrl">URL de la Imagen</label>
+                <input type="url" id="imageUrl" name="imageUrl" placeholder="https://ejemplo.com/imagen.jpg">
+                <div class="image-upload" onclick="document.getElementById('imageUrl').focus()">
+                    <div class="upload-icon">📷</div>
+                    <div class="upload-text">Ingresa la URL de la imagen del producto</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista Previa -->
+        <div class="preview-section">
+            <div class="preview-title">👁️ Vista Previa</div>
+            <div class="product-preview" id="preview">
+                <p style="color: #9ca3af; text-align: center;">
+                    La vista previa aparecerá aquí mientras completas el formulario
+                </p>
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='catalog.html'">
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+                ✓ Agregar Producto
+            </button>
+        </div>
+    </form>
+</main>
+
+<script>
+    let isFeatured = false;
+
+    function toggleFeatured() {
+        isFeatured = !isFeatured;
+        const toggle = document.getElementById('featuredToggle');
+        const text = document.getElementById('featuredText');
+        
+        if (isFeatured) {
+            toggle.classList.add('active');
+            text.textContent = 'Sí';
+            text.style.color = '#7c3aed';
+        } else {
+            toggle.classList.remove('active');
+            text.textContent = 'No';
+            text.style.color = '#9ca3af';
+        }
+    }
+
+    // Vista previa en tiempo real
+    const form = document.getElementById('productForm');
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', updatePreview);
+    });
+
+    function updatePreview() {
+        const name = document.getElementById('name').value || 'Nombre del producto';
+        const category = document.getElementById('category').value || 'Categoría';
+        const description = document.getElementById('description').value || 'Sin descripción';
+        const price = document.getElementById('price').value || '0';
+        const stock = document.getElementById('stock').value || '0';
+
+        const preview = document.getElementById('preview');
+        preview.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">${getIconForCategory(category)}</div>
+                <div style="color: #7c3aed; font-size: 0.9rem; margin-bottom: 0.5rem;">${category}</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">${name}</h3>
+                <p style="color: #9ca3af; margin-bottom: 1rem;">${description}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #10b981; font-size: 1.5rem; font-weight: bold;">$ ${parseInt(price).toLocaleString('es-CO')}</span>
+                    <span style="color: ${stock > 10 ? '#10b981' : stock > 0 ? '#f59e0b' : '#ef4444'};">
+                        Stock: ${stock}
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+
+    function getIconForCategory(category) {
+        const icons = {
+            'GPU': '🎨',
+            'CPU': '⚡',
+            'RAM': '💾',
+            'Storage': '💿',
+            'Motherboard': '🔌',
+            'PSU': '🔋',
+            'Case': '🖥️',
+            'Cooling': '❄️'
+        };
+        return icons[category] || '📦';
+    }
+
+    // Enviar formulario
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const productData = {
+            name: document.getElementById('name').value,
+            category: document.getElementById('category').value,
+            description: document.getElementById('description').value,
+            price: parseFloat(document.getElementById('price').value),
+            stock: parseInt(document.getElementById('stock').value),
+            imageUrl: document.getElementById('imageUrl').value || null,
+            featured: isFeatured
+        };
+
+        console.log('Producto a crear:', productData);
+
+        // Aquí iría la llamada al backend
+        // await apiService.createProduct(productData);
+
+        alert('✓ Producto agregado exitosamente!');
+        window.location.href = 'catalog.html';
+    });
+</script>
+```
+
 </body>
 </html>

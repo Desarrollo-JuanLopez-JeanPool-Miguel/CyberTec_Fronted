@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CyberTec Gaming Store</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                radial-gradient(1200px 600px at -10% -20%, rgba(124,58,237,.18), transparent 60%),
+                radial-gradient(900px 500px at 110% -20%, rgba(56,189,248,.14), transparent 55%),
+                linear-gradient(180deg, #0a0f20, #0b1121 60%, #0b1224);
+            color: #e6e9f3;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 480px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: linear-gradient(180deg, rgba(18,24,49,.95), rgba(15,22,45,.97));
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124,58,237,.1), transparent 70%);
+            animation: glow 8s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px rgba(124,58,237,.6));
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-subtitle {
+            color: #9aa4c7;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            color: #e6e9f3;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,.06);
+            border: 2px solid rgba(124,58,237,.3);
+            border-radius: 12px;
+            color: #e6e9f3;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 4px rgba(124,58,237,.15);
+            background: rgba(255,255,255,.08);
+        }
+
+        .form-input::placeholder {
+            color: #64748b;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 800;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(124,58,237,.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: rgba(239,68,68,.15);
+            border: 1px solid rgba(239,68,68,.35);
+            border-left: 4px solid #ef4444;
+            color: #fca5a5;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #9aa4c7;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-footer a {
+            color: #a855f7;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: #7c3aed;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-home a {
+            color: #9aa4c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-home a:hover {
+            color: #e6e9f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="back-home">
+            <a href="index.html">← Volver al inicio</a>
+        </div>
+
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">⚡</div>
+                <h1 class="login-title">CyberTec</h1>
+                <p class="login-subtitle">Gaming Store • Panel de Acceso</p>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">👤 Usuario</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="form-input" 
+                        placeholder="admin"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔐 Contraseña</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="••••••••"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">
+                    ⚡ Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="login-footer">
+                ¿No tienes cuenta? <a href="register.html">Regístrate aquí</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            errorDiv.style.display = 'none';
+            submitBtn.textContent = '⏳ Iniciando...';
+            submitBtn.disabled = true;
+
+            try {
+                const data = await API.login(username, password);
+
+                if (data.token) {
+                    AUTH.saveAuth(data.token, {
+                        userId: data.userId,
+                        username: data.username,
+                        email: data.email,
+                        role: data.role
+                    });
+
+                    submitBtn.textContent = '✅ Éxito!';
+
+                    setTimeout(() => {
+                        if (data.role === 'ADMIN') {
+                            window.location.href = 'admin/dashboard.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 500);
+                } else {
+                    throw new Error(data.error || 'Credenciales inválidas');
+                }
+            } catch (error) {
+                console.error('Error login:', error);
+                errorDiv.textContent = error.message || 'Error de conexión. Verifica que el backend esté corriendo en http://localhost:8080';
+                errorDiv.style.display = 'block';
+                submitBtn.textContent = '⚡ Iniciar Sesión';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

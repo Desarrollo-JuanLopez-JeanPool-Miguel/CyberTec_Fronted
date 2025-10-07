@@ -1,208 +1,545 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard • CyberTec</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CyberTec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="../../assets/css/admin.css" />
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0a0e1a;
+        color: #fff;
+        display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 260px;
+        background-color: #151824;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 2rem 0;
+        border-right: 1px solid #2a2d3e;
+    }
+
+    .logo-section {
+        padding: 0 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .logo-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #7c3aed;
+    }
+
+    .admin-badge {
+        background-color: #7c3aed;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        display: inline-block;
+    }
+
+    .nav-menu {
+        list-style: none;
+    }
+
+    .nav-item {
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #9ca3af;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        background-color: #1a1d2e;
+        color: #7c3aed;
+        border-left: 4px solid #7c3aed;
+    }
+
+    .nav-icon {
+        font-size: 1.3rem;
+    }
+
+    /* Main Content */
+    .main-content {
+        margin-left: 260px;
+        flex: 1;
+        padding: 2rem;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .welcome-section h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+        color: #9ca3af;
+    }
+
+    .user-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #1a1d2e;
+        color: #fff;
+        border: 2px solid #2a2d3e;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #1a1d2e 0%, #252839 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+        border-color: #7c3aed;
+        transform: translateY(-5px);
+    }
+
+    .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .stat-title {
+        color: #9ca3af;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-change {
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .stat-change.positive {
+        color: #10b981;
+    }
+
+    .stat-change.negative {
+        color: #ef4444;
+    }
+
+    /* Charts Section */
+    .charts-section {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .chart-card {
+        background-color: #151824;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .chart-placeholder {
+        height: 300px;
+        background: linear-gradient(135deg, #1a1d2e 0%, #2a2d3e 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+    }
+
+    /* Recent Orders */
+    .orders-section {
+        background-color: #151824;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .orders-table th {
+        text-align: left;
+        padding: 1rem;
+        color: #9ca3af;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-bottom: 2px solid #2a2d3e;
+    }
+
+    .orders-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #2a2d3e;
+    }
+
+    .orders-table tr:hover {
+        background-color: #1a1d2e;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .status-completed {
+        background-color: #10b98122;
+        color: #10b981;
+    }
+
+    .status-pending {
+        background-color: #f59e0b22;
+        color: #f59e0b;
+    }
+
+    .status-cancelled {
+        background-color: #ef444422;
+        color: #ef4444;
+    }
+
+    @media (max-width: 1024px) {
+        .charts-section {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 80px;
+        }
+
+        .main-content {
+            margin-left: 80px;
+        }
+
+        .nav-item span {
+            display: none;
+        }
+
+        .logo-section {
+            padding: 0 0.5rem;
+        }
+
+        .logo-text,
+        .admin-badge {
+            display: none;
+        }
+    }
+</style>
+
+
 </head>
 <body>
-  <!-- Topbar -->
-  <header class="admin-topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="logo">⚡</span>
-        <div class="brand-text">
-          <strong>CyberTec</strong>
-          <small>Admin Panel</small>
-        </div>
-      </div>
-
-      <div class="topbar-actions">
-        <div class="search">
-          <input type="text" placeholder="Buscar pedidos, clientes, SKUs…" />
-          <span class="icon">🔎</span>
-        </div>
-
-        <button class="icon-btn" data-tip="Notificaciones">🔔<span class="dot"></span></button>
-        <button class="icon-btn" data-tip="Modo oscuro" id="toggleTheme">🌓</button>
-
-        <div class="avatar">
-          <img src="https://i.pravatar.cc/48?img=12" alt="admin"/>
-          <span class="name">Juan Pablo</span>
-        </div>
-        <a class="logout" href="../index.html">Salir</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="admin-shell">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <nav class="nav">
-        <a class="nav-item active" href="#">📊 Dashboard</a>
-        <a class="nav-item" href="inventory.html">📦 Inventario</a>
-        <a class="nav-item" href="catalog.html">🛒 Catálogo</a>
-        <a class="nav-item" href="#">💰 Ventas</a>
-        <a class="nav-item" href="#">👥 Clientes</a>
-        <a class="nav-item" href="#">📈 Reportes</a>
-        <a class="nav-item" href="#">⚙️ Configuración</a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="mini-card">
-          <div class="mini-title">Uso API</div>
-          <div class="mini-value">62%</div>
-          <div class="mini-bar"><span style="width:62%"></span></div>
-        </div>
-        <div class="version">v2.2.0</div>
-      </div>
-    </aside>
-
-    <!-- Main -->
-    <main class="main">
-      <!-- KPIs -->
-      <section class="kpis">
-        <article class="kpi kpi-success">
-          <div class="kpi-top">
-            <span class="kpi-title">Ventas hoy</span>
-            <span class="kpi-icon">💳</span>
-          </div>
-          <div class="kpi-value" data-count="$4.250.000">$0</div>
-          <div class="kpi-sub"><span class="chip chip-up">+15%</span> vs ayer</div>
-        </article>
-
-        <article class="kpi kpi-primary">
-          <div class="kpi-top">
-            <span class="kpi-title">Productos</span>
-            <span class="kpi-icon">📦</span>
-          </div>
-          <div class="kpi-value" data-count="1,247">0</div>
-          <div class="kpi-sub"><span class="chip">+32</span> esta semana</div>
-        </article>
-
-        <article class="kpi kpi-warning">
-          <div class="kpi-top">
-            <span class="kpi-title">Stock bajo</span>
-            <span class="kpi-icon">⚠️</span>
-          </div>
-          <div class="kpi-value" data-count="12">0</div>
-          <div class="kpi-sub">Requieren reposición</div>
-        </article>
-
-        <article class="kpi kpi-info">
-          <div class="kpi-top">
-            <span class="kpi-title">Clientes</span>
-            <span class="kpi-icon">👥</span>
-          </div>
-          <div class="kpi-value" data-count="3,456">0</div>
-          <div class="kpi-sub"><span class="chip">+89</span> este mes</div>
-        </article>
-      </section>
-
-      <!-- Grid -->
-      <section class="grid">
-        <!-- Orders -->
-        <div class="card">
-          <div class="card-head">
-            <h3>🛒 Órdenes recientes</h3>
-            <div class="card-actions">
-              <button class="btn ghost" id="refreshOrders">↻ Actualizar</button>
-              <button class="btn primary" id="newOrder">➕ Nueva</button>
-            </div>
-          </div>
-
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Productos</th>
-                  <th>Total</th>
-                  <th>Estado</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="ordersBody">
-                <tr>
-                  <td><span class="badge id">#2024-001</span></td>
-                  <td><strong>Juan Pérez</strong></td>
-                  <td>RTX 4070 + Ryzen 5</td>
-                  <td><span class="money">$1.250.000</span></td>
-                  <td><span class="status paid">Pagado</span></td>
-                  <td><button class="link" data-action="view">Ver</button></td>
-                </tr>
-                <tr>
-                  <td><span class="badge id">#2024-002</span></td>
-                  <td><strong>María García</strong></td>
-                  <td>Gaming Setup</td>
-                  <td><span class="money">$2.890.000</span></td>
-                  <td><span class="status ship">Enviando</span></td>
-                  <td><button class="link" data-action="view">Ver</button></td>
-                </tr>
-                <tr>
-                  <td><span class="badge id">#2024-003</span></td>
-                  <td><strong>Carlos López</strong></td>
-                  <td>PC Builder Custom</td>
-                  <td><span class="money">$3.450.000</span></td>
-                  <td><span class="status pend">Pendiente</span></td>
-                  <td><button class="link" data-action="process">Procesar</button></td>
-                </tr>
-                <tr>
-                  <td><span class="badge id">#2024-004</span></td>
-                  <td><strong>Ana Rodríguez</strong></td>
-                  <td>Monitor + Teclado</td>
-                  <td><span class="money">$650.000</span></td>
-                  <td><span class="status ok">Entregado</span></td>
-                  <td><span class="muted">—</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="logo-section">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">CyberTec</div>
+            <div class="admin-badge">ADMIN</div>
         </div>
 
-        <!-- Quick actions / activity -->
-        <div class="stack">
-          <div class="card">
-            <div class="card-head"><h3>⚡ Acciones rápidas</h3></div>
-            <div class="actions-col">
-              <a class="btn block primary" href="add-product.html">➕ Nuevo producto</a>
-              <a class="btn block success" href="inventory.html">📦 Gestionar stock</a>
-              <button class="btn block warning" data-toast="🏷️ Crear oferta (demo)">🏷️ Crear oferta</button>
-              <button class="btn block danger" data-toast="📊 Ver reportes (demo)">📊 Ver reportes</button>
-              <button class="btn block info" data-toast="👥 Gestionar usuarios (demo)">👥 Gestionar usuarios</button>
-            </div>
-          </div>
 
-          <div class="card">
-            <div class="card-head"><h3>📈 Actividad reciente</h3></div>
-            <ul class="activity">
-              <li>
-                <span class="dot ok">✓</span>
-                <div>
-                  <p>Stock actualizado: RTX 4080 Super (+15)</p>
-                  <small>Hace 5 min</small>
-                </div>
-              </li>
-              <li>
-                <span class="dot info">💰</span>
-                <div>
-                  <p>Nueva venta: Gaming Setup Pro — $3.450.000</p>
-                  <small>Hace 12 min</small>
-                </div>
-              </li>
-              <li>
-                <span class="dot warn">⚠️</span>
-                <div>
-                  <p>Alerta: Ryzen 7 7800X3D (2 restantes)</p>
-                  <small>Hace 25 min</small>
-                </div>
-              </li>
-              <li>
-                <span class="dot ok">✓</span>
-                <div>
-                  <p>Producto agregado: Monitor ASUS ROG 240Hz</p>
-                  <small>Hace 1 hora
+    <ul class="nav-menu">
+        <li class="nav-item active">
+            <span class="nav-icon">📊</span>
+            <span>Dashboard</span>
+        </li>
+        <li class="nav-item" onclick="window.location.href='catalog.html'">
+            <span class="nav-icon">📦</span>
+            <span>Catálogo</span>
+        </li>
+        <li class="nav-item" onclick="window.location.href='add-product.html'">
+            <span class="nav-icon">➕</span>
+            <span>Agregar Producto</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Órdenes</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-icon">👥</span>
+            <span>Clientes</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-icon">📈</span>
+            <span>Reportes</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span>Configuración</span>
+        </li>
+        <li class="nav-item" onclick="window.location.href='../index.html'">
+            <span class="nav-icon">🏠</span>
+            <span>Volver al Sitio</span>
+        </li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="top-bar">
+        <div class="welcome-section">
+            <h1>¡Bienvenido, Administrador!</h1>
+            <p>Gestiona tu tienda gaming desde aquí</p>
+        </div>
+        <div class="user-actions">
+            <button class="btn btn-secondary">🔔 Notificaciones</button>
+            <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
+                ➕ Nuevo Producto
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">VENTAS TOTALES</span>
+                <span class="stat-icon">💰</span>
+            </div>
+            <div class="stat-value">$12.5M</div>
+            <div class="stat-change positive">
+                ↑ 15.3% vs mes anterior
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">ÓRDENES</span>
+                <span class="stat-icon">📦</span>
+            </div>
+            <div class="stat-value">486</div>
+            <div class="stat-change positive">
+                ↑ 8.2% vs mes anterior
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">PRODUCTOS</span>
+                <span class="stat-icon">🎮</span>
+            </div>
+            <div class="stat-value">127</div>
+            <div class="stat-change negative">
+                ↓ 3 productos agotados
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">CLIENTES</span>
+                <span class="stat-icon">👥</span>
+            </div>
+            <div class="stat-value">2,543</div>
+            <div class="stat-change positive">
+                ↑ 12.5% nuevos usuarios
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="chart-card">
+            <div class="chart-header">
+                <div class="chart-title">📈 Ventas del Mes</div>
+                <select class="btn btn-secondary" style="padding: 0.5rem;">
+                    <option>Últimos 7 días</option>
+                    <option>Último mes</option>
+                    <option>Último año</option>
+                </select>
+            </div>
+            <div class="chart-placeholder">
+                📊 Gráfico de ventas (Integrar con Chart.js)
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="chart-header">
+                <div class="chart-title">🏆 Top Categorías</div>
+            </div>
+            <div class="chart-placeholder">
+                🥧 Gráfico circular (Integrar con Chart.js)
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="orders-section">
+        <div class="section-header">
+            <h2 class="section-title">📋 Órdenes Recientes</h2>
+            <button class="btn btn-secondary">Ver Todas</button>
+        </div>
+
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>ID Orden</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#ORD-2024-001</td>
+                    <td>Juan Pérez</td>
+                    <td>RTX 4090</td>
+                    <td>2024-01-15</td>
+                    <td>$2.850.000</td>
+                    <td><span class="status-badge status-completed">Completado</span></td>
+                </tr>
+                <tr>
+                    <td>#ORD-2024-002</td>
+                    <td>María García</td>
+                    <td>Ryzen 9 7950X</td>
+                    <td>2024-01-14</td>
+                    <td>$920.000</td>
+                    <td><span class="status-badge status-pending">Pendiente</span></td>
+                </tr>
+                <tr>
+                    <td>#ORD-2024-003</td>
+                    <td>Carlos López</td>
+                    <td>Gaming Setup Complete</td>
+                    <td>2024-01-14</td>
+                    <td>$4.500.000</td>
+                    <td><span class="status-badge status-completed">Completado</span></td>
+                </tr>
+                <tr>
+                    <td>#ORD-2024-004</td>
+                    <td>Ana Martínez</td>
+                    <td>RTX 4080</td>
+                    <td>2024-01-13</td>
+                    <td>$1.890.000</td>
+                    <td><span class="status-badge status-cancelled">Cancelado</span></td>
+                </tr>
+                <tr>
+                    <td>#ORD-2024-005</td>
+                    <td>Pedro Sánchez</td>
+                    <td>Corsair Vengeance 32GB</td>
+                    <td>2024-01-12</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script>
+    // Verificar permisos de admin
+    document.addEventListener('DOMContentLoaded', function() {
+        // Aquí se verificaría si el usuario es admin
+        const isAdmin = localStorage.getItem('userRole') === 'ADMIN';
+        
+        if (!isAdmin) {
+            // alert('Acceso denegado. Se requieren permisos de administrador.');
+            // window.location.href = '../index.html';
+        }
+    });
+
+    // Actualizar estadísticas en tiempo real (simulado)
+    function updateStats() {
+        // Aquí se harían llamadas al backend para obtener datos reales
+        console.log('Actualizando estadísticas...');
+    }
+
+    // Actualizar cada 30 segundos
+    setInterval(updateStats, 30000);
+</script>
+
+
+</body>
+</html>

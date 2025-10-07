@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CyberTec Gaming Store</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                radial-gradient(1200px 600px at -10% -20%, rgba(124,58,237,.18), transparent 60%),
+                radial-gradient(900px 500px at 110% -20%, rgba(56,189,248,.14), transparent 55%),
+                linear-gradient(180deg, #0a0f20, #0b1121 60%, #0b1224);
+            color: #e6e9f3;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .register-container {
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .register-card {
+            background: linear-gradient(180deg, rgba(18,24,49,.95), rgba(15,22,45,.97));
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124,58,237,.1), transparent 70%);
+            animation: glow 8s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-logo {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            filter: drop-shadow(0 0 20px rgba(124,58,237,.6));
+        }
+
+        .register-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .register-subtitle {
+            color: #9aa4c7;
+            font-size: 0.9rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #e6e9f3;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            background: rgba(255,255,255,.06);
+            border: 2px solid rgba(124,58,237,.3);
+            border-radius: 12px;
+            color: #e6e9f3;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 4px rgba(124,58,237,.15);
+            background: rgba(255,255,255,.08);
+        }
+
+        .form-input::placeholder {
+            color: #64748b;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 800;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            margin-top: 1rem;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(16,185,129,.4);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: rgba(239,68,68,.15);
+            border: 1px solid rgba(239,68,68,.35);
+            border-left: 4px solid #ef4444;
+            color: #fca5a5;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .success-message {
+            background: rgba(16,185,129,.15);
+            border: 1px solid rgba(16,185,129,.35);
+            border-left: 4px solid #10b981;
+            color: #6ee7b7;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #9aa4c7;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-footer a {
+            color: #a855f7;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .register-footer a:hover {
+            color: #7c3aed;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-home a {
+            color: #9aa4c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-home a:hover {
+            color: #e6e9f3;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="back-home">
+            <a href="index.html">← Volver al inicio</a>
+        </div>
+
+        <div class="register-card">
+            <div class="register-header">
+                <div class="register-logo">⚡</div>
+                <h1 class="register-title">Únete a CyberTec</h1>
+                <p class="register-subtitle">Crea tu cuenta y empieza a armar tu setup gaming</p>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">👤 Nombre</label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            class="form-input" 
+                            placeholder="Juan"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Apellido</label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            class="form-input" 
+                            placeholder="Pérez"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🎮 Usuario</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="form-input" 
+                        placeholder="gamer_pro"
+                        required
+                        minlength="3"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📧 Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder="tu@email.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔐 Contraseña</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="Mínimo 6 caracteres"
+                        required
+                        minlength="6"
+                        autocomplete="new-password"
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">📱 Teléfono (opcional)</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            class="form-input" 
+                            placeholder="+57 300 123 4567"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">📍 Ciudad (opcional)</label>
+                        <input 
+                            type="text" 
+                            id="address" 
+                            class="form-input" 
+                            placeholder="Bogotá, Colombia"
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-register">
+                    🚀 Crear Cuenta
+                </button>
+            </form>
+
+            <div class="register-footer">
+                ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            submitBtn.textContent = '⏳ Creando cuenta...';
+            submitBtn.disabled = true;
+
+            const userData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value || null,
+                address: document.getElementById('address').value || null
+            };
+
+            try {
+                const data = await API.register(userData);
+
+                if (data.token) {
+                    // Registro exitoso
+                    AUTH.saveAuth(data.token, {
+                        userId: data.userId,
+                        username: data.username,
+                        email: data.email,
+                        role: data.role
+                    });
+
+                    successDiv.textContent = '✅ ¡Cuenta creada exitosamente! Redirigiendo...';
+                    successDiv.style.display = 'block';
+                    submitBtn.textContent = '✅ ¡Éxito!';
+
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    throw new Error(data.error || 'Error al crear la cuenta');
+                }
+            } catch (error) {
+                console.error('Error registro:', error);
+                errorDiv.textContent = error.message || 'Error de conexión. Verifica que el backend esté corriendo.';
+                errorDiv.style.display = 'block';
+                submitBtn.textContent = '🚀 Crear Cuenta';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
