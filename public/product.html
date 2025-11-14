@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RTX 4080 SUPER Gaming OC - CyberTec Gaming Store</title>
+    <title>Productos - CyberTec Gaming Store</title>
     <style>
         * {
             margin: 0;
@@ -12,980 +12,603 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #0f172a;
-            color: white;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
         }
 
-        /* Header */
-        .header {
-            background: #0d1421;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        header {
+            background-color: #1f2235;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 2rem;
+            border-bottom: 1px solid #2a2d3e;
         }
 
-        .logo h1 {
-            color: #7c3aed;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .logo {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .tagline {
-            font-size: 0.65rem;
-            color: #a855f7;
-            display: block;
-            margin-top: -0.25rem;
-        }
-
-        .back-btn {
-            background: #374151;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #4b5563;
-            transform: translateX(-3px);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            background: #1e293b;
-            padding: 1rem 0;
-            border-bottom: 1px solid #374151;
-        }
-
-        .breadcrumb-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .breadcrumb a {
-            color: #7c3aed;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a:hover {
-            color: #a855f7;
-        }
-
-        .breadcrumb span {
-            color: #64748b;
-            margin: 0 0.5rem;
-        }
-
-        /* Main Container */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #0f172a;
-        }
-
-        .product-container {
-            background: #1e293b;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 600px;
-        }
-
-        /* Product Images */
-        .product-images {
-            background: #f8f9fa;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            position: relative;
-        }
-
-        .main-image-container {
-            flex: 1;
-            background: #f0f0f0;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-image-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, #7c3aed, #a855f7, #c084fc);
-            opacity: 0.1;
-        }
-
-        .main-image {
-            font-size: 8rem;
-            color: #7c3aed;
-            filter: drop-shadow(0 0 30px rgba(124, 58, 237, 0.3));
-            animation: float 4s ease-in-out infinite;
-            z-index: 1;
-            position: relative;
-        }
-
-        .image-controls {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 2;
-        }
-
-        .control-left {
-            left: 20px;
-        }
-
-        .control-right {
-            right: 20px;
-        }
-
-        .image-control {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(124, 58, 237, 0.8);
-            border: none;
-            color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .image-control:hover {
-            background: #7c3aed;
-            transform: scale(1.1);
-        }
-
-        .thumbnails {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 60px;
-            border-radius: 8px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-        }
-
-        .thumbnail.active {
-            border-color: #7c3aed;
-            box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
-        }
-
-        .thumbnail:hover {
-            transform: translateY(-2px);
-        }
-
-        .thumbnail-icon {
+        .logo-icon {
+            color: #8b5cf6;
             font-size: 2rem;
-            color: #64748b;
         }
 
-        .thumbnail.active .thumbnail-icon {
-            color: #7c3aed;
+        .logo-text {
+            color: #8b5cf6;
         }
 
-        /* Product Info */
-        .product-info {
-            background: #1e293b;
-            padding: 2rem;
+        .header-actions {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 2rem;
-            font-weight: bold;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .brand-badge {
-            background: #10b981;
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            width: fit-content;
-        }
-
-        .rating-section {
-            display: flex;
-            align-items: center;
             gap: 1rem;
-        }
-
-        .stars {
-            color: #fbbf24;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-        }
-
-        .rating-text {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .gaming-badge {
-            background: #ef4444;
-            color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: inline-block;
-            width: fit-content;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .price-section {
-            background: #374151;
-            padding: 1.8rem;
-            border-radius: 15px;
-        }
-
-        .current-price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #7c3aed;
-            margin-bottom: 0.5rem;
-        }
-
-        .price-row {
-            display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
         }
 
-        .old-price {
-            font-size: 1.1rem;
-            color: #94a3b8;
-            text-decoration: line-through;
-        }
-
-        .discount {
-            background: #ef4444;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .installments {
-            color: #10b981;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .stock-info {
-            background: #065f46;
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 4px solid #10b981;
-        }
-
-        .stock-text {
-            color: #10b981;
-            font-weight: bold;
-            margin-bottom: 0.3rem;
-        }
-
-        .shipping-text {
-            color: #6ee7b7;
-            font-size: 0.9rem;
-        }
-
-        .quantity-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .quantity-label {
-            color: white;
-            font-weight: 500;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            border: 2px solid #7c3aed;
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
             border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .qty-btn {
-            background: #374151;
-            color: #7c3aed;
-            border: none;
-            width: 35px;
-            height: 35px;
-            font-size: 1.2rem;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .qty-btn:hover {
-            background: #7c3aed;
-            color: white;
-        }
-
-        .qty-input {
-            background: #1e293b;
-            color: white;
-            border: none;
-            width: 50px;
-            height: 35px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
             color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: #7c3aed;
-            padding: 1rem 2rem;
-            border: 2px solid #7c3aed;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-secondary:hover {
-            background: #7c3aed;
-            color: white;
-        }
-
-        .wishlist-compare {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-wishlist, .btn-compare {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: 2px solid;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-wishlist {
-            border-color: #ef4444;
-            color: #ef4444;
-            background: transparent;
-        }
-
-        .btn-wishlist:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        .btn-compare {
-            border-color: #f59e0b;
-            color: #f59e0b;
-            background: transparent;
-        }
-
-        .btn-compare:hover {
-            background: #f59e0b;
-            color: white;
-        }
-
-        /* Gaming Performance */
-        .performance-section {
-            background: #1e293b;
-            border-radius: 15px;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 2rem;
-            margin-top: 2rem;
         }
 
-        .performance-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .page-header {
+            margin-bottom: 2rem;
         }
 
-        .benchmark-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 0.8rem 0;
-        }
-
-        .benchmark-name {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        .benchmark-bar-container {
-            flex: 1;
-            margin: 0 1rem;
-            height: 12px;
-            background: #374151;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .benchmark-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
-            border-radius: 6px;
-            transition: width 2s ease;
-        }
-
-        .benchmark-fps {
-            color: #10b981;
-            font-weight: bold;
-            font-size: 0.9rem;
-            min-width: 65px;
-            text-align: right;
-        }
-
-        /* Specs Section */
-        .specs-section {
-            background: #1e293b;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .specs-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .spec-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem;
-            background: #374151;
-            border-radius: 8px;
-        }
-
-        .spec-label {
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .spec-value {
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Trust Badges */
-        .trust-badges {
-            background: #374151;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .badges-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .badge-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .badge-icon {
-            font-size: 2rem;
+        .page-header h1 {
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .badge-title {
+        .page-header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+
+        .filters-section {
+            background-color: #1f2235;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        .filter-btn.active {
+            border-color: #8b5cf6;
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: #8b5cf6;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
             font-weight: bold;
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
         }
 
-        .badge-desc {
-            font-size: 0.8rem;
-            color: #94a3b8;
+        .product-description {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .badge-secure {
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
             color: #10b981;
         }
 
-        .badge-shipping {
-            color: #7c3aed;
+        .btn-add-cart {
+            padding: 0.5rem 1rem;
+            background-color: #8b5cf6;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
         }
 
-        .badge-setup {
+        .btn-add-cart:hover {
+            background-color: #7c3aed;
+            transform: scale(1.05);
+        }
+
+        .btn-add-cart:disabled {
+            background-color: #4b5563;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .stock-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .in-stock {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .low-stock {
+            background-color: rgba(245, 158, 11, 0.2);
             color: #f59e0b;
         }
 
-        .badge-support {
+        .out-stock {
+            background-color: rgba(239, 68, 68, 0.2);
             color: #ef4444;
         }
 
-        /* Animaciones */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(1deg); }
-            66% { transform: translateY(5px) rotate(-1deg); }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #9ca3af;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #2a2d3e;
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .product-layout {
-                grid-template-columns: 1fr;
-            }
-            
-            .specs-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .badges-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .main-container {
-                padding: 1rem;
-            }
-            
-            .product-info {
-                padding: 1.5rem;
-            }
-            
-            .product-title {
-                font-size: 1.5rem;
-            }
-            
-            .current-price {
-                font-size: 2rem;
-            }
-            
-            .action-buttons {
-                gap: 0.8rem;
-            }
-            
-            .badges-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: #9ca3af;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: #10b981;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background-color: #ef4444;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <h1><span style="font-size: 1.2em;">⚡</span>CyberTec</h1>
-                <span class="tagline">Gaming Store</span>
-            </div>
-            
-            <a href="index.html" class="back-btn">← Volver</a>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <span class="logo-icon">⚡</span>
+            <div class="logo-text">CyberTec</div>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-primary" onclick="window.location.href='cart.html'">
+                🛒 Carrito (<span id="cart-count">0</span>)
+            </button>
         </div>
     </header>
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb">
-        <div class="breadcrumb-content">
-            <a href="index.html">Inicio</a>
-            <span>/</span>
-            <a href="#">GPUs</a>
-            <span>/</span>
-            <a href="#">NVIDIA</a>
-            <span>/</span>
-            <span style="color: #94a3b8;">RTX 4080 Super Gaming OC</span>
+    <div class="container">
+        <div class="page-header">
+            <h1>🎮 Catálogo de Productos</h1>
+            <p>Encuentra los mejores componentes para tu setup gaming</p>
         </div>
-    </nav>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <div class="product-container">
-            <div class="product-layout">
-                <!-- Product Images -->
-                <div class="product-images">
-                    <div class="main-image-container">
-                        <div class="main-image">🎮</div>
-                        
-                        <!-- Image Controls -->
-                        <button class="image-control control-left">←</button>
-                        <button class="image-control control-right">→</button>
-                    </div>
-                    
-                    <div class="thumbnails">
-                        <div class="thumbnail active">
-                            <div class="thumbnail-icon">🎮</div>
-                        </div>
-                        <div class="thumbnail">
-                            <div class="thumbnail-icon">📦</div>
-                        </div>
-                        <div class="thumbnail">
-                            <div class="thumbnail-icon">🔧</div>
-                        </div>
-                        <div class="thumbnail">
-                            <div class="thumbnail-icon">📊</div>
-                        </div>
-                        <div class="thumbnail">
-                            <div class="thumbnail-icon">🎬</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Info -->
-                <div class="product-info">
-                    <h1 class="product-title">ASUS ROG STRIX RTX 4080 SUPER GAMING OC 16GB</h1>
-                    
-                    <div class="brand-badge">ASUS ROG</div>
-                    
-                    <div class="rating-section">
-                        <div class="stars">★★★★★</div>
-                        <div class="rating-text">(89 reviews) • 4.8/5</div>
-                    </div>
-                    
-                    <div class="gaming-badge">🔥 4K GAMING</div>
-                    
-                    <div class="price-section">
-                        <div class="current-price">$1.890.000</div>
-                        <div class="price-row">
-                            <div class="old-price">$2.150.000</div>
-                            <div class="discount">-12%</div>
-                        </div>
-                        <div class="installments">💳 12 cuotas sin interés de $157.500</div>
-                    </div>
-                    
-                    <div class="stock-info">
-                        <div class="stock-text">✅ En Stock - Últimas 3 unidades</div>
-                        <div class="shipping-text">🚚 Envío gratis - Llega mañana en Bogotá</div>
-                    </div>
-                    
-                    <div class="quantity-section">
-                        <span class="quantity-label">Cantidad:</span>
-                        <div class="quantity-controls">
-                            <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
-                            <input type="number" class="qty-input" id="quantity" value="1" min="1" max="3" readonly>
-                            <button class="qty-btn" onclick="changeQuantity(1)">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn-primary" onclick="showMessage('⚡ Función de compra no implementada aún')">⚡ COMPRAR AHORA</button>
-                        <button class="btn-secondary" onclick="showMessage('🛒 Función de carrito no implementada aún')">🛒 AGREGAR AL CART</button>
-                    </div>
-                    
-                    <div class="wishlist-compare">
-                        <button class="btn-wishlist" onclick="showMessage('❤️ Función de favoritos no implementada aún')">❤️ Favorito</button>
-                        <button class="btn-compare" onclick="showMessage('⚖️ Función de comparación no implementada aún')">⚖️ Comparar</button>
-                    </div>
-                </div>
+        <div class="filters-section">
+            <div class="filter-group">
+                <button class="filter-btn active" data-category="all" onclick="filterByCategory('all', this)">Todos</button>
+                <button class="filter-btn" data-category="GPU" onclick="filterByCategory('GPU', this)">GPUs</button>
+                <button class="filter-btn" data-category="CPU" onclick="filterByCategory('CPU', this)">CPUs</button>
+                <button class="filter-btn" data-category="RAM" onclick="filterByCategory('RAM', this)">RAM</button>
+                <button class="filter-btn" data-category="Storage" onclick="filterByCategory('Storage', this)">Storage</button>
+                <button class="filter-btn" data-category="Motherboard" onclick="filterByCategory('Motherboard', this)">Motherboard</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Buscar productos...">
             </div>
         </div>
 
-        <!-- Gaming Performance -->
-        <div class="performance-section">
-            <h3 class="performance-title">🎮 RENDIMIENTO GAMING</h3>
-            
-            <div class="benchmark-item">
-                <span class="benchmark-name">Cyberpunk 2077 4K Ultra</span>
-                <div class="benchmark-bar-container">
-                    <div class="benchmark-bar" style="width: 80%"></div>
-                </div>
-                <span class="benchmark-fps">75 FPS</span>
-            </div>
-            
-            <div class="benchmark-item">
-                <span class="benchmark-name">Call of Duty 4K High</span>
-                <div class="benchmark-bar-container">
-                    <div class="benchmark-bar" style="width: 90%"></div>
-                </div>
-                <span class="benchmark-fps">120 FPS</span>
-            </div>
-            
-            <div class="benchmark-item">
-                <span class="benchmark-name">Fortnite 4K Epic</span>
-                <div class="benchmark-bar-container">
-                    <div class="benchmark-bar" style="width: 95%"></div>
-                </div>
-                <span class="benchmark-fps">165 FPS</span>
-            </div>
-            
-            <div class="benchmark-item">
-                <span class="benchmark-name">Valorant 1440p Max</span>
-                <div class="benchmark-bar-container">
-                    <div class="benchmark-bar" style="width: 100%"></div>
-                </div>
-                <span class="benchmark-fps">300+ FPS</span>
-            </div>
-        </div>
-
-        <!-- Specifications -->
-        <div class="specs-section">
-            <h3 class="specs-title">⚙️ ESPECIFICACIONES</h3>
-            
-            <div class="specs-grid">
-                <div class="spec-item">
-                    <span class="spec-label">GPU:</span>
-                    <span class="spec-value">NVIDIA GeForce RTX 4080 SUPER</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">VRAM:</span>
-                    <span class="spec-value">16GB GDDR6X</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Base Clock:</span>
-                    <span class="spec-value">2230 MHz</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Boost Clock:</span>
-                    <span class="spec-value">2550 MHz</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Interface:</span>
-                    <span class="spec-value">PCIe 4.0 x16</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Conectores:</span>
-                    <span class="spec-value">3x DisplayPort 1.4a, 1x HDMI 2.1</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Trust Badges -->
-        <div class="trust-badges">
-            <div class="badges-grid">
-                <div class="badge-item badge-secure">
-                    <div class="badge-icon">🔒</div>
-                    <div class="badge-title">Compra Protegida</div>
-                    <div class="badge-desc">SSL + Garantía 2 años</div>
-                </div>
-                
-                <div class="badge-item badge-shipping">
-                    <div class="badge-icon">🚚</div>
-                    <div class="badge-title">Envío Express</div>
-                    <div class="badge-desc">24-48h en ciudades principales</div>
-                </div>
-                
-                <div class="badge-item badge-setup">
-                    <div class="badge-icon">🎮</div>
-                    <div class="badge-title">Setup Gratuito</div>
-                    <div class="badge-desc">Instalación y configuración</div>
-                </div>
-                
-                <div class="badge-item badge-support">
-                    <div class="badge-icon">💬</div>
-                    <div class="badge-title">Soporte 24/7</div>
-                    <div class="badge-desc">WhatsApp + Discord</div>
-                </div>
+        <div id="products-container" class="products-grid">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Cargando productos...</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Cambiar cantidad
-        function changeQuantity(delta) {
-            const quantityInput = document.getElementById('quantity');
-            const currentValue = parseInt(quantityInput.value);
-            const newValue = currentValue + delta;
-            
-            if (newValue >= 1 && newValue <= 3) {
-                quantityInput.value = newValue;
+        // Configuración de API
+        const API_URL = 'http://localhost:8080/api';
+        
+        let allProducts = [];
+        let currentCategory = 'all';
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Cargar productos al iniciar
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                if (!response.ok) throw new Error('Error al cargar productos');
+                
+                allProducts = await response.json();
+                displayProducts(allProducts);
+                updateCartCount();
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('products-container').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <h3>Error al cargar productos</h3>
+                        <p>No se pudo conectar con el servidor. Mostrando datos de ejemplo.</p>
+                    </div>
+                `;
+                // Cargar datos de ejemplo si falla la API
+                loadMockData();
             }
         }
-        
-        // Función para mostrar mensajes (solo para demostración)
-        function showMessage(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #7c3aed, #a855f7);
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                z-index: 10000;
-                font-weight: bold;
-                box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-                animation: slideIn 0.3s ease;
-            `;
+
+        // Datos de ejemplo si no hay backend
+        function loadMockData() {
+            allProducts = [
+                {
+                    id: 1,
+                    name: "RTX 4090 Gaming OC",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4090 24GB GDDR6X",
+                    price: 2850000,
+                    category: "GPU",
+                    stock: 10,
+                    featured: true
+                },
+                {
+                    id: 2,
+                    name: "RTX 4080 SUPER",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4080 SUPER 16GB",
+                    price: 1950000,
+                    category: "GPU",
+                    stock: 15,
+                    featured: true
+                },
+                {
+                    id: 3,
+                    name: "AMD Ryzen 9 7950X",
+                    description: "Procesador AMD Ryzen 9 7950X 16-Core 32-Threads",
+                    price: 920000,
+                    category: "CPU",
+                    stock: 20,
+                    featured: true
+                },
+                {
+                    id: 4,
+                    name: "AMD Ryzen 7 7700X",
+                    description: "Procesador AMD Ryzen 7 7700X 8-Core 16-Threads",
+                    price: 420000,
+                    category: "CPU",
+                    stock: 25,
+                    featured: false
+                },
+                {
+                    id: 5,
+                    name: "Corsair Vengeance DDR5 32GB",
+                    description: "Memoria RAM DDR5 32GB (2x16GB) 5600MHz RGB",
+                    price: 350000,
+                    category: "RAM",
+                    stock: 3,
+                    featured: false
+                },
+                {
+                    id: 6,
+                    name: "Samsung 980 PRO 2TB",
+                    description: "SSD NVMe M.2 2TB PCIe Gen 4.0 x4",
+                    price: 285000,
+                    category: "Storage",
+                    stock: 30,
+                    featured: false
+                }
+            ];
+            displayProducts(allProducts);
+        }
+
+        // Mostrar productos
+        function displayProducts(products) {
+            const container = document.getElementById('products-container');
             
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <h3>No se encontraron productos</h3>
+                        <p>Intenta con otra búsqueda o categoría</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = products.map(product => {
+                let stockClass = 'in-stock';
+                let stockText = 'En Stock';
+                
+                if (product.stock === 0) {
+                    stockClass = 'out-stock';
+                    stockText = 'Agotado';
+                } else if (product.stock < 5) {
+                    stockClass = 'low-stock';
+                    stockText = `Solo ${product.stock} disponibles`;
+                }
+
+                return `
+                    <div class="product-card">
+                        <div class="product-image">
+                            ${getIconForCategory(product.category)}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${product.category || 'General'}</div>
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-description">${product.description || 'Sin descripción'}</div>
+                            <span class="stock-badge ${stockClass}">${stockText}</span>
+                            <div class="product-footer">
+                                <div class="product-price">${formatPrice(product.price)}</div>
+                                <button class="btn-add-cart" onclick="addToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
+                                    ${product.stock === 0 ? 'Agotado' : '+ Agregar'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Filtrar por categoría
+        function filterByCategory(category, button) {
+            // Remover active de todos los botones
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            // Agregar active al botón clickeado
+            button.classList.add('active');
+            
+            currentCategory = category;
+            
+            if (category === 'all') {
+                displayProducts(allProducts);
+            } else {
+                const filtered = allProducts.filter(p => p.category === category);
+                displayProducts(filtered);
+            }
+        }
+
+        // Buscar productos
+        let searchTimeout;
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.toLowerCase();
+            
+            searchTimeout = setTimeout(() => {
+                if (query === '') {
+                    displayProducts(currentCategory === 'all' ? allProducts : 
+                        allProducts.filter(p => p.category === currentCategory));
+                } else {
+                    const filtered = allProducts.filter(p => 
+                        p.name.toLowerCase().includes(query) || 
+                        (p.description && p.description.toLowerCase().includes(query))
+                    );
+                    displayProducts(filtered);
+                }
+            }, 300);
+        });
+
+        // Agregar al carrito
+        function addToCart(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showNotification(`${product.name} agregado al carrito`, 'success');
+            updateCartCount();
+        }
+
+        // Actualizar contador del carrito
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        // Mostrar notificación
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
             notification.textContent = message;
             document.body.appendChild(notification);
-            
+
+            setTimeout(() => notification.classList.add('show'), 100);
             setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
-        
-        // Manejar thumbnails
-        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
-            thumb.addEventListener('click', function() {
-                document.querySelector('.thumbnail.active').classList.remove('active');
-                this.classList.add('active');
-                
-                // Aquí se cambiaría la imagen principal
-                console.log(`Cambiando a imagen ${index + 1}`);
-            });
-        });
-        
-        // Animación de entrada
+
+        // Obtener icono según categoría
+        function getIconForCategory(category) {
+            const icons = {
+                'GPU': '🎨',
+                'CPU': '⚡',
+                'RAM': '💾',
+                'Storage': '💿',
+                'Motherboard': '🔌',
+                'PSU': '🔋',
+                'Case': '🖥️'
+            };
+            return icons[category] || '📦';
+        }
+
+        // Formatear precio
+        function formatPrice(price) {
+            return `$ ${price.toLocaleString('es-CO')}`;
+        }
+
+        // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            const benchmarkBars = document.querySelectorAll('.benchmark-bar');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.width = entry.target.style.width;
-                        entry.target.style.animation = 'slideWidth 1.5s ease';
-                    }
-                });
-            });
-            
-            benchmarkBars.forEach(bar => observer.observe(bar));
+            loadProducts();
         });
-        
-        // CSS para animaciones
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-            
-            @keyframes slideWidth {
-                from { width: 0; }
-                to { width: var(--target-width); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
