@@ -1,272 +1,636 @@
-<!-- public/cart.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tu Setup Gaming - CyberTec</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - CyberTec Gaming Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/cart.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+        }
+
+        header {
+            background-color: #1f2235;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            color: #8b5cf6;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            color: #8b5cf6;
+        }
+
+        .btn-back {
+            padding: 0.75rem 1.5rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-back:hover {
+            border-color: #8b5cf6;
+            background-color: #2a2d41;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+        }
+
+        .cart-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cart-item {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .cart-item:hover {
+            background-color: #252839;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-category {
+            color: #8b5cf6;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #252839;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #8b5cf6;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background-color: #7c3aed;
+        }
+
+        .qty-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-remove {
+            padding: 0.5rem 1rem;
+            background-color: #ef4444;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-remove:hover {
+            background-color: #dc2626;
+        }
+
+        .summary-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .summary-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .summary-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #9ca3af;
+        }
+
+        .summary-value {
+            font-weight: 600;
+        }
+
+        .total-row {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #8b5cf6;
+            font-size: 1.1rem;
+        }
+
+        .total-value {
+            font-size: 1.8rem;
+            color: #10b981;
+        }
+
+        .discount-section {
+            margin: 1.5rem 0;
+        }
+
+        .discount-label {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .discount-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .discount-input input {
+            flex: 1;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .discount-input input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .btn-apply {
+            padding: 0.75rem 1rem;
+            background-color: #10b981;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-apply:hover {
+            background-color: #059669;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-continue {
+            width: 100%;
+            padding: 1rem;
+            background-color: transparent;
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            color: #8b5cf6;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-continue:hover {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .empty-cart-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2a2d3e;
+        }
+
+        .security-badge {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .security-badge-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .installment-info {
+            text-align: center;
+            color: #6ee7b7;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content container">
-      <div class="logo">
-        <h1><span class="logo-icon">⚡</span>CyberTec</h1>
-        <span class="tagline">Gaming Store</span>
-      </div>
-      <div class="cart-info">🛒 Gaming Cart (3)</div>
-    </div>
-  </header>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <span class="logo-icon">⚡</span>
+            <div class="logo-text">CyberTec</div>
+        </div>
+        <button class="btn-back" onclick="window.location.href='product.html'">
+            ← Seguir Comprando
+        </button>
+    </header>
 
-  <!-- Page Title -->
-  <section class="page-title">
-    <h1>🎮 TU SETUP GAMING</h1>
-    <p class="gaming-subtitle">Construye la máquina gaming definitiva</p>
-  </section>
-
-  <!-- Main Container -->
-  <div class="main-container">
-    <div class="continue-shopping">
-      <a href="index.html" class="continue-btn">← Seguir Gaming</a>
+    <div class="container" id="cart-container">
+        <!-- El contenido se cargará dinámicamente -->
     </div>
 
-    <div class="cart-layout">
-      <!-- Cart Items -->
-      <div class="cart-items">
-        <h2 class="section-title">COMPONENTES SELECCIONADOS</h2>
+    <script>
+        let cart = [];
+        let discount = 0;
 
-        <!-- Build Progress -->
-        <div class="build-progress">
-          <div class="progress-text">🎮 Build Progress: 3/7 componentes</div>
-          <div class="progress-bar-container">
-            <div class="progress-bar" style="width:43%"></div>
-          </div>
-          <div class="progress-label">43% completado</div>
-        </div>
+        // Cargar carrito
+        function loadCart() {
+            cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            displayCart();
+        }
 
-        <!-- Cart Item 1 - GPU -->
-        <div class="cart-item gpu-item" data-item-id="1">
-          <div class="item-layout">
-            <div class="item-image">🎮</div>
-            <div class="item-info">
-              <h3 class="item-title">ASUS ROG STRIX RTX 4080 SUPER</h3>
-              <div class="item-specs">16GB GDDR6X • 4K Gaming Ready</div>
-              <div class="item-badge badge-hot">HOT SELLER</div>
-            </div>
-            <div class="quantity-section">
-              <div class="qty-label">Qty:</div>
-              <div class="qty-controls">
-                <button class="qty-btn" onclick="changeQty(1,-1)">-</button>
-                <div class="qty-display" id="qty-1">1</div>
-                <button class="qty-btn" onclick="changeQty(1,1)">+</button>
-              </div>
-            </div>
-            <div class="item-price">$1.890.000</div>
-            <div class="remove-item" onclick="removeItem(1)">🗑️ Remover</div>
-          </div>
-        </div>
+        // Mostrar carrito
+        function displayCart() {
+            const container = document.getElementById('cart-container');
 
-        <!-- Cart Item 2 - CPU -->
-        <div class="cart-item cpu-item" data-item-id="2">
-          <div class="item-layout">
-            <div class="item-image">⚡</div>
-            <div class="item-info">
-              <h3 class="item-title">AMD Ryzen 7 7800X3D</h3>
-              <div class="item-specs">8 Cores • 16 Threads • Gaming Beast</div>
-              <div class="item-badge badge-best">BEST FOR GAMING</div>
-            </div>
-            <div class="quantity-section">
-              <div class="qty-label">Qty:</div>
-              <div class="qty-controls">
-                <button class="qty-btn" onclick="changeQty(2,-1)">-</button>
-                <div class="qty-display" id="qty-2">1</div>
-                <button class="qty-btn" onclick="changeQty(2,1)">+</button>
-              </div>
-            </div>
-            <div class="item-price">$620.000</div>
-            <div class="remove-item" onclick="removeItem(2)">🗑️ Remover</div>
-          </div>
-        </div>
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Tu carrito está vacío</h3>
+                        <p>¡Agrega algunos productos increíbles a tu carrito!</p>
+                        <button class="btn-checkout" onclick="window.location.href='product.html'">
+                            Explorar Productos
+                        </button>
+                    </div>
+                `;
+                return;
+            }
 
-        <!-- Cart Item 3 - RAM -->
-        <div class="cart-item ram-item" data-item-id="3">
-          <div class="item-layout">
-            <div class="item-image">💾</div>
-            <div class="item-info">
-              <h3 class="item-title">Corsair Vengeance RGB DDR5</h3>
-              <div class="item-specs">32GB (2x16GB) • 5600MHz • RGB</div>
-              <div class="item-badge badge-rgb">RGB SYNC</div>
-            </div>
-            <div class="quantity-section">
-              <div class="qty-label">Qty:</div>
-              <div class="qty-controls">
-                <button class="qty-btn" onclick="changeQty(3,-1)">-</button>
-                <div class="qty-display" id="qty-3">1</div>
-                <button class="qty-btn" onclick="changeQty(3,1)">+</button>
-              </div>
-            </div>
-            <div class="item-price">$420.000</div>
-            <div class="remove-item" onclick="removeItem(3)">🗑️ Remover</div>
-          </div>
-        </div>
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discountAmount = subtotal * discount;
+            const shipping = (subtotal - discountAmount) > 500000 ? 0 : 25000;
+            const tax = (subtotal - discountAmount) * 0.19;
+            const total = subtotal - discountAmount + shipping + tax;
 
-        <!-- Missing Components Alert -->
-        <div style="background:#7f1d1d;padding:1rem;border-radius:8px;margin-top:1rem;">
-          <div style="color:#fecaca;font-size:0.9rem;">
-            ⚠️ <strong>Faltan:</strong> Motherboard, PSU, Storage, Case para completar tu build
-          </div>
-        </div>
+            container.innerHTML = `
+                <div class="cart-section">
+                    <h2>🛒 Tu Carrito (${cart.length} ${cart.length === 1 ? 'producto' : 'productos'})</h2>
+                    <div class="cart-items">
+                        ${cart.map(item => `
+                            <div class="cart-item">
+                                <div class="item-image">${getIconForCategory(item.category)}</div>
+                                <div class="item-info">
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-category">${item.category || 'General'}</div>
+                                    <div class="item-price">${formatPrice(item.price)} c/u</div>
+                                </div>
+                                <div class="item-actions">
+                                    <div class="quantity-controls">
+                                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                                        <span class="qty-value">${item.quantity}</span>
+                                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                    </div>
+                                    <button class="btn-remove" onclick="removeFromCart(${item.id})">
+                                        🗑️ Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
 
-        <!-- Suggested Products -->
-        <div class="suggested-products">
-          <h3 class="suggested-title">Te puede interesar:</h3>
-          <div class="suggested-grid">
-            <div class="suggested-item" onclick="showMessage('🛒 Función de agregar sugerencias no implementada aún')">
-              <div class="suggested-icon" style="color:#10b981;">💾</div>
-              <div class="suggested-name">SSD 1TB</div>
-              <div class="suggested-price">$95.000</div>
-            </div>
-            <div class="suggested-item" onclick="showMessage('🛒 Función de agregar sugerencias no implementada aún')">
-              <div class="suggested-icon" style="color:#7c3aed;">🖥️</div>
-              <div class="suggested-name">Monitor 144Hz</div>
-              <div class="suggested-price">$380.000</div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div class="summary-card">
+                    <h3>📋 Resumen del Pedido</h3>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal:</span>
+                        <span class="summary-value">${formatPrice(subtotal)}</span>
+                    </div>
+                    
+                    ${discount > 0 ? `
+                    <div class="summary-row">
+                        <span class="summary-label">Descuento (${(discount * 100)}%):</span>
+                        <span class="summary-value" style="color: #10b981;">-${formatPrice(discountAmount)}</span>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Envío:</span>
+                        <span class="summary-value">${shipping === 0 ? 'GRATIS 🎉' : formatPrice(shipping)}</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">IVA (19%):</span>
+                        <span class="summary-value">${formatPrice(tax)}</span>
+                    </div>
 
-      <!-- Order Summary -->
-      <div class="order-summary">
-        <h2 class="summary-title">💰 RESUMEN GAMING</h2>
+                    <div class="discount-section">
+                        <label class="discount-label">Código de descuento</label>
+                        <div class="discount-input">
+                            <input type="text" id="coupon-input" placeholder="Ingresa tu código">
+                            <button class="btn-apply" onclick="applyCoupon()">Aplicar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-row total-row">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value total-value">${formatPrice(total)}</span>
+                    </div>
 
-        <!-- Performance Score -->
-        <div class="performance-score">
-          <div class="score-title">🎮 Gaming Performance Score</div>
-          <div class="score-value">95/100</div>
-          <div class="score-bar-container">
-            <div class="score-bar" style="width:95%"></div>
-          </div>
-        </div>
+                    <div class="installment-info">
+                        💳 12 cuotas sin interés: ${formatPrice(total / 12)}
+                    </div>
 
-        <!-- Price Breakdown -->
-        <div class="price-breakdown">
-          <div class="price-row">
-            <span class="price-label">Subtotal (3 items)</span>
-            <span class="price-value" id="subtotal-display">$2.930.000</span>
-          </div>
-          <div class="price-row">
-            <span class="price-label">Descuento Gaming Bundle</span>
-            <span class="price-value discount-value">-$150.000</span>
-          </div>
-          <div class="price-row">
-            <span class="price-label">Envío Express</span>
-            <span class="price-value free-value">GRATIS</span>
-          </div>
-          <div class="price-row">
-            <span class="price-label">Setup Gaming (Opcional)</span>
-            <span class="price-value" style="color:#f59e0b;">+$80.000</span>
-          </div>
-          <hr class="total-divider">
-          <div class="total-row">
-            <span class="total-label">TOTAL GAMING BUILD</span>
-            <span class="total-value" id="total-display">$2.860.000</span>
-          </div>
-          <div class="installments-info">
-            💳 12 cuotas sin interés: $238.333/mes
-          </div>
-        </div>
+                    <button class="btn-checkout" onclick="checkout()">
+                        🚀 Proceder al Pago
+                    </button>
 
-        <!-- Payment Methods -->
-        <div class="payment-methods">
-          <h3 class="payment-title">💳 MÉTODOS DE PAGO</h3>
-          <div class="payment-option">💳 Tarjetas (Visa, Master, Amex)</div>
-          <div class="payment-option">🏪 Contraentrega (+$15.000)</div>
-          <div class="payment-option">🏦 Transferencia (-2% descuento)</div>
-        </div>
+                    <button class="btn-continue" onclick="window.location.href='product.html'">
+                        ← Continuar Comprando
+                    </button>
 
-        <!-- Gaming Perks -->
-        <div class="gaming-perks">
-          <h3 class="perks-title">🎮 GAMING PERKS INCLUIDOS</h3>
-          <div class="perk-item">⚡ Overclocking gratuito</div>
-          <div class="perk-item">🎧 Discord VIP 3 meses</div>
-          <div class="perk-item">🔧 Soporte gamer 24/7</div>
-        </div>
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <div class="security-badge-icon">🔒</div>
+                            <div>Pago Seguro</div>
+                        </div>
+                        <div class="security-badge">
+                            <div class="security-badge-icon">🚚</div>
+                            <div>Envío Rápido</div>
+                        </div>
+                        <div class="security-badge">
+                            <div class="security-badge-icon">✓</div>
+                            <div>Garantía Pro</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-          <button class="btn-primary" onclick="showMessage('🚀 Función de checkout no implementada aún')">🚀 CHECKOUT GAMING</button>
-          <div class="secondary-actions">
-            <button class="btn-secondary btn-save" onclick="showMessage('💾 Función de guardar build no implementada aún')">💾 Guardar Build</button>
-            <button class="btn-secondary btn-share" onclick="showMessage('📤 Función de compartir setup no implementada aún')">📤 Compartir Setup</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        // Actualizar cantidad
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                    return;
+                }
+                if (item.quantity > item.stock) {
+                    alert(`Solo hay ${item.stock} unidades disponibles`);
+                    item.quantity = item.stock;
+                }
+                saveCart();
+                displayCart();
+            }
+        }
 
-    <!-- Progress Indicator -->
-    <div class="progress-indicator">
-      <div class="progress-steps">
-        <div class="step step-active">
-          <div class="step-circle">1</div>
-          <div class="step-label">Cart</div>
-        </div>
-        <div class="step-line"></div>
-        <div class="step step-inactive">
-          <div class="step-circle">2</div>
-          <div class="step-label">Gaming Setup</div>
-        </div>
-        <div class="step-line"></div>
-        <div class="step step-inactive">
-          <div class="step-circle">3</div>
-          <div class="step-label">Payment</div>
-        </div>
-        <div class="step-line"></div>
-        <div class="step step-inactive">
-          <div class="step-circle">4</div>
-          <div class="step-label">Ready to Game!</div>
-        </div>
-      </div>
-    </div>
+        // Eliminar del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            displayCart();
+        }
 
-    <!-- Trust Section -->
-    <div class="trust-section">
-      <div class="trust-grid">
-        <div class="trust-item trust-secure">
-          <div class="trust-icon">🔒</div>
-          <div class="trust-title">Protección Gamer Plus</div>
-          <div class="trust-desc">✓ Garantía extendida 3 años</div>
-        </div>
-        <div class="trust-item trust-delivery">
-          <div class="trust-icon">🚚</div>
-          <div class="trust-title">Entrega Premium</div>
-          <div class="trust-desc">✓ Setup completo incluido</div>
-        </div>
-      </div>
-      <div class="trust-contact">
-        📞 Línea gamer: +57 320 456 7890 | 💬 Discord: CyberTecGaming#2025
-      </div>
-    </div>
-  </div>
+        // Guardar carrito
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2025 CyberTec Gaming Store</p>
-        <p>📞 +57 320 456 7890 | 📧 info@cybertec.co</p>
-      </div>
-      <div class="admin-access">
-        <a href="admin/dashboard.html" class="admin-link">🛠️ Admin</a>
-      </div>
-    </div>
-  </footer>
+        // Aplicar cupón
+        function applyCoupon() {
+            const coupon = document.getElementById('coupon-input').value.toUpperCase().trim();
+            
+            const validCoupons = {
+                'CYBER10': 0.10,
+                'GAMER20': 0.20,
+                'FIRST15': 0.15,
+                'BLACK30': 0.30
+            };
 
-  <!-- JS -->
-  <script src="../assets/js/cart.js" defer></script>
+            if (validCoupons[coupon]) {
+                discount = validCoupons[coupon];
+                alert(`¡Cupón aplicado! Descuento del ${(discount * 100)}% 🎉`);
+                displayCart();
+            } else if (coupon === '') {
+                alert('Por favor ingresa un código de cupón');
+            } else {
+                alert('Cupón inválido ❌');
+            }
+        }
+
+        // Proceder al checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // En producción, aquí se enviaría al backend
+            const order = {
+                items: cart,
+                total: total,
+                discount: discount,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Orden a procesar:', order);
+            
+            alert('🚀 ¡Pedido procesado exitosamente!\n\nTotal: ' + formatPrice(total) + '\n\nEn producción, aquí se redigiría a la página de pago.');
+            
+            // Limpiar carrito después del checkout
+            // cart = [];
+            // saveCart();
+            // displayCart();
+        }
+
+        // Vaciar carrito completamente
+        function clearCart() {
+            if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+                cart = [];
+                saveCart();
+                displayCart();
+            }
+        }
+
+        // Obtener icono según categoría
+        function getIconForCategory(category) {
+            const icons = {
+                'GPU': '🎨',
+                'CPU': '⚡',
+                'RAM': '💾',
+                'Storage': '💿',
+                'Motherboard': '🔌',
+                'PSU': '🔋',
+                'Case': '🖥️'
+            };
+            return icons[category] || '📦';
+        }
+
+        // Formatear precio
+        function formatPrice(price) {
+            return `$ ${Math.round(price).toLocaleString('es-CO')}`;
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+        });
+    </script>
 </body>
 </html>
