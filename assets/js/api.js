@@ -1,6 +1,6 @@
 // assets/js/api.js
 /**
- * Cliente API para consumir el backend
+ * Cliente API para conectar el backend
  */
 
 const API = {
@@ -99,14 +99,14 @@ const API = {
         return await response.json();
     },
 
-    async updateCartItem(productId, quantity) {
-        const response = await fetch(`${this.BASE_URL}/cart/items/${productId}`, {
-            method: 'PATCH',
-            headers: AUTH.getAuthHeaders(),
-            body: JSON.stringify({ quantity })
-        });
-        return await response.json();
-    },
+   async updateCartItem(productId, quantity) {
+    const response = await fetch(`${this.BASE_URL}/cart/items/${productId}`, {
+        method: 'PUT',  // ← CORRECTO
+        headers: AUTH.getAuthHeaders(),
+        body: JSON.stringify({ quantity })
+    });
+    return await response.json();
+},
 
     async clearCart() {
         const response = await fetch(`${this.BASE_URL}/cart`, {
