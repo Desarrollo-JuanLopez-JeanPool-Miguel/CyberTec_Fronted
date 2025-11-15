@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,315 +11,469 @@
             box-sizing: border-box;
         }
 
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #0a0e1a;
-        color: #fff;
-        display: flex;
-    }
-
-    /* Sidebar */
-    .sidebar {
-        width: 260px;
-        background-color: #151824;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding: 2rem 0;
-        border-right: 1px solid #2a2d3e;
-    }
-
-    .logo-section {
-        padding: 0 1.5rem;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .logo-icon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .logo-text {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #7c3aed;
-    }
-
-    .admin-badge {
-        background-color: #7c3aed;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
-        display: inline-block;
-    }
-
-    .nav-menu {
-        list-style: none;
-    }
-
-    .nav-item {
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: #9ca3af;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-        background-color: #1a1d2e;
-        color: #7c3aed;
-        border-left: 4px solid #7c3aed;
-    }
-
-    .nav-icon {
-        font-size: 1.3rem;
-    }
-
-    /* Main Content */
-    .main-content {
-        margin-left: 260px;
-        flex: 1;
-        padding: 2rem;
-    }
-
-    .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-
-    .welcome-section h1 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .welcome-section p {
-        color: #9ca3af;
-    }
-
-    .user-actions {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .btn {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-        color: white;
-    }
-
-    .btn-secondary {
-        background-color: #1a1d2e;
-        color: #fff;
-        border: 2px solid #2a2d3e;
-    }
-
-    /* Stats Cards */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .stat-card {
-        background: linear-gradient(135deg, #1a1d2e 0%, #252839 100%);
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 2px solid transparent;
-        transition: all 0.3s;
-    }
-
-    .stat-card:hover {
-        border-color: #7c3aed;
-        transform: translateY(-5px);
-    }
-
-    .stat-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    .stat-title {
-        color: #9ca3af;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
-    .stat-icon {
-        font-size: 2rem;
-    }
-
-    .stat-value {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-change {
-        font-size: 0.85rem;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
-
-    .stat-change.positive {
-        color: #10b981;
-    }
-
-    .stat-change.negative {
-        color: #ef4444;
-    }
-
-    /* Charts Section */
-    .charts-section {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .chart-card {
-        background-color: #151824;
-        padding: 1.5rem;
-        border-radius: 12px;
-    }
-
-    .chart-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-    }
-
-    .chart-title {
-        font-size: 1.3rem;
-        font-weight: bold;
-    }
-
-    .chart-placeholder {
-        height: 300px;
-        background: linear-gradient(135deg, #1a1d2e 0%, #2a2d3e 100%);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #9ca3af;
-    }
-
-    /* Recent Orders */
-    .orders-section {
-        background-color: #151824;
-        padding: 1.5rem;
-        border-radius: 12px;
-    }
-
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 1.3rem;
-        font-weight: bold;
-    }
-
-    .orders-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .orders-table th {
-        text-align: left;
-        padding: 1rem;
-        color: #9ca3af;
-        font-weight: 600;
-        font-size: 0.9rem;
-        border-bottom: 2px solid #2a2d3e;
-    }
-
-    .orders-table td {
-        padding: 1rem;
-        border-bottom: 1px solid #2a2d3e;
-    }
-
-    .orders-table tr:hover {
-        background-color: #1a1d2e;
-    }
-
-    .status-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
-
-    .status-completed {
-        background-color: #10b98122;
-        color: #10b981;
-    }
-
-    .status-pending {
-        background-color: #f59e0b22;
-        color: #f59e0b;
-    }
-
-    .status-cancelled {
-        background-color: #ef444422;
-        color: #ef4444;
-    }
-
-    @media (max-width: 1024px) {
-        .charts-section {
-            grid-template-columns: 1fr;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            display: flex;
         }
-    }
 
-    @media (max-width: 768px) {
+        /* Sidebar */
         .sidebar {
-            width: 80px;
-        }
-
-        .main-content {
-            margin-left: 80px;
-        }
-
-        .nav-item span {
-            display: none;
+            width: 260px;
+            background-color: #1f2235;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            border-right: 1px solid #2a2d3e;
+            overflow-y: auto;
         }
 
         .logo-section {
-            padding: 0 0.5rem;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .logo-text,
+        .logo-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
         .admin-badge {
-            display: none;
+            background-color: #8b5cf6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: inline-block;
         }
-    }
-</style>
 
+        .nav-menu {
+            list-style: none;
+        }
 
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #252839;
+            color: #8b5cf6;
+            border-left-color: #8b5cf6;
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: #9ca3af;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #252839;
+            color: #fff;
+            border: 2px solid #2a2d3e;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8b5cf6;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-change.positive {
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            color: #ef4444;
+        }
+
+        /* Products Management */
+        .products-section {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .products-table table {
+            width: 100%;
+        }
+
+        .products-table th {
+            text-align: left;
+            padding: 1rem;
+            color: #9ca3af;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-bottom: 2px solid #2a2d3e;
+            background-color: #252839;
+        }
+
+        .products-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .products-table tr:hover {
+            background-color: #252839;
+        }
+
+        .product-name-cell {
+            font-weight: 600;
+        }
+
+        .category-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+        }
+
+        .stock-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .in-stock {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .low-stock {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .out-stock {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit {
+            padding: 0.5rem 1rem;
+            background-color: #8b5cf6;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-edit:hover {
+            background-color: #7c3aed;
+        }
+
+        .btn-delete {
+            padding: 0.5rem 1rem;
+            background-color: #ef4444;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-close:hover {
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .nav-item span:not(.nav-icon) {
+                display: none;
+            }
+
+            .logo-text,
+            .admin-badge {
+                display: none;
+            }
+
+            .products-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Sidebar -->
@@ -331,215 +484,420 @@
             <div class="admin-badge">ADMIN</div>
         </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='catalog.html'">
+                <span class="nav-icon">📦</span>
+                <span>Catálogo</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='add-product.html'">
+                <span class="nav-icon">➕</span>
+                <span>Agregar Producto</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='orders.html'">
+                <span class="nav-icon">📋</span>
+                <span>Órdenes</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-icon">👥</span>
+                <span>Clientes</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-icon">📈</span>
+                <span>Reportes</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='../index.html'">
+                <span class="nav-icon">🏠</span>
+                <span>Volver al Sitio</span>
+            </li>
+        </ul>
+    </aside>
 
-    <ul class="nav-menu">
-        <li class="nav-item active">
-            <span class="nav-icon">📊</span>
-            <span>Dashboard</span>
-        </li>
-        <li class="nav-item" onclick="window.location.href='catalog.html'">
-            <span class="nav-icon">📦</span>
-            <span>Catálogo</span>
-        </li>
-        <li class="nav-item" onclick="window.location.href='add-product.html'">
-            <span class="nav-icon">➕</span>
-            <span>Agregar Producto</span>
-        </li>
-        <li class="nav-item">
-            <span class="nav-icon">📋</span>
-            <span>Órdenes</span>
-        </li>
-        <li class="nav-item">
-            <span class="nav-icon">👥</span>
-            <span>Clientes</span>
-        </li>
-        <li class="nav-item">
-            <span class="nav-icon">📈</span>
-            <span>Reportes</span>
-        </li>
-        <li class="nav-item">
-            <span class="nav-icon">⚙️</span>
-            <span>Configuración</span>
-        </li>
-        <li class="nav-item" onclick="window.location.href='../index.html'">
-            <span class="nav-icon">🏠</span>
-            <span>Volver al Sitio</span>
-        </li>
-    </ul>
-</aside>
-
-<!-- Main Content -->
-<main class="main-content">
-    <div class="top-bar">
-        <div class="welcome-section">
-            <h1>¡Bienvenido, Administrador!</h1>
-            <p>Gestiona tu tienda gaming desde aquí</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="top-bar">
+            <div class="welcome-section">
+                <h1>¡Bienvenido, Administrador!</h1>
+                <p>Gestiona tu tienda gaming desde aquí</p>
+            </div>
+            <div class="user-actions">
+                <button class="btn btn-secondary">🔔 Notificaciones</button>
+                <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
+                    ➕ Nuevo Producto
+                </button>
+            </div>
         </div>
-        <div class="user-actions">
-            <button class="btn btn-secondary">🔔 Notificaciones</button>
-            <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
-                ➕ Nuevo Producto
-            </button>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Productos Totales</span>
+                    <span class="stat-icon">📦</span>
+                </div>
+                <div class="stat-value" id="totalProducts">0</div>
+                <div class="stat-change positive">
+                    ↑ Catálogo actualizado
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">En Stock</span>
+                    <span class="stat-icon">✓</span>
+                </div>
+                <div class="stat-value" id="inStockProducts">0</div>
+                <div class="stat-change positive">
+                    ↑ Disponibles ahora
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Bajo Stock</span>
+                    <span class="stat-icon">⚠️</span>
+                </div>
+                <div class="stat-value" id="lowStockProducts">0</div>
+                <div class="stat-change negative">
+                    ↓ Requieren atención
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Valor Total</span>
+                    <span class="stat-icon">💰</span>
+                </div>
+                <div class="stat-value" id="totalValue">$0</div>
+                <div class="stat-change positive">
+                    ↑ Inventario
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Management -->
+        <div class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">📦 Gestión de Productos</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchProducts" placeholder="🔍 Buscar productos...">
+                </div>
+                <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
+                    ➕ Nuevo
+                </button>
+            </div>
+
+            <div class="products-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <tr>
+                            <td colspan="7" class="loading">Cargando productos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Edición -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">✏️ Editar Producto</h3>
+                <button class="btn-close" onclick="closeEditModal()">×</button>
+            </div>
+
+            <form id="editForm">
+                <input type="hidden" id="editProductId">
+
+                <div class="form-group">
+                    <label for="editName">Nombre del Producto *</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCategory">Categoría *</label>
+                    <select id="editCategory" required>
+                        <option value="">Seleccionar categoría</option>
+                        <option value="GPU">GPU - Tarjetas Gráficas</option>
+                        <option value="CPU">CPU - Procesadores</option>
+                        <option value="RAM">RAM - Memoria</option>
+                        <option value="Storage">Storage - Almacenamiento</option>
+                        <option value="Motherboard">Motherboard - Placas Madre</option>
+                        <option value="PSU">PSU - Fuentes de Poder</option>
+                        <option value="Case">Case - Gabinetes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editDescription">Descripción</label>
+                    <textarea id="editDescription"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPrice">Precio *</label>
+                    <input type="number" id="editPrice" min="0" step="1000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editStock">Stock *</label>
+                    <input type="number" id="editStock" min="0" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        ✓ Guardar Cambios
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-header">
-                <span class="stat-title">VENTAS TOTALES</span>
-                <span class="stat-icon">💰</span>
-            </div>
-            <div class="stat-value">$12.5M</div>
-            <div class="stat-change positive">
-                ↑ 15.3% vs mes anterior
-            </div>
-        </div>
+    <script>
+        const API_URL = 'http://localhost:8080/api';
+        let allProducts = [];
 
-        <div class="stat-card">
-            <div class="stat-header">
-                <span class="stat-title">ÓRDENES</span>
-                <span class="stat-icon">📦</span>
-            </div>
-            <div class="stat-value">486</div>
-            <div class="stat-change positive">
-                ↑ 8.2% vs mes anterior
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-header">
-                <span class="stat-title">PRODUCTOS</span>
-                <span class="stat-icon">🎮</span>
-            </div>
-            <div class="stat-value">127</div>
-            <div class="stat-change negative">
-                ↓ 3 productos agotados
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-header">
-                <span class="stat-title">CLIENTES</span>
-                <span class="stat-icon">👥</span>
-            </div>
-            <div class="stat-value">2,543</div>
-            <div class="stat-change positive">
-                ↑ 12.5% nuevos usuarios
-            </div>
-        </div>
-    </div>
-
-    <!-- Charts Section -->
-    <div class="charts-section">
-        <div class="chart-card">
-            <div class="chart-header">
-                <div class="chart-title">📈 Ventas del Mes</div>
-                <select class="btn btn-secondary" style="padding: 0.5rem;">
-                    <option>Últimos 7 días</option>
-                    <option>Último mes</option>
-                    <option>Último año</option>
-                </select>
-            </div>
-            <div class="chart-placeholder">
-                📊 Gráfico de ventas (Integrar con Chart.js)
-            </div>
-        </div>
-
-        <div class="chart-card">
-            <div class="chart-header">
-                <div class="chart-title">🏆 Top Categorías</div>
-            </div>
-            <div class="chart-placeholder">
-                🥧 Gráfico circular (Integrar con Chart.js)
-            </div>
-        </div>
-    </div>
-
-    <!-- Recent Orders -->
-    <div class="orders-section">
-        <div class="section-header">
-            <h2 class="section-title">📋 Órdenes Recientes</h2>
-            <button class="btn btn-secondary">Ver Todas</button>
-        </div>
-
-        <table class="orders-table">
-            <thead>
-                <tr>
-                    <th>ID Orden</th>
-                    <th>Cliente</th>
-                    <th>Producto</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>#ORD-2024-001</td>
-                    <td>Juan Pérez</td>
-                    <td>RTX 4090</td>
-                    <td>2024-01-15</td>
-                    <td>$2.850.000</td>
-                    <td><span class="status-badge status-completed">Completado</span></td>
-                </tr>
-                <tr>
-                    <td>#ORD-2024-002</td>
-                    <td>María García</td>
-                    <td>Ryzen 9 7950X</td>
-                    <td>2024-01-14</td>
-                    <td>$920.000</td>
-                    <td><span class="status-badge status-pending">Pendiente</span></td>
-                </tr>
-                <tr>
-                    <td>#ORD-2024-003</td>
-                    <td>Carlos López</td>
-                    <td>Gaming Setup Complete</td>
-                    <td>2024-01-14</td>
-                    <td>$4.500.000</td>
-                    <td><span class="status-badge status-completed">Completado</span></td>
-                </tr>
-                <tr>
-                    <td>#ORD-2024-004</td>
-                    <td>Ana Martínez</td>
-                    <td>RTX 4080</td>
-                    <td>2024-01-13</td>
-                    <td>$1.890.000</td>
-                    <td><span class="status-badge status-cancelled">Cancelado</span></td>
-                </tr>
-                <tr>
-                    <td>#ORD-2024-005</td>
-                    <td>Pedro Sánchez</td>
-                    <td>Corsair Vengeance 32GB</td>
-                    <td>2024-01-12</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
-
-<script>
-    // Verificar permisos de admin
-    document.addEventListener('DOMContentLoaded', function() {
-        // Aquí se verificaría si el usuario es admin
-        const isAdmin = localStorage.getItem('userRole') === 'ADMIN';
-        
-        if (!isAdmin) {
-            // alert('Acceso denegado. Se requieren permisos de administrador.');
-            // window.location.href = '../index.html';
+        // Cargar productos
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                if (!response.ok) throw new Error('Error al cargar productos');
+                
+                allProducts = await response.json();
+                displayProducts(allProducts);
+                updateStats();
+            } catch (error) {
+                console.error('Error:', error);
+                // Cargar datos de ejemplo
+                loadMockData();
+            }
         }
-    });
 
-    // Actualizar estadísticas en tiempo real (simulado)
-    function updateStats() {
-        // Aquí se harían llamadas al backend para obtener datos reales
-        console.log('Actualizando estadísticas...');
-    }
+        // Datos de ejemplo
+        function loadMockData() {
+            allProducts = [
+                {
+                    id: 1,
+                    name: "RTX 4090 Gaming OC",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4090 24GB",
+                    price: 2850000,
+                    category: "GPU",
+                    stock: 10
+                },
+                {
+                    id: 2,
+                    name: "RTX 4080 SUPER",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4080 SUPER",
+                    price: 1950000,
+                    category: "GPU",
+                    stock: 15
+                },
+                {
+                    id: 3,
+                    name: "AMD Ryzen 9 7950X",
+                    description: "Procesador AMD Ryzen 9 16-Core",
+                    price: 920000,
+                    category: "CPU",
+                    stock: 20
+                },
+                {
+                    id: 4,
+                    name: "Corsair Vengeance DDR5 32GB",
+                    description: "Memoria RAM DDR5 32GB 5600MHz",
+                    price: 350000,
+                    category: "RAM",
+                    stock: 3
+                },
+                {
+                    id: 5,
+                    name: "Samsung 980 PRO 2TB",
+                    description: "SSD NVMe M.2 2TB PCIe Gen 4.0",
+                    price: 285000,
+                    category: "Storage",
+                    stock: 0
+                }
+            ];
+            displayProducts(allProducts);
+            updateStats();
+        }
 
-    // Actualizar cada 30 segundos
-    setInterval(updateStats, 30000);
-</script>
+        // Mostrar productos en tabla
+        function displayProducts(products) {
+            const tbody = document.getElementById('productsTableBody');
+            
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #9ca3af;">No se encontraron productos</td></tr>';
+                return;
+            }
 
+            tbody.innerHTML = products.map(product => {
+                let stockClass = 'in-stock';
+                let stockText = 'En Stock';
+                
+                if (product.stock === 0) {
+                    stockClass = 'out-stock';
+                    stockText = 'Agotado';
+                } else if (product.stock < 5) {
+                    stockClass = 'low-stock';
+                    stockText = 'Bajo';
+                }
 
+                return `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td class="product-name-cell">${product.name}</td>
+                        <td><span class="category-badge">${product.category}</span></td>
+                        <td>${formatPrice(product.price)}</td>
+                        <td>${product.stock}</td>
+                        <td><span class="stock-badge ${stockClass}">${stockText}</span></td>
+                        <td>
+                            <div class="actions-cell">
+                                <button class="btn-edit" onclick="openEditModal(${product.id})">✏️ Editar</button>
+                                <button class="btn-delete" onclick="deleteProduct(${product.id})">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Actualizar estadísticas
+        function updateStats() {
+            const totalProducts = allProducts.length;
+            const inStock = allProducts.filter(p => p.stock > 5).length;
+            const lowStock = allProducts.filter(p => p.stock > 0 && p.stock <= 5).length;
+            const totalValue = allProducts.reduce((sum, p) => sum + (p.price * p.stock), 0);
+
+            document.getElementById('totalProducts').textContent = totalProducts;
+            document.getElementById('inStockProducts').textContent = inStock;
+            document.getElementById('lowStockProducts').textContent = lowStock;
+            document.getElementById('totalValue').textContent = formatPrice(totalValue);
+        }
+
+        // Abrir modal de edición
+        function openEditModal(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('editName').value = product.name;
+            document.getElementById('editCategory').value = product.category;
+            document.getElementById('editDescription').value = product.description || '';
+            document.getElementById('editPrice').value = product.price;
+            document.getElementById('editStock').value = product.stock;
+
+            document.getElementById('editModal').classList.add('show');
+        }
+
+        // Cerrar modal
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+
+        // Guardar cambios
+        document.getElementById('editForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const productId = document.getElementById('editProductId').value;
+            const updatedProduct = {
+                id: parseInt(productId),
+                name: document.getElementById('editName').value,
+                category: document.getElementById('editCategory').value,
+                description: document.getElementById('editDescription').value,
+                price: parseFloat(document.getElementById('editPrice').value),
+                stock: parseInt(document.getElementById('editStock').value)
+            };
+
+            try {
+                // Intentar actualizar en el backend
+                const response = await fetch(`${API_URL}/products/${productId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedProduct)
+                });
+
+                if (!response.ok) throw new Error('Error al actualizar');
+                
+                alert('✓ Producto actualizado exitosamente');
+            } catch (error) {
+                // Si falla, actualizar localmente
+                const index = allProducts.findIndex(p => p.id == productId);
+                if (index !== -1) {
+                    allProducts[index] = updatedProduct;
+                }
+                alert('✓ Producto actualizado localmente (sin conexión al backend)');
+            }
+
+            displayProducts(allProducts);
+            updateStats();
+            closeEditModal();
+        });
+
+        // Eliminar producto
+        async function deleteProduct(productId) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este producto?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/products/${productId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) throw new Error('Error al eliminar');
+                
+                alert('✓ Producto eliminado exitosamente');
+            } catch (error) {
+                allProducts = allProducts.filter(p => p.id !== productId);
+                alert('✓ Producto eliminado localmente (sin conexión al backend)');
+            }
+
+            allProducts = allProducts.filter(p => p.id !== productId);
+            displayProducts(allProducts);
+            updateStats();
+        }
+
+        // Buscar productos
+        document.getElementById('searchProducts').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = allProducts.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                p.category.toLowerCase().includes(query)
+            );
+            displayProducts(filtered);
+        });
+
+        // Formatear precio
+        function formatPrice(price) {
+            return `$ ${price.toLocaleString('es-CO')}`;
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+        });
+    </script>
 </body>
 </html>

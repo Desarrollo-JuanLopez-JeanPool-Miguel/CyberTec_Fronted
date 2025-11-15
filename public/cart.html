@@ -579,24 +579,13 @@
                 return;
             }
 
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            // En producción, aquí se enviaría al backend
-            const order = {
-                items: cart,
-                total: total,
-                discount: discount,
-                timestamp: new Date().toISOString()
-            };
+            // Guardar el descuento actual para usarlo en checkout
+            if (discount > 0) {
+                localStorage.setItem('cartDiscount', discount.toString());
+            }
 
-            console.log('Orden a procesar:', order);
-            
-            alert('🚀 ¡Pedido procesado exitosamente!\n\nTotal: ' + formatPrice(total) + '\n\nEn producción, aquí se redigiría a la página de pago.');
-            
-            // Limpiar carrito después del checkout
-            // cart = [];
-            // saveCart();
-            // displayCart();
+            // Redirigir a la página de checkout
+            window.location.href = 'checkout.html';
         }
 
         // Vaciar carrito completamente

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,263 +11,307 @@
             box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            display: flex;
+        }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #0a0e1a;
-        color: #fff;
-        display: flex;
-    }
+        .sidebar {
+            width: 260px;
+            background-color: #1f2235;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            border-right: 1px solid #2a2d3e;
+        }
 
-    .sidebar {
-        width: 260px;
-        background-color: #151824;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding: 2rem 0;
-        border-right: 1px solid #2a2d3e;
-    }
+        .logo-section {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
 
-    .logo-section {
-        padding: 0 1.5rem;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
+        .logo-icon {
+            font-size: 3rem;
+        }
 
-    .logo-icon {
-        font-size: 3rem;
-    }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
 
-    .logo-text {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #7c3aed;
-    }
+        .nav-menu {
+            list-style: none;
+        }
 
-    .nav-menu {
-        list-style: none;
-    }
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            border-left: 4px solid transparent;
+        }
 
-    .nav-item {
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: #9ca3af;
-    }
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #252839;
+            color: #8b5cf6;
+            border-left-color: #8b5cf6;
+        }
 
-    .nav-item:hover,
-    .nav-item.active {
-        background-color: #1a1d2e;
-        color: #7c3aed;
-        border-left: 4px solid #7c3aed;
-    }
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+            max-width: 1000px;
+        }
 
-    .main-content {
-        margin-left: 260px;
-        flex: 1;
-        padding: 2rem;
-        max-width: 1000px;
-    }
+        .page-header {
+            margin-bottom: 2rem;
+        }
 
-    .page-header {
-        margin-bottom: 2rem;
-    }
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
 
-    .page-header h1 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
+        .page-header p {
+            color: #9ca3af;
+        }
 
-    .page-header p {
-        color: #9ca3af;
-    }
+        .form-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+        }
 
-    .form-card {
-        background-color: #151824;
-        border-radius: 12px;
-        padding: 2rem;
-    }
+        .form-section {
+            margin-bottom: 2rem;
+        }
 
-    .form-section {
-        margin-bottom: 2rem;
-    }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #8b5cf6;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .section-title {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        color: #7c3aed;
-    }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
 
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-    }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
 
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
 
-    .form-group.full-width {
-        grid-column: 1 / -1;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+            font-weight: 600;
+        }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #9ca3af;
-        font-weight: 600;
-    }
+        .required {
+            color: #ef4444;
+        }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 0.875rem;
-        background-color: #1a1d2e;
-        border: 2px solid #2a2d3e;
-        border-radius: 8px;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: all 0.3s;
-    }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: #7c3aed;
-        background-color: #252839;
-    }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background-color: #2a2d41;
+        }
 
-    .form-group textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
 
-    .image-upload {
-        border: 2px dashed #2a2d3e;
-        border-radius: 8px;
-        padding: 2rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
+        .featured-toggle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #252839;
+            border-radius: 8px;
+        }
 
-    .image-upload:hover {
-        border-color: #7c3aed;
-        background-color: #1a1d2e;
-    }
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #2a2d3e;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-    .upload-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
+        .toggle-switch.active {
+            background-color: #8b5cf6;
+        }
 
-    .upload-text {
-        color: #9ca3af;
-    }
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
 
-    .featured-toggle {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
+        .toggle-switch.active .toggle-slider {
+            left: 33px;
+        }
 
-    .toggle-switch {
-        position: relative;
-        width: 60px;
-        height: 30px;
-        background-color: #2a2d3e;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
 
-    .toggle-switch.active {
-        background-color: #7c3aed;
-    }
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-    .toggle-slider {
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 24px;
-        height: 24px;
-        background-color: white;
-        border-radius: 50%;
-        transition: all 0.3s;
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+        }
 
-    .toggle-switch.active .toggle-slider {
-        left: 33px;
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
 
-    .form-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
+        .btn-secondary {
+            background-color: #252839;
+            color: #fff;
+            border: 2px solid #2a2d3e;
+        }
 
-    .btn {
-        flex: 1;
-        padding: 1rem;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
+        .btn-secondary:hover {
+            border-color: #8b5cf6;
+        }
 
-    .btn-primary {
-        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-        color: white;
-    }
+        .preview-section {
+            background-color: #252839;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
 
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-    }
+        .preview-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
+        }
 
-    .btn-secondary {
-        background-color: #1a1d2e;
-        color: #fff;
-        border: 2px solid #2a2d3e;
-    }
+        .product-preview {
+            background-color: #1f2235;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 2px solid #8b5cf6;
+            text-align: center;
+        }
 
-    .btn-secondary:hover {
-        border-color: #7c3aed;
-    }
+        .preview-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
 
-    .preview-section {
-        background-color: #1a1d2e;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-top: 1rem;
-    }
+        .preview-category {
+            color: #8b5cf6;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
 
-    .preview-title {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        color: #9ca3af;
-    }
+        .preview-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
 
-    .product-preview {
-        background-color: #151824;
-        border-radius: 8px;
-        padding: 1.5rem;
-        border: 2px solid #7c3aed;
-    }
-</style>
-```
+        .preview-description {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
 
+        .preview-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-price {
+            font-size: 1.5rem;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .preview-stock {
+            color: #9ca3af;
+        }
+
+        .helper-text {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .success-message {
+            background-color: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <aside class="sidebar">
@@ -292,200 +335,239 @@
         </ul>
     </aside>
 
-```
-<main class="main-content">
-    <div class="page-header">
-        <h1>➕ Agregar Nuevo Producto</h1>
-        <p>Completa la información del producto para agregarlo al catálogo</p>
-    </div>
-
-    <form class="form-card" id="productForm">
-        <!-- Información Básica -->
-        <div class="form-section">
-            <h3 class="section-title">📝 Información Básica</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="name">Nombre del Producto *</label>
-                    <input type="text" id="name" name="name" placeholder="RTX 4090 Gaming OC" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Categoría *</label>
-                    <select id="category" name="category" required>
-                        <option value="">Seleccionar categoría</option>
-                        <option value="GPU">GPU - Tarjetas Gráficas</option>
-                        <option value="CPU">CPU - Procesadores</option>
-                        <option value="RAM">RAM - Memoria</option>
-                        <option value="Storage">Storage - Almacenamiento</option>
-                        <option value="Motherboard">Motherboard - Placas Madre</option>
-                        <option value="PSU">PSU - Fuentes de Poder</option>
-                        <option value="Case">Case - Gabinetes</option>
-                        <option value="Cooling">Cooling - Refrigeración</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width">
-                    <label for="description">Descripción</label>
-                    <textarea id="description" name="description" placeholder="Describe las características principales del producto..."></textarea>
-                </div>
-            </div>
+    <main class="main-content">
+        <div class="page-header">
+            <h1>➕ Agregar Nuevo Producto</h1>
+            <p>Completa la información del producto para agregarlo al catálogo</p>
         </div>
 
-        <!-- Precio e Inventario -->
-        <div class="form-section">
-            <h3 class="section-title">💰 Precio e Inventario</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="price">Precio *</label>
-                    <input type="number" id="price" name="price" placeholder="2850000" min="0" step="1000" required>
-                </div>
+        <div class="success-message" id="successMessage">
+            ✓ Producto agregado exitosamente
+        </div>
 
-                <div class="form-group">
-                    <label for="stock">Stock Disponible *</label>
-                    <input type="number" id="stock" name="stock" placeholder="10" min="0" required>
-                </div>
+        <form class="form-card" id="productForm">
+            <!-- Información Básica -->
+            <div class="form-section">
+                <h3 class="section-title">📝 Información Básica</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Nombre del Producto <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="RTX 4090 Gaming OC" required>
+                        <div class="helper-text">Nombre claro y descriptivo</div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="sku">SKU (Código)</label>
-                    <input type="text" id="sku" name="sku" placeholder="GPU-RTX4090-001">
-                </div>
+                    <div class="form-group">
+                        <label for="category">Categoría <span class="required">*</span></label>
+                        <select id="category" name="category" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="GPU">GPU - Tarjetas Gráficas</option>
+                            <option value="CPU">CPU - Procesadores</option>
+                            <option value="RAM">RAM - Memoria</option>
+                            <option value="Storage">Storage - Almacenamiento</option>
+                            <option value="Motherboard">Motherboard - Placas Madre</option>
+                            <option value="PSU">PSU - Fuentes de Poder</option>
+                            <option value="Case">Case - Gabinetes</option>
+                            <option value="Cooling">Cooling - Refrigeración</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Producto Destacado</label>
-                    <div class="featured-toggle">
-                        <div class="toggle-switch" id="featuredToggle" onclick="toggleFeatured()">
-                            <div class="toggle-slider"></div>
-                        </div>
-                        <span id="featuredText">No</span>
+                    <div class="form-group full-width">
+                        <label for="description">Descripción</label>
+                        <textarea id="description" name="description" placeholder="Describe las características principales del producto..."></textarea>
+                        <div class="helper-text">Incluye especificaciones técnicas importantes</div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Imagen del Producto -->
-        <div class="form-section">
-            <h3 class="section-title">🖼️ Imagen del Producto</h3>
-            <div class="form-group">
-                <label for="imageUrl">URL de la Imagen</label>
-                <input type="url" id="imageUrl" name="imageUrl" placeholder="https://ejemplo.com/imagen.jpg">
-                <div class="image-upload" onclick="document.getElementById('imageUrl').focus()">
-                    <div class="upload-icon">📷</div>
-                    <div class="upload-text">Ingresa la URL de la imagen del producto</div>
+            <!-- Precio e Inventario -->
+            <div class="form-section">
+                <h3 class="section-title">💰 Precio e Inventario</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="price">Precio (COP) <span class="required">*</span></label>
+                        <input type="number" id="price" name="price" placeholder="2850000" min="0" step="1000" required>
+                        <div class="helper-text">Precio en pesos colombianos</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock Disponible <span class="required">*</span></label>
+                        <input type="number" id="stock" name="stock" placeholder="10" min="0" required>
+                        <div class="helper-text">Cantidad disponible en inventario</div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Producto Destacado</label>
+                        <div class="featured-toggle">
+                            <div class="toggle-switch" id="featuredToggle" onclick="toggleFeatured()">
+                                <div class="toggle-slider"></div>
+                            </div>
+                            <span id="featuredText" style="color: #9ca3af;">No destacado</span>
+                        </div>
+                        <div class="helper-text">Los productos destacados aparecen en la página principal</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Vista Previa -->
-        <div class="preview-section">
-            <div class="preview-title">👁️ Vista Previa</div>
-            <div class="product-preview" id="preview">
-                <p style="color: #9ca3af; text-align: center;">
-                    La vista previa aparecerá aquí mientras completas el formulario
-                </p>
+            <!-- Vista Previa -->
+            <div class="preview-section">
+                <div class="preview-title">👁️ Vista Previa</div>
+                <div class="product-preview" id="preview">
+                    <div class="preview-icon">📦</div>
+                    <div class="preview-category">Categoría</div>
+                    <div class="preview-name">Nombre del producto</div>
+                    <div class="preview-description">La descripción aparecerá aquí</div>
+                    <div class="preview-footer">
+                        <div class="preview-price">$ 0</div>
+                        <div class="preview-stock">Stock: 0</div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Botones de Acción -->
-        <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='catalog.html'">
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-primary">
-                ✓ Agregar Producto
-            </button>
-        </div>
-    </form>
-</main>
+            <!-- Botones de Acción -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='catalog.html'">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    ✓ Agregar Producto
+                </button>
+            </div>
+        </form>
+    </main>
 
-<script>
-    let isFeatured = false;
+    <script>
+        const API_URL = 'http://localhost:8080/api';
+        let isFeatured = false;
 
-    function toggleFeatured() {
-        isFeatured = !isFeatured;
-        const toggle = document.getElementById('featuredToggle');
-        const text = document.getElementById('featuredText');
-        
-        if (isFeatured) {
-            toggle.classList.add('active');
-            text.textContent = 'Sí';
-            text.style.color = '#7c3aed';
-        } else {
-            toggle.classList.remove('active');
-            text.textContent = 'No';
-            text.style.color = '#9ca3af';
+        function toggleFeatured() {
+            isFeatured = !isFeatured;
+            const toggle = document.getElementById('featuredToggle');
+            const text = document.getElementById('featuredText');
+            
+            if (isFeatured) {
+                toggle.classList.add('active');
+                text.textContent = 'Producto destacado';
+                text.style.color = '#8b5cf6';
+            } else {
+                toggle.classList.remove('active');
+                text.textContent = 'No destacado';
+                text.style.color = '#9ca3af';
+            }
+            updatePreview();
         }
-    }
 
-    // Vista previa en tiempo real
-    const form = document.getElementById('productForm');
-    const inputs = form.querySelectorAll('input, select, textarea');
+        // Vista previa en tiempo real
+        const form = document.getElementById('productForm');
+        const inputs = form.querySelectorAll('input, select, textarea');
 
-    inputs.forEach(input => {
-        input.addEventListener('input', updatePreview);
-    });
+        inputs.forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
 
-    function updatePreview() {
-        const name = document.getElementById('name').value || 'Nombre del producto';
-        const category = document.getElementById('category').value || 'Categoría';
-        const description = document.getElementById('description').value || 'Sin descripción';
-        const price = document.getElementById('price').value || '0';
-        const stock = document.getElementById('stock').value || '0';
+        function updatePreview() {
+            const name = document.getElementById('name').value || 'Nombre del producto';
+            const category = document.getElementById('category').value || 'Categoría';
+            const description = document.getElementById('description').value || 'La descripción aparecerá aquí';
+            const price = document.getElementById('price').value || '0';
+            const stock = document.getElementById('stock').value || '0';
 
-        const preview = document.getElementById('preview');
-        preview.innerHTML = `
-            <div style="text-align: center;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">${getIconForCategory(category)}</div>
-                <div style="color: #7c3aed; font-size: 0.9rem; margin-bottom: 0.5rem;">${category}</div>
-                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">${name}</h3>
-                <p style="color: #9ca3af; margin-bottom: 1rem;">${description}</p>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="color: #10b981; font-size: 1.5rem; font-weight: bold;">$ ${parseInt(price).toLocaleString('es-CO')}</span>
-                    <span style="color: ${stock > 10 ? '#10b981' : stock > 0 ? '#f59e0b' : '#ef4444'};">
+            const preview = document.getElementById('preview');
+            preview.innerHTML = `
+                <div class="preview-icon">${getIconForCategory(category)}</div>
+                <div class="preview-category">${category}</div>
+                <div class="preview-name">${name}</div>
+                <div class="preview-description">${description}</div>
+                <div class="preview-footer">
+                    <div class="preview-price">${formatPrice(parseInt(price))}</div>
+                    <div class="preview-stock" style="color: ${stock > 10 ? '#10b981' : stock > 0 ? '#f59e0b' : '#ef4444'};">
                         Stock: ${stock}
-                    </span>
+                    </div>
                 </div>
-            </div>
-        `;
-    }
+            `;
+        }
 
-    function getIconForCategory(category) {
-        const icons = {
-            'GPU': '🎨',
-            'CPU': '⚡',
-            'RAM': '💾',
-            'Storage': '💿',
-            'Motherboard': '🔌',
-            'PSU': '🔋',
-            'Case': '🖥️',
-            'Cooling': '❄️'
-        };
-        return icons[category] || '📦';
-    }
+        function getIconForCategory(category) {
+            const icons = {
+                'GPU': '🎨',
+                'CPU': '⚡',
+                'RAM': '💾',
+                'Storage': '💿',
+                'Motherboard': '🔌',
+                'PSU': '🔋',
+                'Case': '🖥️',
+                'Cooling': '❄️'
+            };
+            return icons[category] || '📦';
+        }
 
-    // Enviar formulario
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
+        function formatPrice(price) {
+            return `$ ${price.toLocaleString('es-CO')}`;
+        }
 
-        const productData = {
-            name: document.getElementById('name').value,
-            category: document.getElementById('category').value,
-            description: document.getElementById('description').value,
-            price: parseFloat(document.getElementById('price').value),
-            stock: parseInt(document.getElementById('stock').value),
-            imageUrl: document.getElementById('imageUrl').value || null,
-            featured: isFeatured
-        };
+        // Enviar formulario
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-        console.log('Producto a crear:', productData);
+            const productData = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value || null,
+                price: parseFloat(document.getElementById('price').value),
+                stock: parseInt(document.getElementById('stock').value),
+                featured: isFeatured,
+                imageUrl: null
+            };
 
-        // Aquí iría la llamada al backend
-        // await apiService.createProduct(productData);
+            console.log('Producto a crear:', productData);
 
-        alert('✓ Producto agregado exitosamente!');
-        window.location.href = 'catalog.html';
-    });
-</script>
-```
+            try {
+                const response = await fetch(`${API_URL}/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
 
+                if (!response.ok) {
+                    throw new Error('Error al crear producto');
+                }
+
+                const result = await response.json();
+                console.log('Producto creado:', result);
+
+                // Mostrar mensaje de éxito
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.add('show');
+                
+                // Limpiar formulario
+                form.reset();
+                isFeatured = false;
+                document.getElementById('featuredToggle').classList.remove('active');
+                document.getElementById('featuredText').textContent = 'No destacado';
+                document.getElementById('featuredText').style.color = '#9ca3af';
+                updatePreview();
+
+                // Ocultar mensaje después de 3 segundos
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+
+                // Opcional: redirigir al catálogo
+                setTimeout(() => {
+                    if (confirm('¿Deseas ir al catálogo para ver el producto?')) {
+                        window.location.href = 'catalog.html';
+                    }
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('⚠️ Error al agregar el producto.\n\nPor favor verifica que el backend esté ejecutándose en http://localhost:8080\n\nError: ' + error.message);
+            }
+        });
+
+        // Inicializar vista previa
+        updatePreview();
+    </script>
 </body>
 </html>

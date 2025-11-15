@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,203 +11,383 @@
             box-sizing: border-box;
         }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #0a0e1a;
-        color: #fff;
-        display: flex;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            display: flex;
+        }
 
-    .sidebar {
-        width: 260px;
-        background-color: #151824;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding: 2rem 0;
-        border-right: 1px solid #2a2d3e;
-    }
+        .sidebar {
+            width: 260px;
+            background-color: #1f2235;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            border-right: 1px solid #2a2d3e;
+        }
 
-    .logo-section {
-        padding: 0 1.5rem;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
+        .logo-section {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
 
-    .logo-icon {
-        font-size: 3rem;
-    }
+        .logo-icon {
+            font-size: 3rem;
+        }
 
-    .logo-text {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #7c3aed;
-    }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
 
-    .nav-menu {
-        list-style: none;
-    }
+        .nav-menu {
+            list-style: none;
+        }
 
-    .nav-item {
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: #9ca3af;
-    }
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            border-left: 4px solid transparent;
+        }
 
-    .nav-item:hover,
-    .nav-item.active {
-        background-color: #1a1d2e;
-        color: #7c3aed;
-        border-left: 4px solid #7c3aed;
-    }
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #252839;
+            color: #8b5cf6;
+            border-left-color: #8b5cf6;
+        }
 
-    .main-content {
-        margin-left: 260px;
-        flex: 1;
-        padding: 2rem;
-    }
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+        }
 
-    .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-    .page-title {
-        font-size: 2rem;
-    }
+        .page-title {
+            font-size: 2rem;
+        }
 
-    .btn {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
 
-    .btn-primary {
-        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-        color: white;
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+        }
 
-    .btn-secondary {
-        background-color: #1a1d2e;
-        color: #fff;
-        border: 2px solid #2a2d3e;
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
 
-    .filters-bar {
-        background-color: #151824;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 2rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
+        .btn-secondary {
+            background-color: #252839;
+            color: #fff;
+            border: 2px solid #2a2d3e;
+        }
 
-    .search-box {
-        flex: 1;
-        min-width: 300px;
-    }
+        .filters-bar {
+            background-color: #1f2235;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
-    .search-box input {
-        width: 100%;
-        padding: 0.75rem;
-        background-color: #1a1d2e;
-        border: 2px solid #2a2d3e;
-        border-radius: 8px;
-        color: #fff;
-    }
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
 
-    .products-table {
-        background-color: #151824;
-        border-radius: 12px;
-        overflow: hidden;
-    }
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .search-box input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
 
-    th {
-        background-color: #1a1d2e;
-        padding: 1rem;
-        text-align: left;
-        color: #9ca3af;
-        font-weight: 600;
-    }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-    td {
-        padding: 1rem;
-        border-bottom: 1px solid #2a2d3e;
-    }
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
 
-    tr:hover {
-        background-color: #1a1d2e;
-    }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-    .product-image-cell {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #1a1d2e 0%, #2a2d3e 100%);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-    }
+        .product-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
 
-    .stock-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+        }
 
-    .in-stock {
-        background-color: #10b98122;
-        color: #10b981;
-    }
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
 
-    .low-stock {
-        background-color: #f59e0b22;
-        color: #f59e0b;
-    }
+        .product-info {
+            padding: 1.5rem;
+        }
 
-    .actions {
-        display: flex;
-        gap: 0.5rem;
-    }
+        .product-category {
+            color: #8b5cf6;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
 
-    .btn-edit {
-        padding: 0.5rem 1rem;
-        background-color: #7c3aed;
-        border: none;
-        border-radius: 6px;
-        color: white;
-        cursor: pointer;
-    }
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
 
-    .btn-delete {
-        padding: 0.5rem 1rem;
-        background-color: #ef4444;
-        border: none;
-        border-radius: 6px;
-        color: white;
-        cursor: pointer;
-    }
-</style>
-```
+        .product-description {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        .stock-info {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit {
+            flex: 1;
+            padding: 0.75rem;
+            background-color: #8b5cf6;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-edit:hover {
+            background-color: #7c3aed;
+        }
+
+        .btn-delete {
+            padding: 0.75rem;
+            background-color: #ef4444;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
+        .stock-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .in-stock {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .low-stock {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .out-stock {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Modal (mismo estilo del dashboard) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #9ca3af;
+            grid-column: 1 / -1;
+        }
+    </style>
 </head>
 <body>
     <aside class="sidebar">
@@ -232,118 +411,309 @@
         </ul>
     </aside>
 
-```
-<main class="main-content">
-    <div class="top-bar">
-        <h1 class="page-title">📦 Gestión de Catálogo</h1>
-        <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
-            ➕ Nuevo Producto
-        </button>
-    </div>
-
-    <div class="filters-bar">
-        <div class="search-box">
-            <input type="text" id="search" placeholder="🔍 Buscar productos...">
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">📦 Catálogo de Productos</h1>
+            <button class="btn btn-primary" onclick="window.location.href='add-product.html'">
+                ➕ Nuevo Producto
+            </button>
         </div>
-        <select class="btn btn-secondary">
-            <option>Todas las categorías</option>
-            <option>GPUs</option>
-            <option>CPUs</option>
-            <option>RAM</option>
-            <option>Storage</option>
-        </select>
-        <select class="btn btn-secondary">
-            <option>Todos los estados</option>
-            <option>En Stock</option>
-            <option>Bajo Stock</option>
-            <option>Agotado</option>
-        </select>
+
+        <div class="filters-bar">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="🔍 Buscar productos...">
+            </div>
+            <button class="filter-btn active" onclick="filterCategory('all', this)">Todas</button>
+            <button class="filter-btn" onclick="filterCategory('GPU', this)">GPUs</button>
+            <button class="filter-btn" onclick="filterCategory('CPU', this)">CPUs</button>
+            <button class="filter-btn" onclick="filterCategory('RAM', this)">RAM</button>
+            <button class="filter-btn" onclick="filterCategory('Storage', this)">Storage</button>
+        </div>
+
+        <div id="productsGrid" class="products-grid">
+            <div class="loading">Cargando productos...</div>
+        </div>
+    </main>
+
+    <!-- Modal de Edición -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">✏️ Editar Producto</h3>
+                <button class="btn-close" onclick="closeEditModal()">×</button>
+            </div>
+
+            <form id="editForm">
+                <input type="hidden" id="editProductId">
+
+                <div class="form-group">
+                    <label for="editName">Nombre del Producto *</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCategory">Categoría *</label>
+                    <select id="editCategory" required>
+                        <option value="">Seleccionar categoría</option>
+                        <option value="GPU">GPU - Tarjetas Gráficas</option>
+                        <option value="CPU">CPU - Procesadores</option>
+                        <option value="RAM">RAM - Memoria</option>
+                        <option value="Storage">Storage - Almacenamiento</option>
+                        <option value="Motherboard">Motherboard</option>
+                        <option value="PSU">PSU - Fuentes</option>
+                        <option value="Case">Case - Gabinetes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editDescription">Descripción</label>
+                    <textarea id="editDescription"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPrice">Precio *</label>
+                    <input type="number" id="editPrice" min="0" step="1000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editStock">Stock *</label>
+                    <input type="number" id="editStock" min="0" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        ✓ Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="products-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="products-tbody">
-                <tr>
-                    <td>
-                        <div class="product-image-cell">🎨</div>
-                    </td>
-                    <td><strong>RTX 4090</strong></td>
-                    <td>GPU</td>
-                    <td>$2.850.000</td>
-                    <td>10</td>
-                    <td><span class="stock-badge in-stock">En Stock</span></td>
-                    <td>
-                        <div class="actions">
-                            <button class="btn-edit">✏️ Editar</button>
-                            <button class="btn-delete">🗑️ Eliminar</button>
+    <script>
+        const API_URL = 'http://localhost:8080/api';
+        let allProducts = [];
+        let currentCategory = 'all';
+
+        // Cargar productos
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                if (!response.ok) throw new Error('Error');
+                
+                allProducts = await response.json();
+                displayProducts(allProducts);
+            } catch (error) {
+                console.log('Cargando datos de ejemplo...');
+                loadMockData();
+            }
+        }
+
+        // Datos de ejemplo
+        function loadMockData() {
+            allProducts = [
+                {
+                    id: 1,
+                    name: "RTX 4090 Gaming OC",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4090 24GB GDDR6X",
+                    price: 2850000,
+                    category: "GPU",
+                    stock: 10
+                },
+                {
+                    id: 2,
+                    name: "RTX 4080 SUPER",
+                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4080 SUPER 16GB",
+                    price: 1950000,
+                    category: "GPU",
+                    stock: 15
+                },
+                {
+                    id: 3,
+                    name: "AMD Ryzen 9 7950X",
+                    description: "Procesador AMD Ryzen 9 7950X 16-Core 32-Threads",
+                    price: 920000,
+                    category: "CPU",
+                    stock: 20
+                },
+                {
+                    id: 4,
+                    name: "Corsair Vengeance DDR5 32GB",
+                    description: "Memoria RAM DDR5 32GB (2x16GB) 5600MHz RGB",
+                    price: 350000,
+                    category: "RAM",
+                    stock: 3
+                },
+                {
+                    id: 5,
+                    name: "Samsung 980 PRO 2TB",
+                    description: "SSD NVMe M.2 2TB PCIe Gen 4.0 x4",
+                    price: 285000,
+                    category: "Storage",
+                    stock: 0
+                }
+            ];
+            displayProducts(allProducts);
+        }
+
+        // Mostrar productos
+        function displayProducts(products) {
+            const grid = document.getElementById('productsGrid');
+            
+            if (products.length === 0) {
+                grid.innerHTML = '<div class="loading">No se encontraron productos</div>';
+                return;
+            }
+
+            grid.innerHTML = products.map(product => {
+                let stockClass = 'in-stock';
+                let stockText = 'En Stock';
+                
+                if (product.stock === 0) {
+                    stockClass = 'out-stock';
+                    stockText = 'Agotado';
+                } else if (product.stock < 5) {
+                    stockClass = 'low-stock';
+                    stockText = `Solo ${product.stock}`;
+                }
+
+                return `
+                    <div class="product-card">
+                        <div class="product-image">${getIcon(product.category)}</div>
+                        <div class="product-info">
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-description">${product.description || ''}</div>
+                            <span class="stock-badge ${stockClass}">${stockText}</span>
+                            <div class="product-footer">
+                                <div class="product-price">${formatPrice(product.price)}</div>
+                                <div class="stock-info">Stock: ${product.stock}</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-edit" onclick="openEditModal(${product.id})">
+                                    ✏️ Editar
+                                </button>
+                                <button class="btn-delete" onclick="deleteProduct(${product.id})">
+                                    🗑️
+                                </button>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="product-image-cell">⚡</div>
-                    </td>
-                    <td><strong>AMD Ryzen 9 7950X</strong></td>
-                    <td>CPU</td>
-                    <td>$920.000</td>
-                    <td>20</td>
-                    <td><span class="stock-badge in-stock">En Stock</span></td>
-                    <td>
-                        <div class="actions">
-                            <button class="btn-edit">✏️ Editar</button>
-                            <button class="btn-delete">🗑️ Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="product-image-cell">💾</div>
-                    </td>
-                    <td><strong>Corsair Vengeance 32GB</strong></td>
-                    <td>RAM</td>
-                    <td>$350.000</td>
-                    <td>3</td>
-                    <td><span class="stock-badge low-stock">Bajo Stock</span></td>
-                    <td>
-                        <div class="actions">
-                            <button class="btn-edit">✏️ Editar</button>
-                            <button class="btn-delete">🗑️ Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
+                    </div>
+                `;
+            }).join('');
+        }
 
-<script>
-    // Cargar productos desde el backend
-    async function loadProducts() {
-        // Aquí se haría la llamada al backend
-        console.log('Cargando productos...');
-    }
+        // Filtrar por categoría
+        function filterCategory(category, button) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            currentCategory = category;
+            const filtered = category === 'all' ? allProducts : allProducts.filter(p => p.category === category);
+            displayProducts(filtered);
+        }
 
-    // Buscar productos
-    document.getElementById('search').addEventListener('input', function(e) {
-        const query = e.target.value.toLowerCase();
-        // Filtrar productos
-        console.log('Buscando:', query);
-    });
+        // Buscar
+        document.getElementById('search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = allProducts.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                (p.description && p.description.toLowerCase().includes(query))
+            );
+            displayProducts(filtered);
+        });
 
-    loadProducts();
-</script>
-```
+        // Abrir modal de edición
+        function openEditModal(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
 
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('editName').value = product.name;
+            document.getElementById('editCategory').value = product.category;
+            document.getElementById('editDescription').value = product.description || '';
+            document.getElementById('editPrice').value = product.price;
+            document.getElementById('editStock').value = product.stock;
+
+            document.getElementById('editModal').classList.add('show');
+        }
+
+        // Cerrar modal
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+
+        // Guardar cambios
+        document.getElementById('editForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const productId = document.getElementById('editProductId').value;
+            const updatedProduct = {
+                id: parseInt(productId),
+                name: document.getElementById('editName').value,
+                category: document.getElementById('editCategory').value,
+                description: document.getElementById('editDescription').value,
+                price: parseFloat(document.getElementById('editPrice').value),
+                stock: parseInt(document.getElementById('editStock').value)
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/products/${productId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedProduct)
+                });
+
+                if (!response.ok) throw new Error('Error');
+                alert('✓ Producto actualizado exitosamente');
+            } catch (error) {
+                const index = allProducts.findIndex(p => p.id == productId);
+                if (index !== -1) {
+                    allProducts[index] = updatedProduct;
+                }
+                alert('✓ Producto actualizado localmente');
+            }
+
+            displayProducts(allProducts);
+            closeEditModal();
+        });
+
+        // Eliminar producto
+        async function deleteProduct(productId) {
+            if (!confirm('¿Eliminar este producto?')) return;
+
+            try {
+                await fetch(`${API_URL}/products/${productId}`, { method: 'DELETE' });
+                alert('✓ Producto eliminado');
+            } catch (error) {
+                alert('✓ Producto eliminado localmente');
+            }
+
+            allProducts = allProducts.filter(p => p.id !== productId);
+            displayProducts(allProducts);
+        }
+
+        function getIcon(category) {
+            const icons = {
+                'GPU': '🎨',
+                'CPU': '⚡',
+                'RAM': '💾',
+                'Storage': '💿',
+                'Motherboard': '🔌',
+                'PSU': '🔋',
+                'Case': '🖥️'
+            };
+            return icons[category] || '📦';
+        }
+
+        function formatPrice(price) {
+            return `$ ${price.toLocaleString('es-CO')}`;
+        }
+
+        // Inicializar
+        loadProducts();
+    </script>
 </body>
 </html>
