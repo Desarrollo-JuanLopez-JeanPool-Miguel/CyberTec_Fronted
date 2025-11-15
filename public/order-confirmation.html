@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orden Confirmada - CyberTec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1f2235;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            color: #8b5cf6;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            color: #8b5cf6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+        }
+
+        .success-animation {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .success-icon {
+            font-size: 8rem;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .success-title {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            color: #10b981;
+        }
+
+        .success-subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .order-info-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid #8b5cf6;
+        }
+
+        .order-number {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .order-number-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-number-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8b5cf6;
+            letter-spacing: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-section {
+            background-color: #252839;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .info-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #8b5cf6;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .items-section {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #252839;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-details {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        .total-section {
+            background-color: #252839;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .total-row.final {
+            border-top: 2px solid #8b5cf6;
+            border-bottom: none;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .total-value {
+            font-weight: 600;
+        }
+
+        .total-value.final {
+            font-size: 1.8rem;
+            color: #10b981;
+        }
+
+        .actions-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #252839;
+            color: #fff;
+            border: 2px solid #2a2d3e;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8b5cf6;
+            background-color: #2a2d41;
+        }
+
+        .alert-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-content h4 {
+            margin-bottom: 0.5rem;
+            color: #3b82f6;
+        }
+
+        .alert-content p {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        .next-steps {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #252839;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-number::before {
+            content: counter(step-counter);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <span class="logo-icon">⚡</span>
+            <div class="logo-text">CyberTec</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="success-animation">
+            <div class="success-icon">✅</div>
+            <h1 class="success-title">¡Pedido Confirmado!</h1>
+            <p class="success-subtitle">Gracias por tu compra. Tu pedido ha sido recibido y está siendo procesado.</p>
+        </div>
+
+        <div class="order-info-card">
+            <div class="order-number">
+                <div class="order-number-label">Número de Orden</div>
+                <div class="order-number-value" id="orderNumber">ORD-2024-XXXXXX</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3 class="info-title">👤 Cliente</h3>
+                    <div class="info-row">
+                        <span class="info-label">Nombre:</span>
+                        <span class="info-value" id="customerName">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value" id="customerEmail">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Teléfono:</span>
+                        <span class="info-value" id="customerPhone">-</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3 class="info-title">📍 Envío</h3>
+                    <div class="info-row">
+                        <span class="info-label">Dirección:</span>
+                        <span class="info-value" id="shippingAddress">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Ciudad:</span>
+                        <span class="info-value" id="shippingCity">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Departamento:</span>
+                        <span class="info-value" id="shippingDepartment">-</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3 class="info-title">💳 Pago</h3>
+                    <div class="info-row">
+                        <span class="info-label">Método:</span>
+                        <span class="info-value" id="paymentMethod">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Estado:</span>
+                        <span class="info-value" style="color: #f59e0b;">Pendiente</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Fecha:</span>
+                        <span class="info-value" id="orderDate">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="items-section">
+            <h2 class="section-title">🛒 Productos Ordenados</h2>
+            <div id="orderItems">
+                <!-- Se llenará dinámicamente -->
+            </div>
+
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span class="total-value" id="totalSubtotal">$0</span>
+                </div>
+                <div class="total-row" id="discountRow" style="display: none;">
+                    <span>Descuento:</span>
+                    <span class="total-value" style="color: #10b981;" id="totalDiscount">$0</span>
+                </div>
+                <div class="total-row">
+                    <span>Envío:</span>
+                    <span class="total-value" id="totalShipping">$0</span>
+                </div>
+                <div class="total-row">
+                    <span>IVA (19%):</span>
+                    <span class="total-value" id="totalTax">$0</span>
+                </div>
+                <div class="total-row final">
+                    <span><strong>Total:</strong></span>
+                    <span class="total-value final" id="totalFinal">$0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-info">
+            <span class="alert-icon">📧</span>
+            <div class="alert-content">
+                <h4>Confirmación Enviada</h4>
+                <p>Hemos enviado un email de confirmación a <strong id="confirmEmail">tu correo</strong> con todos los detalles de tu pedido. Si no lo encuentras, revisa tu carpeta de spam.</p>
+            </div>
+        </div>
+
+        <div class="next-steps">
+            <h2 class="section-title">📋 Próximos Pasos</h2>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <div class="step-title">Confirmación de Pedido</div>
+                        <div class="step-description">Recibirás un email con los detalles de tu compra en los próximos minutos.</div>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <div class="step-title">Preparación del Envío</div>
+                        <div class="step-description">Nuestro equipo preparará tu pedido en las próximas 24-48 horas.</div>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <div class="step-title">Envío en Camino</div>
+                        <div class="step-description">Recibirás un código de seguimiento para rastrear tu envío en tiempo real.</div>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <div class="step-title">Entrega</div>
+                        <div class="step-description">Tu pedido llegará en 3-5 días hábiles. ¡Disfruta tu nuevo equipo gaming!</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="actions-section">
+            <button class="btn btn-primary" onclick="window.location.href='product.html'">
+                🛍️ Seguir Comprando
+            </button>
+            <button class="btn btn-secondary" onclick="window.print()">
+                🖨️ Imprimir Recibo
+            </button>
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                🏠 Volver al Inicio
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function loadOrderDetails() {
+            // Obtener ID de orden de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order');
+
+            if (!orderId) {
+                alert('No se encontró la orden');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Buscar la orden en localStorage
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const order = orders.find(o => o.orderId === orderId);
+
+            if (!order) {
+                alert('Orden no encontrada');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Llenar los datos
+            document.getElementById('orderNumber').textContent = order.orderId;
+            document.getElementById('customerName').textContent = order.customerName;
+            document.getElementById('customerEmail').textContent = order.customerEmail;
+            document.getElementById('confirmEmail').textContent = order.customerEmail;
+            document.getElementById('customerPhone').textContent = order.customerPhone || 'No especificado';
+            
+            if (order.shippingAddress) {
+                document.getElementById('shippingAddress').textContent = order.shippingAddress.address;
+                document.getElementById('shippingCity').textContent = order.shippingAddress.city;
+                document.getElementById('shippingDepartment').textContent = order.shippingAddress.department;
+            }
+
+            document.getElementById('paymentMethod').textContent = order.paymentMethod;
+            
+            const date = new Date(order.date);
+            document.getElementById('orderDate').textContent = date.toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Mostrar items
+            const itemsContainer = document.getElementById('orderItems');
+            itemsContainer.innerHTML = order.items.map(item => `
+                <div class="item-row">
+                    <div class="item-info">
+                        <div class="item-name">${item.productName}</div>
+                        <div class="item-details">
+                            ${item.category} • Cantidad: ${item.quantity} • ${formatPrice(item.price)} c/u
+                        </div>
+                    </div>
+                    <div class="item-price">${formatPrice(item.subtotal)}</div>
+                </div>
+            `).join('');
+
+            // Mostrar totales
+            document.getElementById('totalSubtotal').textContent = formatPrice(order.subtotal);
+            document.getElementById('totalShipping').textContent = order.shipping === 0 ? 'GRATIS 🎉' : formatPrice(order.shipping);
+            document.getElementById('totalTax').textContent = formatPrice(order.tax);
+            document.getElementById('totalFinal').textContent = formatPrice(order.total);
+
+            if (order.discount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('totalDiscount').textContent = `-${formatPrice(order.discount)}`;
+            }
+        }
+
+        function formatPrice(price) {
+            return `$ ${Math.round(price).toLocaleString('es-CO')}`;
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', loadOrderDetails);
+    </script>
+</body>
+</html>
