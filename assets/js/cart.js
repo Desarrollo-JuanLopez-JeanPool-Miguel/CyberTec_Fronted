@@ -1,9 +1,10 @@
 
 console.log('🛒 Cart.js cargado y conectado al backend');
 
+
 // ========== CONFIGURACIÓN ==========
 const API_URL = 'http://localhost:8080/api';
-let cart = null;
+let cartData = null;
 
 // ========== INICIALIZACIÓN ==========
 document.addEventListener('DOMContentLoaded', async function() {
@@ -36,7 +37,9 @@ async function loadCart() {
             throw new Error('Error al cargar el carrito');
         }
 
-        cart = await response.json();
+        cartData = await response.json();
+        console.log('📦 Carrito cargado:', cartData);
+        
         renderCart();
         updateSummary();
         hideLoading();
@@ -53,13 +56,13 @@ async function loadCart() {
 function renderCart() {
     const container = document.querySelector('.cart-items');
     
-    if (!cart || !cart.items || cart.items.length === 0) {
+    if (!cartData || !cartData.items || cartData.items.length === 0) {
         container.innerHTML = `
             <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
                 <div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div>
                 <h3>Tu carrito está vacío</h3>
                 <p style="margin: 1rem 0;">Comienza a agregar productos increíbles</p>
-                <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
+                <a href="product.html" class="btn-primary" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
                     Explorar Productos
                 </a>
             </div>
@@ -68,17 +71,17 @@ function renderCart() {
     }
 
     // Renderizar items
-    const itemsHTML = cart.items.map((item, index) => `
-        <div class="cart-item" data-item-id="${item.id}" data-animated="true" style="animation-delay: ${index * 0.1}s">
+    const itemsHTML = cartData.items.map((item, index) => `
+        <div class="cart-item" data-item-id="${item.product.id}" data-animated="true" style="animation-delay: ${index * 0.1}s">
             <div class="item-layout">
-                <div class="item-image">${getCategoryIcon(item.productCategory)}</div>
+                <div class="item-image">${getCategoryIcon(item.product.category)}</div>
                 <div class="item-info">
-                    <h3 class="item-title">${item.productName}</h3>
-                    <div class="item-specs">${item.productBrand || 'Gaming Hardware'}</div>
+                    <h3 class="item-title">${item.product.name}</h3>
+                    <div class="item-specs">${item.product.brand || 'Gaming Hardware'}</div>
                     <div class="item-badge badge-hot">EN STOCK</div>
                 </div>
                 <div class="quantity-section">
-                    <div class="qty-label">Qty:</div>
+                    <div class="qty-label">Cantidad:</div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="updateQuantity(${item.product.id}, ${item.quantity - 1})">-</button>
                         <div class="qty-display">${item.quantity}</div>
@@ -91,14 +94,14 @@ function renderCart() {
         </div>
     `).join('');
 
-    // Insertar antes de las sugerencias
-    const firstChild = container.firstElementChild;
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = itemsHTML;
-    
-    while (tempDiv.firstChild) {
-        container.insertBefore(tempDiv.firstChild, firstChild);
+    // Verificar si ya existe el contenedor de items
+    let itemsContainer = container.querySelector('.items-container');
+    if (!itemsContainer) {
+        container.innerHTML = `<div class="items-container"></div>` + container.innerHTML;
+        itemsContainer = container.querySelector('.items-container');
     }
+    
+    itemsContainer.innerHTML = itemsHTML;
 }
 
 /**
@@ -112,7 +115,7 @@ async function updateQuantity(productId, newQuantity) {
 
     try {
         const response = await fetch(`${API_URL}/cart/items/${productId}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: AUTH.getAuthHeaders(),
             body: JSON.stringify({ quantity: newQuantity })
         });
@@ -122,7 +125,7 @@ async function updateQuantity(productId, newQuantity) {
             throw new Error(error.error || 'Error al actualizar cantidad');
         }
 
-        cart = await response.json();
+        cartData = await response.json();
         renderCart();
         updateSummary();
         showNotification('✅ Cantidad actualizada', 'success');
@@ -150,17 +153,19 @@ async function removeFromCart(productId) {
             throw new Error('Error al eliminar producto');
         }
 
-        cart = await response.json();
+        cartData = await response.json();
         
         // Remover visualmente con animación
         const itemElement = document.querySelector(`[data-item-id="${productId}"]`);
         if (itemElement) {
             itemElement.style.animation = 'slideOut 0.3s ease';
             setTimeout(() => {
-                itemElement.remove();
-                renderCart();
+             renderCart();
                 updateSummary();
             }, 300);
+        } else {
+            renderCart();
+            updateSummary();
         }
 
         showNotification('🗑️ Producto eliminado', 'success');
@@ -188,7 +193,7 @@ async function clearCart() {
             throw new Error('Error al vaciar carrito');
         }
 
-        cart = await response.json();
+        cartData = await response.json();
         renderCart();
         updateSummary();
         showNotification('🗑️ Carrito vaciado', 'success');
@@ -202,22 +207,45 @@ async function clearCart() {
  * Actualizar resumen de precios
  */
 function updateSummary() {
-    if (!cart) return;
+    if (!cartData) return;
 
-    document.getElementById('subtotal-display').textContent = formatPrice(cart.subtotal);
-    document.getElementById('total-display').textContent = formatPrice(cart.total);
+    const subtotal = cartData.subtotal || 0;
+    const total = cartData.total || 0;
+    const totalItems = cartData.items ? cartData.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+
+    // Actualizar displays
+    const subtotalEl = document.getElementById('subtotal-display');
+    const totalEl = document.getElementById('total-display');
+    
+    if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+    if (totalEl) totalEl.textContent = formatPrice(total);
 
     // Actualizar contador de items
-    const totalItems = cart.totalItems || 0;
-    document.querySelector('.cart-info').textContent = `🛒 Gaming Cart (${totalItems})`;
+    const cartInfo = document.querySelector('.cart-info');
+    if (cartInfo) {
+        cartInfo.textContent = `🛒 Gaming Cart (${totalItems})`;
+    }
 
     // Actualizar progreso
     const progress = Math.min((totalItems / 7) * 100, 100);
-    document.getElementById('progress-bar').style.width = `${progress}%`;
-    document.getElementById('build-progress-text').textContent = 
-        `🎮 Build Progress: ${totalItems}/7 componentes`;
-    document.querySelector('.progress-label').textContent = 
-        `${Math.round(progress)}% completado`;
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('build-progress-text');
+    const progressLabel = document.querySelector('.progress-label');
+    
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (progressText) progressText.textContent = `🎮 Build Progress: ${totalItems}/7 componentes`;
+    if (progressLabel) progressLabel.textContent = `${Math.round(progress)}% completado`;
+}
+
+/**
+ * Proceder al checkout
+ */
+function proceedToCheckout() {
+    if (!cartData || !cartData.items || cartData.items.length === 0) {
+        showNotification('⚠️ Tu carrito está vacío', 'warning');
+        return;
+    }
+    window.location.href = 'checkout.html';
 }
 
 // ========== UTILIDADES ==========
@@ -264,6 +292,7 @@ function showNotification(message, type = 'info') {
         z-index: 9999;
         background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 
                      type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 
+                     type === 'warning' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
                      'linear-gradient(135deg, #7c3aed, #a855f7)'};
         color: white;
         padding: 1rem 1.5rem;
@@ -325,4 +354,5 @@ function hideLoading() {
 window.updateQuantity = updateQuantity;
 window.removeFromCart = removeFromCart;
 window.clearCart = clearCart;
+window.proceedToCheckout = proceedToCheckout;
 window.showNotification = showNotification;

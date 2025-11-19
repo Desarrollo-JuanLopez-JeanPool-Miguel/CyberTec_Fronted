@@ -1,4 +1,4 @@
-// assets/js/api.js
+
 /**
  * Cliente API para conectar el backend
  */
@@ -99,18 +99,43 @@ const API = {
         return await response.json();
     },
 
-   async updateCartItem(productId, quantity) {
-    const response = await fetch(`${this.BASE_URL}/cart/items/${productId}`, {
-        method: 'PUT',  // ← CORRECTO
-        headers: AUTH.getAuthHeaders(),
-        body: JSON.stringify({ quantity })
-    });
-    return await response.json();
-},
+    //  Ahora usa PATCH
+    async updateCartItem(productId, quantity) {
+        const response = await fetch(`${this.BASE_URL}/cart/items/${productId}`, {
+            method: 'PATCH',  // ✅ CORRECTO
+            headers: AUTH.getAuthHeaders(),
+            body: JSON.stringify({ quantity })
+        });
+        return await response.json();
+    },
 
     async clearCart() {
-        const response = await fetch(`${this.BASE_URL}/cart`, {
+        const response = await fetch(`${this.BASE_URL}/cart/clear`, {
             method: 'DELETE',
+            headers: AUTH.getAuthHeaders()
+        });
+        return await response.json();
+    },
+
+    // ========== ORDERS (NUEVO) ==========
+    async createOrder(orderData) {
+        const response = await fetch(`${this.BASE_URL}/orders`, {
+            method: 'POST',
+            headers: AUTH.getAuthHeaders(),
+            body: JSON.stringify(orderData)
+        });
+        return await response.json();
+    },
+
+    async getUserOrders() {
+        const response = await fetch(`${this.BASE_URL}/orders`, {
+            headers: AUTH.getAuthHeaders()
+        });
+        return await response.json();
+    },
+
+    async getOrderById(orderId) {
+        const response = await fetch(`${this.BASE_URL}/orders/${orderId}`, {
             headers: AUTH.getAuthHeaders()
         });
         return await response.json();

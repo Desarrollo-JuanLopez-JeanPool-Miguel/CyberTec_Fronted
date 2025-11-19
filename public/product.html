@@ -371,244 +371,287 @@
         </div>
     </div>
 
-    <script>
-        // Configuración de API
-        const API_URL = 'http://localhost:8080/api';
-        
-        let allProducts = [];
-        let currentCategory = 'all';
-        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+   <script>
+    // Configuración de API
+    const API_URL = 'http://localhost:8080/api';
+    
+    let allProducts = [];
+    let currentCategory = 'all';
 
-        // Cargar productos al iniciar
-        async function loadProducts() {
-            try {
-                const response = await fetch(`${API_URL}/products`);
-                if (!response.ok) throw new Error('Error al cargar productos');
-                
-                allProducts = await response.json();
-                displayProducts(allProducts);
-                updateCartCount();
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('products-container').innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">⚠️</div>
-                        <h3>Error al cargar productos</h3>
-                        <p>No se pudo conectar con el servidor. Mostrando datos de ejemplo.</p>
-                    </div>
-                `;
-                // Cargar datos de ejemplo si falla la API
-                loadMockData();
-            }
-        }
-
-        // Datos de ejemplo si no hay backend
-        function loadMockData() {
-            allProducts = [
-                {
-                    id: 1,
-                    name: "RTX 4090 Gaming OC",
-                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4090 24GB GDDR6X",
-                    price: 2850000,
-                    category: "GPU",
-                    stock: 10,
-                    featured: true
-                },
-                {
-                    id: 2,
-                    name: "RTX 4080 SUPER",
-                    description: "Tarjeta Gráfica NVIDIA GeForce RTX 4080 SUPER 16GB",
-                    price: 1950000,
-                    category: "GPU",
-                    stock: 15,
-                    featured: true
-                },
-                {
-                    id: 3,
-                    name: "AMD Ryzen 9 7950X",
-                    description: "Procesador AMD Ryzen 9 7950X 16-Core 32-Threads",
-                    price: 920000,
-                    category: "CPU",
-                    stock: 20,
-                    featured: true
-                },
-                {
-                    id: 4,
-                    name: "AMD Ryzen 7 7700X",
-                    description: "Procesador AMD Ryzen 7 7700X 8-Core 16-Threads",
-                    price: 420000,
-                    category: "CPU",
-                    stock: 25,
-                    featured: false
-                },
-                {
-                    id: 5,
-                    name: "Corsair Vengeance DDR5 32GB",
-                    description: "Memoria RAM DDR5 32GB (2x16GB) 5600MHz RGB",
-                    price: 350000,
-                    category: "RAM",
-                    stock: 3,
-                    featured: false
-                },
-                {
-                    id: 6,
-                    name: "Samsung 980 PRO 2TB",
-                    description: "SSD NVMe M.2 2TB PCIe Gen 4.0 x4",
-                    price: 285000,
-                    category: "Storage",
-                    stock: 30,
-                    featured: false
-                }
-            ];
+    // ========== CARGAR PRODUCTOS ==========
+    async function loadProducts() {
+        try {
+            const response = await fetch(`${API_URL}/products`);
+            if (!response.ok) throw new Error('Error al cargar productos');
+            
+            allProducts = await response.json();
             displayProducts(allProducts);
+            updateCartCount();
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('products-container').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚠️</div>
+                    <h3>Error al cargar productos</h3>
+                    <p>No se pudo conectar con el servidor. Mostrando datos de ejemplo.</p>
+                </div>
+            `;
+            loadMockData();
+        }
+    }
+
+    // Datos de ejemplo si falla la API
+    function loadMockData() {
+        allProducts = [
+            {
+                id: 1,
+                name: "RTX 4090 Gaming OC",
+                description: "Tarjeta Gráfica NVIDIA GeForce RTX 4090 24GB GDDR6X",
+                price: 2850000,
+                category: "GPU",
+                stock: 10,
+                featured: true
+            },
+            {
+                id: 2,
+                name: "RTX 4080 SUPER",
+                description: "Tarjeta Gráfica NVIDIA GeForce RTX 4080 SUPER 16GB",
+                price: 1950000,
+                category: "GPU",
+                stock: 15,
+                featured: true
+            },
+            {
+                id: 3,
+                name: "AMD Ryzen 9 7950X",
+                description: "Procesador AMD Ryzen 9 7950X 16-Core 32-Threads",
+                price: 920000,
+                category: "CPU",
+                stock: 20,
+                featured: true
+            },
+            {
+                id: 4,
+                name: "AMD Ryzen 7 7700X",
+                description: "Procesador AMD Ryzen 7 7700X 8-Core 16-Threads",
+                price: 420000,
+                category: "CPU",
+                stock: 25,
+                featured: false
+            },
+            {
+                id: 5,
+                name: "Corsair Vengeance DDR5 32GB",
+                description: "Memoria RAM DDR5 32GB (2x16GB) 5600MHz RGB",
+                price: 350000,
+                category: "RAM",
+                stock: 3,
+                featured: false
+            },
+            {
+                id: 6,
+                name: "Samsung 980 PRO 2TB",
+                description: "SSD NVMe M.2 2TB PCIe Gen 4.0 x4",
+                price: 285000,
+                category: "Storage",
+                stock: 30,
+                featured: false
+            }
+        ];
+        displayProducts(allProducts);
+    }
+
+    // ========== MOSTRAR PRODUCTOS ==========
+    function displayProducts(products) {
+        const container = document.getElementById('products-container');
+        
+        if (products.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📦</div>
+                    <h3>No se encontraron productos</h3>
+                    <p>Intenta con otra búsqueda o categoría</p>
+                </div>
+            `;
+            return;
         }
 
-        // Mostrar productos
-        function displayProducts(products) {
-            const container = document.getElementById('products-container');
+        container.innerHTML = products.map(product => {
+            let stockClass = 'in-stock';
+            let stockText = 'En Stock';
             
-            if (products.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📦</div>
-                        <h3>No se encontraron productos</h3>
-                        <p>Intenta con otra búsqueda o categoría</p>
-                    </div>
-                `;
-                return;
+            if (product.stock === 0) {
+                stockClass = 'out-stock';
+                stockText = 'Agotado';
+            } else if (product.stock < 5) {
+                stockClass = 'low-stock';
+                stockText = `Solo ${product.stock} disponibles`;
             }
 
-            container.innerHTML = products.map(product => {
-                let stockClass = 'in-stock';
-                let stockText = 'En Stock';
-                
-                if (product.stock === 0) {
-                    stockClass = 'out-stock';
-                    stockText = 'Agotado';
-                } else if (product.stock < 5) {
-                    stockClass = 'low-stock';
-                    stockText = `Solo ${product.stock} disponibles`;
-                }
-
-                return `
-                    <div class="product-card">
-                        <div class="product-image">
-                            ${getIconForCategory(product.category)}
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">${product.category || 'General'}</div>
-                            <div class="product-name">${product.name}</div>
-                            <div class="product-description">${product.description || 'Sin descripción'}</div>
-                            <span class="stock-badge ${stockClass}">${stockText}</span>
-                            <div class="product-footer">
-                                <div class="product-price">${formatPrice(product.price)}</div>
-                                <button class="btn-add-cart" onclick="addToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
-                                    ${product.stock === 0 ? 'Agotado' : '+ Agregar'}
-                                </button>
-                            </div>
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        ${getIconForCategory(product.category)}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category || 'General'}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">${product.description || 'Sin descripción'}</div>
+                        <span class="stock-badge ${stockClass}">${stockText}</span>
+                        <div class="product-footer">
+                            <div class="product-price">${formatPrice(product.price)}</div>
+                            <button class="btn-add-cart" onclick="addToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
+                                ${product.stock === 0 ? 'Agotado' : '+ Agregar'}
+                            </button>
                         </div>
                     </div>
-                `;
-            }).join('');
-        }
+                </div>
+            `;
+        }).join('');
+    }
 
-        // Filtrar por categoría
-        function filterByCategory(category, button) {
-            // Remover active de todos los botones
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            // Agregar active al botón clickeado
-            button.classList.add('active');
-            
-            currentCategory = category;
-            
-            if (category === 'all') {
-                displayProducts(allProducts);
+    // ========== FILTRAR POR CATEGORÍA ==========
+    function filterByCategory(category, button) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        currentCategory = category;
+        
+        if (category === 'all') {
+            displayProducts(allProducts);
+        } else {
+            const filtered = allProducts.filter(p => p.category === category);
+            displayProducts(filtered);
+        }
+    }
+
+    // ========== BUSCAR PRODUCTOS ==========
+    let searchTimeout;
+    document.getElementById('search-input').addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.toLowerCase();
+        
+        searchTimeout = setTimeout(() => {
+            if (query === '') {
+                displayProducts(currentCategory === 'all' ? allProducts : 
+                    allProducts.filter(p => p.category === currentCategory));
             } else {
-                const filtered = allProducts.filter(p => p.category === category);
+                const filtered = allProducts.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    (p.description && p.description.toLowerCase().includes(query))
+                );
                 displayProducts(filtered);
             }
-        }
+        }, 300);
+    });
 
-        // Buscar productos
-        let searchTimeout;
-        document.getElementById('search-input').addEventListener('input', function(e) {
-            clearTimeout(searchTimeout);
-            const query = e.target.value.toLowerCase();
-            
-            searchTimeout = setTimeout(() => {
-                if (query === '') {
-                    displayProducts(currentCategory === 'all' ? allProducts : 
-                        allProducts.filter(p => p.category === currentCategory));
-                } else {
-                    const filtered = allProducts.filter(p => 
-                        p.name.toLowerCase().includes(query) || 
-                        (p.description && p.description.toLowerCase().includes(query))
-                    );
-                    displayProducts(filtered);
-                }
-            }, 300);
-        });
-
-        // Agregar al carrito
-        function addToCart(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (!product) return;
-            
-            const existingItem = cart.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            showNotification(`${product.name} agregado al carrito`, 'success');
-            updateCartCount();
-        }
-
-        // Actualizar contador del carrito
-        function updateCartCount() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
-        }
-
-        // Mostrar notificación
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            setTimeout(() => notification.classList.add('show'), 100);
+    // ========== AGREGAR AL CARRITO (CONECTADO AL BACKEND) ==========
+    async function addToCart(productId) {
+        // Verificar autenticación
+        if (!AUTH.isAuthenticated()) {
+            showNotification('⚠️ Debes iniciar sesión para agregar productos', 'warning');
             setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+                window.location.href = 'login.html';
+            }, 2000);
+            return;
         }
 
-        // Obtener icono según categoría
-        function getIconForCategory(category) {
-            const icons = {
-                'GPU': '🎨',
-                'CPU': '⚡',
-                'RAM': '💾',
-                'Storage': '💿',
-                'Motherboard': '🔌',
-                'PSU': '🔋',
-                'Case': '🖥️'
-            };
-            return icons[category] || '📦';
+        const product = allProducts.find(p => p.id === productId);
+        if (!product || product.stock === 0) return;
+        
+        const button = event.target;
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = '⏳ Agregando...';
+
+        try {
+            const response = await fetch(`${API_URL}/cart/items`, {
+                method: 'POST',
+                headers: AUTH.getAuthHeaders(),
+                body: JSON.stringify({
+                    productId: productId,
+                    quantity: 1
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Error al agregar al carrito');
+            }
+
+            button.textContent = '✅ Agregado!';
+            showNotification(`✅ ${product.name} agregado al carrito`, 'success');
+            await updateCartCount();
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 1500);
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('❌ ' + error.message, 'error');
+            button.textContent = originalText;
+            button.disabled = false;
+        }
+    }
+
+    // ========== ACTUALIZAR CONTADOR DEL CARRITO ==========
+    async function updateCartCount() {
+        if (!AUTH.isAuthenticated()) {
+            document.getElementById('cart-count').textContent = '0';
+            return;
         }
 
-        // Formatear precio
-        function formatPrice(price) {
-            return `$ ${price.toLocaleString('es-CO')}`;
+        try {
+            const response = await fetch(`${API_URL}/cart`, {
+                headers: AUTH.getAuthHeaders()
+            });
+            
+            if (response.ok) {
+                const cartData = await response.json();
+                const count = cartData.items ? cartData.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+                document.getElementById('cart-count').textContent = count;
+            }
+        } catch (error) {
+            console.error('Error al actualizar contador:', error);
         }
+    }
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProducts();
-        });
-    </script>
+    // ========== UTILIDADES ==========
+    function getIconForCategory(category) {
+        const icons = {
+            'GPU': '🎨',
+            'CPU': '⚡',
+            'RAM': '💾',
+            'Storage': '💿',
+            'Motherboard': '🔌',
+            'PSU': '🔋',
+            'Case': '🖥️'
+        };
+        return icons[category] || '📦';
+    }
+
+    function formatPrice(price) {
+        return `$ ${price.toLocaleString('es-CO')}`;
+    }
+
+    function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => notification.classList.add('show'), 100);
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // ========== INICIALIZAR ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProducts();
+    });
+</script>
 </body>
 </html>
