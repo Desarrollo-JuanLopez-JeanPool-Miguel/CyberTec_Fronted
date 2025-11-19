@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Admin CyberTec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #1f2235;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            border-right: 1px solid #2a2d3e;
+            overflow-y: auto;
+        }
+
+        .logo-section {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #252839;
+            color: #8b5cf6;
+            border-left-color: #8b5cf6;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .page-subtitle {
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        /* Period Selector */
+        .period-selector {
+            background-color: #1f2235;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .period-label {
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .period-btn {
+            padding: 0.5rem 1rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .period-btn:hover,
+        .period-btn.active {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-change.positive {
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            color: #ef4444;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2d3e;
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .chart-subtitle {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Simple Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            height: 200px;
+            padding: 1rem 0;
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #8b5cf6 0%, #a78bfa 100%);
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .bar:hover {
+            background: linear-gradient(180deg, #7c3aed 0%, #8b5cf6 100%);
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
+        .bar-label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* Product List */
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #252839;
+            border-radius: 8px;
+            border: 1px solid #2a2d3e;
+            transition: all 0.3s;
+        }
+
+        .product-item:hover {
+            border-color: #8b5cf6;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .product-rank {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+            width: 40px;
+            text-align: center;
+        }
+
+        .product-details h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .product-stats {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        .stat-item-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #2a2d3e;
+        }
+
+        .summary-title {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+        }
+
+        .summary-item-label {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .summary-item-value {
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #252839;
+            color: #fff;
+            border: 2px solid #2a2d3e;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8b5cf6;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #252839;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+            border-radius: 999px;
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .nav-item span:not(:first-child) {
+                display: none;
+            }
+
+            .logo-text {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">CyberTec</div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item" onclick="window.location.href='dashboard.html'">
+                <span>📊</span> <span>Dashboard</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='catalog.html'">
+                <span>📦</span> <span>Catálogo</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='add-product.html'">
+                <span>➕</span> <span>Agregar Producto</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='orders.html'">
+                <span>📋</span> <span>Órdenes</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='customers.html'">
+                <span>👥</span> <span>Clientes</span>
+            </li>
+            <li class="nav-item active">
+                <span>📈</span> <span>Reportes</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='../index.html'">
+                <span>🏠</span> <span>Volver al Sitio</span>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <div>
+                <h1 class="page-title">📈 Reportes y Análisis</h1>
+                <p class="page-subtitle">Visualiza el rendimiento de tu tienda</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-secondary" onclick="exportReport()">
+                    📊 Exportar
+                </button>
+                <button class="btn btn-primary" onclick="generateReport()">
+                    🔄 Actualizar
+                </button>
+            </div>
+        </div>
+
+        <!-- Period Selector -->
+        <div class="period-selector">
+            <span class="period-label">📅 Período:</span>
+            <button class="period-btn" onclick="changePeriod('today', this)">Hoy</button>
+            <button class="period-btn active" onclick="changePeriod('week', this)">Esta Semana</button>
+            <button class="period-btn" onclick="changePeriod('month', this)">Este Mes</button>
+            <button class="period-btn" onclick="changePeriod('year', this)">Este Año</button>
+            <button class="period-btn" onclick="changePeriod('custom', this)">Personalizado</button>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Ventas Totales</span>
+                    <span class="stat-icon">💰</span>
+                </div>
+                <div class="stat-value" style="color: #10b981;">$12.450.000</div>
+                <div class="stat-change positive">
+                    ↑ +15.3% vs período anterior
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Órdenes</span>
+                    <span class="stat-icon">📦</span>
+                </div>
+                <div class="stat-value" style="color: #8b5cf6;">287</div>
+                <div class="stat-change positive">
+                    ↑ +12.8% vs período anterior
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Ticket Promedio</span>
+                    <span class="stat-icon">💳</span>
+                </div>
+                <div class="stat-value" style="color: #3b82f6;">$433.800</div>
+                <div class="stat-change positive">
+                    ↑ +2.1% vs período anterior
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Productos Vendidos</span>
+                    <span class="stat-icon">📊</span>
+                </div>
+                <div class="stat-value" style="color: #f59e0b;">542</div>
+                <div class="stat-change positive">
+                    ↑ +18.5% vs período anterior
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <!-- Sales Chart -->
+            <div class="chart-card full-width">
+                <div class="chart-header">
+                    <div>
+                        <h3 class="chart-title">💰 Ventas por Día</h3>
+                        <p class="chart-subtitle">Últimos 7 días</p>
+                    </div>
+                </div>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar" style="height: 60%;">
+                            <div class="bar-value">$1.2M</div>
+                        </div>
+                        <div class="bar-label">Lun</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 75%;">
+                            <div class="bar-value">$1.5M</div>
+                        </div>
+                        <div class="bar-label">Mar</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 85%;">
+                            <div class="bar-value">$1.7M</div>
+                        </div>
+                        <div class="bar-label">Mié</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 70%;">
+                            <div class="bar-value">$1.4M</div>
+                        </div>
+                        <div class="bar-label">Jue</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 100%;">
+                            <div class="bar-value">$2.0M</div>
+                        </div>
+                        <div class="bar-label">Vie</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 95%;">
+                            <div class="bar-value">$1.9M</div>
+                        </div>
+                        <div class="bar-label">Sáb</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 80%;">
+                            <div class="bar-value">$1.6M</div>
+                        </div>
+                        <div class="bar-label">Dom</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <h3 class="chart-title">🏆 Productos Más Vendidos</h3>
+                        <p class="chart-subtitle">Top 5 esta semana</p>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-rank">1</div>
+                            <div class="product-details">
+                                <h4>RTX 4090 Gaming OC</h4>
+                                <div class="product-category">Tarjetas Gráficas</div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">45</div>
+                                <div class="stat-item-label">Ventas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-rank">2</div>
+                            <div class="product-details">
+                                <h4>AMD Ryzen 9 7950X</h4>
+                                <div class="product-category">Procesadores</div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">38</div>
+                                <div class="stat-item-label">Ventas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-rank">3</div>
+                            <div class="product-details">
+                                <h4>Corsair Vengeance 32GB</h4>
+                                <div class="product-category">Memoria RAM</div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">32</div>
+                                <div class="stat-item-label">Ventas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-rank">4</div>
+                            <div class="product-details">
+                                <h4>Samsung 980 PRO 2TB</h4>
+                                <div class="product-category">Almacenamiento</div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">28</div>
+                                <div class="stat-item-label">Ventas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-rank">5</div>
+                            <div class="product-details">
+                                <h4>RTX 4080 SUPER</h4>
+                                <div class="product-category">Tarjetas Gráficas</div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">24</div>
+                                <div class="stat-item-label">Ventas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Performance -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <h3 class="chart-title">📊 Ventas por Categoría</h3>
+                        <p class="chart-subtitle">Distribución del período</p>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h4>🎨 Tarjetas Gráficas</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-item-value">$5.2M</div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h4>⚡ Procesadores</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-item-value">$3.8M</div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h4>💾 Memoria RAM</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 55%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-item-value">$1.9M</div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h4>💿 Almacenamiento</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-item-value">$1.2M</div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h4>🖥️ Monitores</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 35%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-item-value">$350K</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h4 class="summary-title">💳 Métodos de Pago</h4>
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <span class="summary-item-label">Tarjeta de Crédito</span>
+                        <span class="summary-item-value" style="color: #10b981;">65%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">PSE</span>
+                        <span class="summary-item-value" style="color: #8b5cf6;">25%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">Efectivo</span>
+                        <span class="summary-item-value" style="color: #3b82f6;">10%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <h4 class="summary-title">📍 Ciudades Top</h4>
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <span class="summary-item-label">Bogotá</span>
+                        <span class="summary-item-value" style="color: #10b981;">142</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">Medellín</span>
+                        <span class="summary-item-value" style="color: #8b5cf6;">89</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">Cali</span>
+                        <span class="summary-item-value" style="color: #3b82f6;">56</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <h4 class="summary-title">⏰ Horas Pico</h4>
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <span class="summary-item-label">10:00 AM - 12:00 PM</span>
+                        <span class="summary-item-value" style="color: #10b981;">28%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">2:00 PM - 4:00 PM</span>
+                        <span class="summary-item-value" style="color: #8b5cf6;">35%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-item-label">7:00 PM - 9:00 PM</span>
+                        <span class="summary-item-value" style="color: #3b82f6;">37%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>
+        // Cambiar período
+        function changePeriod(period, button) {
+            // Remover active de todos los botones
+            document.querySelectorAll('.period-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            
+            // Agregar active al botón clickeado
+            button.classList.add('active');
+            
+            // Aquí podrías hacer una llamada al backend para obtener datos del período
+            console.log('Período seleccionado:', period);
+            alert('📅 Cargando datos del período: ' + getPeriodName(period));
+        }
+
+        function getPeriodName(period) {
+            var names = {
+                'today': 'Hoy',
+                'week': 'Esta Semana',
+                'month': 'Este Mes',
+                'year': 'Este Año',
+                'custom': 'Personalizado'
+            };
+            return names[period] || period;
+        }
+
+        // Generar reporte
+        function generateReport() {
+            alert('🔄 Actualizando reportes...\n\nEsto cargaría los datos más recientes del backend.');
+        }
+
+        // Exportar reporte
+        function exportReport() {
+            alert('📊 Exportando reporte...\n\nEsto generaría un archivo CSV o PDF con los datos actuales.');
+        }
+
+        // Animación de entrada para las barras
+        document.addEventListener('DOMContentLoaded', function() {
+            var bars = document.querySelectorAll('.bar');
+            bars.forEach(function(bar, index) {
+                var height = bar.style.height;
+                bar.style.height = '0%';
+                setTimeout(function() {
+                    bar.style.height = height;
+                }, index * 100);
+            });
+
+            // Animar valores de stats
+            animateValues();
+        });
+
+        // Animar números (efecto contador)
+        function animateValues() {
+            var statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(function(stat) {
+                var text = stat.textContent;
+                // Solo animar si contiene números
+                if (text.includes('$') || !isNaN(text)) {
+                    stat.style.opacity = '0';
+                    setTimeout(function() {
+                        stat.style.transition = 'opacity 0.5s';
+                        stat.style.opacity = '1';
+                    }, 300);
+                }
+            });
+        }
+
+        // Actualizar datos cada 30 segundos (simulado)
+        setInterval(function() {
+            console.log('Actualizando datos del reporte...');
+            // Aquí podrías hacer una llamada al backend
+        }, 30000);
+    </script>
+</body>
+</html>
