@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Admin CyberTec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d2e;
+            color: #fff;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #1f2235;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            border-right: 1px solid #2a2d3e;
+            overflow-y: auto;
+        }
+
+        .logo-section {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #252839;
+            color: #8b5cf6;
+            border-left-color: #8b5cf6;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .page-subtitle {
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #252839 0%, #2a2d3e 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        /* Filters */
+        .filters-bar {
+            background-color: #1f2235;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: #252839;
+            border: 2px solid #2a2d3e;
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        /* Customers Section */
+        .customers-section {
+            background-color: #1f2235;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .customers-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .customers-table table {
+            width: 100%;
+            min-width: 1000px;
+        }
+
+        .customers-table th {
+            text-align: left;
+            padding: 1rem;
+            color: #9ca3af;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-bottom: 2px solid #2a2d3e;
+            background-color: #252839;
+        }
+
+        .customers-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #2a2d3e;
+        }
+
+        .customers-table tr:hover {
+            background-color: #252839;
+        }
+
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .customer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #8b5cf6;
+        }
+
+        .customer-name {
+            font-weight: 600;
+        }
+
+        .customer-id {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-vip {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-inactive {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-new {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-view {
+            padding: 0.5rem 1rem;
+            background-color: #8b5cf6;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-view:hover {
+            background-color: #7c3aed;
+        }
+
+        .btn-contact {
+            padding: 0.5rem 1rem;
+            background-color: #10b981;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-contact:hover {
+            background-color: #059669;
+        }
+
+        .btn-primary {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #9ca3af;
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .nav-item span:not(:first-child) {
+                display: none;
+            }
+
+            .logo-text {
+                display: none;
+            }
+
+            .customers-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">CyberTec</div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item" onclick="window.location.href='dashboard.html'">
+                <span>📊</span> <span>Dashboard</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='catalog.html'">
+                <span>📦</span> <span>Catálogo</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='add-product.html'">
+                <span>➕</span> <span>Agregar Producto</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='orders.html'">
+                <span>📋</span> <span>Órdenes</span>
+            </li>
+            <li class="nav-item active">
+                <span>👥</span> <span>Clientes</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='reports.html'">
+                <span>📈</span> <span>Reportes</span>
+            </li>
+            <li class="nav-item" onclick="window.location.href='../index.html'">
+                <span>🏠</span> <span>Volver al Sitio</span>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <div>
+                <h1 class="page-title">👥 Gestión de Clientes</h1>
+                <p class="page-subtitle">Administra tu base de clientes</p>
+            </div>
+            <button class="btn-primary" onclick="alert('🆕 Agregar nuevo cliente (demo)')">
+                ➕ Nuevo Cliente
+            </button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Total Clientes</span>
+                    <span class="stat-icon">👥</span>
+                </div>
+                <div class="stat-value">3,456</div>
+                <div class="stat-change">Base de clientes completa</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Clientes Activos</span>
+                    <span class="stat-icon">✅</span>
+                </div>
+                <div class="stat-value">2,890</div>
+                <div class="stat-change">Con compras recientes</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Clientes VIP</span>
+                    <span class="stat-icon">⭐</span>
+                </div>
+                <div class="stat-value">110</div>
+                <div class="stat-change">Alto valor de compra</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Nuevos Este Mes</span>
+                    <span class="stat-icon">🆕</span>
+                </div>
+                <div class="stat-value">456</div>
+                <div class="stat-change">Registros recientes</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-bar">
+            <div class="search-box">
+                <input type="text" id="searchCustomers" placeholder="🔍 Buscar por nombre, email o ID...">
+            </div>
+            <button class="filter-btn active" onclick="filterStatus('all', this)">Todos</button>
+            <button class="filter-btn" onclick="filterStatus('vip', this)">⭐ VIP</button>
+            <button class="filter-btn" onclick="filterStatus('active', this)">✅ Activos</button>
+            <button class="filter-btn" onclick="filterStatus('inactive', this)">⏸️ Inactivos</button>
+            <button class="filter-btn" onclick="filterStatus('new', this)">🆕 Nuevos</button>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="customers-section">
+            <h2 class="section-title">Lista de Clientes</h2>
+            <div class="customers-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Compras</th>
+                            <th>Total Gastado</th>
+                            <th>Estado</th>
+                            <th>Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customersTableBody">
+                        <tr data-status="vip">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=1" alt="Juan Pérez" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Juan Pérez</div>
+                                        <div class="customer-id">#CL-001</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>juan.perez@email.com</td>
+                            <td>+57 300 123 4567</td>
+                            <td><strong>24</strong></td>
+                            <td><strong style="color: #10b981;">$8.450.000</strong></td>
+                            <td><span class="status-badge status-vip">⭐ VIP</span></td>
+                            <td>15/03/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="active">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=5" alt="María García" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">María García</div>
+                                        <div class="customer-id">#CL-002</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>maria.garcia@email.com</td>
+                            <td>+57 310 987 6543</td>
+                            <td><strong>12</strong></td>
+                            <td><strong style="color: #10b981;">$3.200.000</strong></td>
+                            <td><span class="status-badge status-active">✅ Activo</span></td>
+                            <td>22/05/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="vip">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=8" alt="Carlos López" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Carlos López</div>
+                                        <div class="customer-id">#CL-003</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>carlos.lopez@email.com</td>
+                            <td>+57 320 456 7890</td>
+                            <td><strong>31</strong></td>
+                            <td><strong style="color: #10b981;">$12.890.000</strong></td>
+                            <td><span class="status-badge status-vip">⭐ VIP</span></td>
+                            <td>10/01/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="active">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=9" alt="Ana Rodríguez" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Ana Rodríguez</div>
+                                        <div class="customer-id">#CL-004</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>ana.rodriguez@email.com</td>
+                            <td>+57 315 234 5678</td>
+                            <td><strong>8</strong></td>
+                            <td><strong style="color: #10b981;">$2.150.000</strong></td>
+                            <td><span class="status-badge status-active">✅ Activo</span></td>
+                            <td>05/06/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="new">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=14" alt="Luis Martínez" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Luis Martínez</div>
+                                        <div class="customer-id">#CL-005</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>luis.martinez@email.com</td>
+                            <td>+57 318 765 4321</td>
+                            <td><strong>2</strong></td>
+                            <td><strong style="color: #10b981;">$580.000</strong></td>
+                            <td><span class="status-badge status-new">🆕 Nuevo</span></td>
+                            <td>12/10/2024</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="inactive">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=20" alt="Laura Sánchez" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Laura Sánchez</div>
+                                        <div class="customer-id">#CL-006</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>laura.sanchez@email.com</td>
+                            <td>+57 312 345 6789</td>
+                            <td><strong>5</strong></td>
+                            <td><strong style="color: #10b981;">$1.200.000</strong></td>
+                            <td><span class="status-badge status-inactive">⏸️ Inactivo</span></td>
+                            <td>18/02/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="active">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=33" alt="Diego Torres" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Diego Torres</div>
+                                        <div class="customer-id">#CL-007</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>diego.torres@email.com</td>
+                            <td>+57 305 876 5432</td>
+                            <td><strong>15</strong></td>
+                            <td><strong style="color: #10b981;">$4.750.000</strong></td>
+                            <td><span class="status-badge status-active">✅ Activo</span></td>
+                            <td>30/04/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-status="vip">
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://i.pravatar.cc/48?img=45" alt="Sofía Ramírez" class="customer-avatar">
+                                    <div>
+                                        <div class="customer-name">Sofía Ramírez</div>
+                                        <div class="customer-id">#CL-008</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>sofia.ramirez@email.com</td>
+                            <td>+57 314 567 8901</td>
+                            <td><strong>28</strong></td>
+                            <td><strong style="color: #10b981;">$9.320.000</strong></td>
+                            <td><span class="status-badge status-vip">⭐ VIP</span></td>
+                            <td>08/02/2023</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-view" onclick="alert('👁️ Ver perfil completo')">👁️ Ver</button>
+                                    <button class="btn-contact" onclick="alert('💬 Contactar cliente')">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Filtrar por estado
+        function filterStatus(status, button) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const rows = document.querySelectorAll('#customersTableBody tr');
+            rows.forEach(row => {
+                if (status === 'all') {
+                    row.style.display = '';
+                } else {
+                    const rowStatus = row.getAttribute('data-status');
+                    row.style.display = rowStatus === status ? '' : 'none';
+                }
+            });
+        }
+
+        // Buscar clientes
+        document.getElementById('searchCustomers').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#customersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
